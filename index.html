@@ -1030,3 +1030,1225 @@
       left: 0;
       right: 0;
       heigh
+t: 72px;
+      background: rgba(5,19,15,.92);
+      border-top: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 600px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+    }
+
+    .nav-btn {
+      border: 0;
+      background: transparent;
+      color: #81958e;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-btn span {
+      font-size: 20px;
+    }
+
+    .nav-btn.active {
+      color: var(--green);
+    }
+
+    /* SUPPORT */
+
+    .support {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .support a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: #60736d;
+      font-size: 10px;
+      margin-top: 25px;
+    }
+
+    @media (max-width: 500px) {
+
+      .data-plan-grid {
+        grid-template-columns: repeat(2,1fr);
+        gap: 7px;
+      }
+
+    }
+
+    @media (max-width: 390px) {
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .services,
+      .why,
+      .plans,
+      .theme-grid {
+        gap: 8px;
+      }
+
+      .data-plan-card {
+        min-height: 103px;
+        padding: 11px 4px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- SPLASH -->
+
+  <div id="splash">
+
+    <div class="splash-logo">
+      BD
+    </div>
+
+    <div class="splash-title">
+      BACKUP<span>DATA</span>
+    </div>
+
+    <div class="splash-subtitle">
+      Fast • Affordable • Reliable
+    </div>
+
+    <div class="loader"></div>
+
+  </div>
+
+
+  <!-- HEADER -->
+
+  <div class="topbar">
+
+    <div class="brand">
+      BACKUP<span>DATA</span>
+    </div>
+
+    <button
+      class="account-btn"
+      onclick="showScreen('account')">
+      👤
+    </button>
+
+  </div>
+
+
+  <main class="container">
+
+
+    <!-- =========================
+         HOME
+    ========================== -->
+
+    <section id="home" class="screen active">
+
+      <div class="hero">
+
+        <div class="hello">
+          WELCOME TO BACKUPDATA 👋
+        </div>
+
+        <h1>
+          Stay connected without stress.
+        </h1>
+
+        <p>
+          Get affordable mobile data quickly and easily.
+          Simple buying. Great prices. More services coming.
+        </p>
+
+        <button
+          class="primary-btn"
+          onclick="showScreen('buy')">
+
+          📱 BUY DATA NOW
+
+        </button>
+
+      </div>
+
+
+      <div class="activity">
+
+        <div class="live-dot"></div>
+
+        <div class="activity-text">
+
+          <strong>
+            BackupData is ready.
+          </strong>
+
+          Your data marketplace is available.
+
+        </div>
+
+      </div>
+
+
+      <div class="section">
+
+        <div class="section-head">
+
+          <h2>
+            Our Services
+          </h2>
+
+          <span>
+            EXPANDING 🚀
+          </span>
+
+        </div>
+
+
+        <div class="services">
+
+
+          <div
+            class="service"
+            onclick="showScreen('buy')">
+
+            <div class="service-icon">
+              📱
+            </div>
+
+            <h3>
+              Buy Data
+            </h3>
+
+            <p>
+              Affordable mobile data
+            </p>
+
+          </div>
+
+
+          <div class="service disabled">
+
+            <div class="service-icon">
+              💳
+            </div>
+
+            <h3>
+              Data Card
+            </h3>
+
+            <p>
+              Physical & digital options
+            </p>
+
+            <span class="soon">
+              COMING SOON
+            </span>
+
+          </div>
+
+
+          <div class="service disabled">
+
+            <div class="service-icon">
+              ☎️
+            </div>
+
+            <h3>
+              Airtime
+            </h3>
+
+            <p>
+              Recharge your line
+            </p>
+
+            <span class="soon">
+              COMING SOON
+            </span>
+
+          </div>
+
+
+          <div class="service disabled">
+
+            <div class="service-icon">
+              🎁
+            </div>
+
+            <h3>
+              Rewards
+            </h3>
+
+            <p>
+              Earn while you use BackupData
+            </p>
+
+            <span class="soon">
+              COMING SOON
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- POPULAR PLANS -->
+
+      <div class="section">
+
+        <div class="section-head">
+
+          <h2>
+            Popular Data Plans
+          </h2>
+
+          <span>
+            DEMO OFFERS
+          </span>
+
+        </div>
+
+
+        <div class="plans">
+
+
+          <div class="plan">
+
+            <small>
+              MTN
+            </small>
+
+            <h3>
+              1GB
+            </h3>
+
+            <div class="plan-price">
+              ₦800
+            </div>
+
+            <button
+              onclick="quickBuyPlan('MTN','1GB')">
+
+              Buy
+
+            </button>
+
+          </div>
+
+
+          <div class="plan">
+
+            <small>
+              Airtel
+            </small>
+
+            <h3>
+              2GB
+            </h3>
+
+            <div class="plan-price">
+              ₦1,000
+            </div>
+
+            <button
+              onclick="quickBuyPlan('Airtel','2GB')">
+
+              Buy
+
+            </button>
+
+          </div>
+
+
+          <div class="plan">
+
+            <small>
+              Glo
+            </small>
+
+            <h3>
+              5GB
+            </h3>
+
+            <div class="plan-price">
+              ₦2,000
+            </div>
+
+            <button
+              onclick="quickBuyPlan('Glo','5GB')">
+
+              Buy
+
+            </button>
+
+          </div>
+
+
+          <div class="plan">
+
+            <small>
+              9mobile
+            </small>
+
+            <h3>
+              10GB
+            </h3>
+
+            <div class="plan-price">
+              ₦4,000
+            </div>
+
+            <button
+              onclick="quickBuyPlan('9mobile','10GB')">
+
+              Buy
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- WHY BACKUPDATA -->
+
+      <div class="section">
+
+        <div class="section-head">
+
+          <h2>
+            Why BackupData?
+          </h2>
+
+        </div>
+
+
+        <div class="why">
+
+
+          <div class="why-item">
+
+            <b>
+              ⚡ Fast
+            </b>
+
+            <span>
+              Designed for a simple buying experience.
+            </span>
+
+          </div>
+
+
+          <div class="why-item">
+
+            <b>
+              💰 Affordable
+            </b>
+
+            <span>
+              Competitive demo prices ready for supplier integration.
+            </span>
+
+          </div>
+
+
+          <div class="why-item">
+
+            <b>
+              🔒 Secure
+            </b>
+
+            <span>
+              Production security will be added with the real backend.
+            </span>
+
+          </div>
+
+
+          <div class="why-item">
+
+            <b>
+              🤖 Backup AI
+            </b>
+
+            <span>
+              Get help choosing plans and using BackupData.
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="support">
+
+        Need help?
+
+        <a
+          href="https://wa.me/2347084912007"
+          target="_blank">
+
+          Chat BackupData Support on WhatsApp
+
+        </a>
+
+      </div>
+
+
+      <footer>
+        © 2026 BackupData. All rights reserved.
+      </footer>
+
+    </section>
+
+
+    <!-- =========================
+         BUY DATA
+    ========================== -->
+
+    <section id="buy" class="screen">
+
+      <h1 class="page-title">
+        Buy Data 📱
+      </h1>
+
+      <p class="page-subtitle">
+        Pick your network, choose any offer and enter
+        the number you want to recharge.
+      </p>
+
+
+      <div class="buy-top">
+
+        <div class="buy-label">
+          SELECT NETWORK
+        </div>
+
+
+        <div class="network-tabs">
+
+
+          <button
+            class="network-tab active"
+            onclick="changeNetwork('MTN')"
+            id="network-MTN">
+
+            MTN
+
+          </button>
+
+
+          <button
+            class="network-tab"
+            onclick="changeNetwork('Airtel')"
+            id="network-Airtel">
+
+            Airtel
+
+          </button>
+
+
+          <button
+            class="network-tab"
+            onclick="changeNetwork('Glo')"
+            id="network-Glo">
+
+            Glo
+
+          </button>
+
+
+          <button
+            class="network-tab"
+            onclick="changeNetwork('9mobile')"
+            id="network-9mobile">
+
+            9mobile
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="offers-title">
+
+        <h2 id="offersTitle">
+          MTN DATA
+        </h2>
+
+        <span id="offerCount">
+          20 offers
+        </span>
+
+      </div>
+
+
+      <div
+        id="dataPlanGrid"
+        class="data-plan-grid">
+      </div>
+
+
+      <div
+        id="selectedSummary"
+        class="selected-summary">
+
+
+        <div class="summary-title">
+          SELECTED DATA PLAN
+        </div>
+
+
+        <div class="summary-main">
+
+
+          <div>
+
+            <strong id="summaryData">
+              1GB
+            </strong>
+
+            <div
+              class="summary-meta"
+              id="summaryNetwork">
+
+              MTN • 30 Days
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="summary-price"
+            id="summaryPrice">
+
+            ₦800
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="phone-box">
+
+        <label for="phone">
+          PHONE NUMBER
+        </label>
+
+
+        <input
+          id="phone"
+          type="tel"
+          inputmode="numeric"
+          maxlength="11"
+          placeholder="08012345678"
+        >
+
+
+        <div class="buy-note">
+          Enter the Nigerian phone number that should receive the data.
+        </div>
+
+
+        <button
+          class="primary-btn"
+          onclick="placeOrder()">
+
+          Continue
+
+        </button>
+
+
+        <button
+          class="back-btn"
+          onclick="showScreen('home')">
+
+          ← Back Home
+
+        </button>
+
+
+        <div
+          id="orderMessage"
+          class="message">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         THEMES
+    ========================== -->
+
+    <section id="themes" class="screen">
+
+      <h1 class="page-title">
+        Themes 🎨
+      </h1>
+
+      <p class="page-subtitle">
+        Unlock new BackupData looks as you complete achievements.
+      </p>
+
+
+      <div class="theme-grid">
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#20e889,#071b16);">
+          </div>
+
+          <div class="theme-name">
+            Backup Green
+          </div>
+
+          <div class="theme-status">
+            ✅ Unlocked
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#00c6ff,#0072ff);">
+          </div>
+
+          <div class="theme-name">
+            Ocean
+          </div>
+
+          <div class="theme-status">
+            🔒 Buy data 3 times
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#ff512f,#dd2476);">
+          </div>
+
+          <div class="theme-name">
+            Fire
+          </div>
+
+          <div class="theme-status">
+            🔒 Complete 10 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#232526,#414345);">
+          </div>
+
+          <div class="theme-name">
+            Galaxy
+          </div>
+
+          <div class="theme-status">
+            🔒 7-day activity
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#bdc3c7,#2c3e50);">
+          </div>
+
+          <div class="theme-name">
+            Silver Glass
+          </div>
+
+          <div class="theme-status">
+            🔒 15 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#ff758c,#ff7eb3);">
+          </div>
+
+          <div class="theme-name">
+            Rose
+          </div>
+
+          <div class="theme-status">
+            🔒 Refer 3 friends
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#f7971e,#ffd200);">
+          </div>
+
+          <div class="theme-name">
+            Gold
+          </div>
+
+          <div class="theme-status">
+            🔒 30 successful orders
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#00f2fe,#4facfe);">
+          </div>
+
+          <div class="theme-name">
+            Aqua
+          </div>
+
+          <div class="theme-status">
+            🔒 20 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#7f00ff,#e100ff);">
+          </div>
+
+          <div class="theme-name">
+            Violet
+          </div>
+
+          <div class="theme-status">
+            🔒 50 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#56ab2f,#a8e063);">
+          </div>
+
+          <div class="theme-name">
+            Nature
+          </div>
+
+          <div class="theme-status">
+            🔒 14-day streak
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#141e30,#243b55);">
+          </div>
+
+          <div class="theme-name">
+            Midnight
+          </div>
+
+          <div class="theme-status">
+            🔒 25 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#ff9966,#ff5e62);">
+          </div>
+
+          <div class="theme-name">
+            Sunset
+          </div>
+
+          <div class="theme-status">
+            🔒 40 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#74ebd5,#ACB6E5);">
+          </div>
+
+          <div class="theme-name">
+            Sky
+          </div>
+
+          <div class="theme-status">
+            🔒 5-day streak
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#232526,#000000);">
+          </div>
+
+          <div class="theme-name">
+            Carbon
+          </div>
+
+          <div class="theme-status">
+            🔒 60 purchases
+          </div>
+
+        </div>
+
+
+        <div class="theme">
+
+          <div
+            class="theme-preview"
+            style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);">
+          </div>
+
+          <div class="theme-name">
+            Dream
+          </div>
+
+          <div class="theme-status">
+            🔒 Special achievement
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACCOUNT
+    ========================== -->
+
+    <section id="account" class="screen">
+
+      <h1 class="page-title">
+        Your Account 👤
+      </h1>
+
+      <p class="page-subtitle">
+        Manage your BackupData profile,
+        settings and preferences.
+      </p>
+
+
+      <!-- ACCOUNT HOME -->
+
+      <div
+        class="account-card"
+        id="accountHome">
+
+        <div class="account-icon">
+          👤
+        </div>
+
+        <h2>
+          BackupData Account
+        </h2>
+
+        <p>
+          Create an account or login to manage
+          your profile, preferences and activity.
+        </p>
+
+
+        <button
+          class="primary-btn"
+          onclick="showAccountForm('create')">
+
+          ✨ Create Account
+
+        </button>
+
+
+        <button
+          class="account-option"
+          onclick="showAccountForm('login')">
+
+          🔐 Login
+
+        </button>
+
+
+        <button
+          class="account-option"
+          onclick="showScreen('themes')">
+
+          🎨 View Themes
+
+        </button>
+
+      </div>
+
+
+      <!-- CREATE ACCOUNT -->
+
+      <div
+        class="account-card"
+        id="createAccountBox"
+        style="display:none;">
+
+        <h2 class="form-title">
+          Create Account
+        </h2>
+
+        <p class="form-description">
+          Join BackupData and keep your profile in one place.
+        </p>
+
+
+        <div class="field">
+
+          <label for="createName">
+            Full Name
+          </label>
+
+          <input
+            id="createName"
+            type="text"
+            placeholder="Your full name"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="createPhone">
+            Phone Number
+          </label>
+
+          <input
+            id="createPhone"
+            type="tel"
+            inputmode="numeric"
+            maxlength="11"
+            placeholder="08012345678"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="createEmail">
+            Email
+          </label>
+
+          <input
+            id="createEmail"
+            type="email"
+            placeholder="you@example.com"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="createPassword">
+            Password
+          </label>
+
+
+          <div class="password-wrap">
+
+            <input
+              id="createPassword"
+              type="password"
+              placeholder="At least 6 characters"
+            >
+
+            <button
+              class="show-password"
+              onclick="togglePassword('createPassword',this)">
+
+              SHOW
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          onclick="createAccount()">
+
+          Create My Account
+
+        </button>
+
+
+        <button
+          class="back-btn"
+          onclick="showAccountHome()">
+
+          ← Back
+
+        </button>
+
+
+        <p class="switch-text">
+
+          Already have an account?
+
+          <button
+            onclick="showAccountForm('login')">
+
+            Login
+
+          </button>
+
+        </p>
+
+
+        <div
+          id="createMessage"
+          class="message">
+        </div>
+
+      </div>
+
+
+      <!-- LOGIN -->
+
+      <div
+        class="account-card"
+        id="loginBox"
+        style="display:none;">
+
+        <h2 class="form-title">
+          Welcome Back 👋
+        </h2>
+
+        <p class="form-description">
+          Login to your BackupData account.
+        </p>
+
+
+        <div class="field">
+
+          <label for="loginEmail">
+            Email
+          </label>
+
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="you@example.com"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="loginPassword">
+            Password
+          </label>
+
+
+          <div class="password-wrap">
+
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Your password"
+            >
+
+            <bu
