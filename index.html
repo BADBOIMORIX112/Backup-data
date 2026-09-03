@@ -4023,3 +4023,177 @@ t: 72px;
       updateSettingsUI();
 
     }
+    /* =========================
+       AI ASSISTANT
+    ========================== */
+
+    function toggleAI() {
+
+      const chat =
+        document.getElementById("aiChat");
+
+      if (!chat) return;
+
+
+      chat.style.display =
+        chat.style.display === "none"
+        ? "flex"
+        : "none";
+
+    }
+
+
+    function closeAI() {
+
+      const chat =
+        document.getElementById("aiChat");
+
+      if (chat) {
+
+        chat.style.display = "none";
+
+      }
+
+    }
+
+
+    function sendAI() {
+
+      const input =
+        document.getElementById("aiInput");
+
+      const messages =
+        document.getElementById("aiMessages");
+
+
+      if (!input || !messages) return;
+
+
+      const text =
+        input.value.trim();
+
+
+      if (!text) return;
+
+
+      const user =
+        document.createElement("div");
+
+
+      user.className =
+        "ai-message user";
+
+
+      user.textContent =
+        text;
+
+
+      messages.appendChild(user);
+
+
+      input.value = "";
+
+
+      const lower =
+        text.toLowerCase();
+
+
+      let reply =
+        "I can help you choose a data plan or explain how BackupData works.";
+
+
+      if (
+        lower.includes("price") ||
+        lower.includes("cost") ||
+        lower.includes("cheap")
+      ) {
+
+        reply =
+          "BackupData currently shows demo marketplace prices. Pick a network and compare the available offers.";
+
+      }
+
+
+      else if (
+        lower.includes("mtn") ||
+        lower.includes("airtel") ||
+        lower.includes("glo") ||
+        lower.includes("9mobile")
+      ) {
+
+        reply =
+          "Tap Buy Data, choose your network, select a plan, enter the Nigerian phone number and continue.";
+
+      }
+
+
+      else if (
+        lower.includes("whatsapp") ||
+        lower.includes("support") ||
+        lower.includes("help")
+      ) {
+
+        reply =
+          "BackupData Support is available on WhatsApp at 07084912007.";
+
+      }
+
+
+      const bot =
+        document.createElement("div");
+
+
+      bot.className =
+        "ai-message bot";
+
+
+      bot.textContent =
+        reply;
+
+
+      messages.appendChild(bot);
+
+
+      messages.scrollTop =
+        messages.scrollHeight;
+
+    }
+
+
+    /* =========================
+       STARTUP
+    ========================== */
+
+    window.addEventListener(
+      "load",
+      function() {
+
+        applyAppearance();
+
+        changeNetwork("MTN");
+
+        checkAccountLogin();
+
+
+        setTimeout(
+          function() {
+
+            const splash =
+              document.getElementById(
+                "splash"
+              );
+
+
+            if (splash) {
+
+              splash.style.display =
+                "none";
+
+            }
+
+          },
+          1800
+        );
+
+      }
+    );
