@@ -446,94 +446,119 @@
       font-size: 11px;
       line-height: 1.4;
     }
+<!-- =========================
+     BUY DATA
+========================== -->
 
-    /* =========================
-       BUY DATA
-    ========================== */
+<section id="buy" class="screen">
 
-    .page-title {
-      margin-top: 20px;
-      font-size: 27px;
-    }
+  <h1 class="page-title">Buy Data 📱</h1>
 
-    .page-subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 7px;
-    }
+  <p class="page-subtitle">
+    Choose your network and data plan.
+  </p>
 
-    .form-card {
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--card-border);
-    }
+  <div class="form-card">
 
-    label {
-      display: block;
-      margin: 16px 0 7px;
-      font-size: 13px;
-      font-weight: bold;
-      color: #e4ece9;
-    }
+    <label>Network</label>
 
-    select,
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color: white;
-      outline: none;
-    }
+    <div class="network-tabs">
 
-    select:focus,
-    input:focus {
-      border-color: var(--green);
-    }
+      <button
+        class="network-tab active"
+        id="network-MTN"
+        onclick="changeNetwork('MTN')">
+        MTN
+      </button>
 
-    select option {
-      background: #10231d;
-      color: white;
-    }
+      <button
+        class="network-tab"
+        id="network-Airtel"
+        onclick="changeNetwork('Airtel')">
+        Airtel
+      </button>
 
-    .form-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.5;
-    }
+      <button
+        class="network-tab"
+        id="network-Glo"
+        onclick="changeNetwork('Glo')">
+        Glo
+      </button>
 
-    .back-btn {
-      width: 100%;
-      padding: 13px;
-      margin-top: 11px;
-      border: 1px solid var(--card-border);
-      background: rgba(255,255,255,.05);
-      color: white;
-      border-radius: 12px;
-      font-weight: bold;
-    }
+      <button
+        class="network-tab"
+        id="network-9mobile"
+        onclick="changeNetwork('9mobile')">
+        9mobile
+      </button>
 
-    .message {
-      display: none;
-      margin-top: 16px;
-      padding: 15px;
-      border-radius: 13px;
-      background: rgba(32,232,137,.12);
-      border: 1px solid rgba(32,232,137,.2);
-      color: #baffda;
-      font-size: 13px;
-      line-height: 1.6;
-    }
+    </div>
 
-    .message.error {
-      background: rgba(255,107,107,.1);
-      border-color: rgba(255,107,107,.2);
-      color: #ffc2c2;
-    }
+    <div id="offersTitle" class="offers-title">
+      MTN Data Plans
+    </div>
+
+    <div id="offerCount" class="offer-count">
+      Available plans
+    </div>
+
+    <div id="dataPlanGrid" class="data-plan-grid"></div>
+
+    <div id="selectedSummary" class="selected-summary">
+
+      <div>
+        <span>Selected</span>
+        <strong id="summaryData">No plan</strong>
+      </div>
+
+      <div>
+        <span>Network</span>
+        <strong id="summaryNetwork">-</strong>
+      </div>
+
+      <div>
+        <span>Price</span>
+        <strong id="summaryPrice">₦0</strong>
+      </div>
+
+    </div>
+
+    <label for="phone">Phone Number</label>
+
+    <input
+      id="phone"
+      type="tel"
+      inputmode="numeric"
+      placeholder="08012345678"
+      maxlength="11"
+    >
+
+    <button
+      class="primary-btn"
+      onclick="placeOrder()">
+      Continue
+    </button>
+
+    <button
+      class="back-btn"
+      onclick="showScreen('home')">
+      ← Back Home
+    </button>
+
+    <div
+      id="orderMessage"
+      class="message">
+    </div>
+
+    <div class="form-note">
+      This is currently a demo. Real payment and
+      automatic data delivery will be connected later.
+    </div>
+
+  </div>
+
+</section>
+    
     /* =========================
        DATA PLAN SELECTOR
     ========================== */
