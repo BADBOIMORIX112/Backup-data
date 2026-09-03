@@ -4201,3 +4201,39 @@ t: 72px;
 
 </body>
 </html>
+    window.addEventListener(
+      "load",
+      function() {
+
+        applyAppearance();
+
+        changeNetwork("MTN");
+
+        checkAccountLogin();
+
+        setTimeout(
+          function() {
+
+            const splash =
+              document.getElementById(
+                "splash"
+              );
+
+            if (splash) {
+
+              splash.style.display =
+                "none";
+
+            }
+
+          },
+          1800
+        );
+
+      }
+    );
+
+</script>
+
+</body>
+</html>
