@@ -446,7 +446,8 @@
       font-size: 11px;
       line-height: 1.4;
     }
-<!-- =========================
+    
+    <!-- =========================
      BUY DATA
 ========================== -->
 
@@ -455,88 +456,87 @@
   <h1 class="page-title">Buy Data 📱</h1>
 
   <p class="page-subtitle">
-    Choose your network and data plan.
+    Select your network and choose a data plan.
   </p>
 
   <div class="form-card">
 
-    <label>Network</label>
+    <label>Choose Network</label>
 
     <div class="network-tabs">
 
-      <button
-        class="network-tab active"
-        id="network-MTN"
+      <button class="network-tab active"
         onclick="changeNetwork('MTN')">
         MTN
       </button>
 
-      <button
-        class="network-tab"
-        id="network-Airtel"
+      <button class="network-tab"
         onclick="changeNetwork('Airtel')">
         Airtel
       </button>
 
-      <button
-        class="network-tab"
-        id="network-Glo"
+      <button class="network-tab"
         onclick="changeNetwork('Glo')">
         Glo
       </button>
 
-      <button
-        class="network-tab"
-        id="network-9mobile"
+      <button class="network-tab"
         onclick="changeNetwork('9mobile')">
         9mobile
       </button>
 
     </div>
 
-    <div id="offersTitle" class="offers-title">
-      MTN Data Plans
-    </div>
-
-    <div id="offerCount" class="offer-count">
-      Available plans
+    <div class="plans-heading">
+      <div>
+        <h2 id="offersTitle">MTN Data Plans</h2>
+        <p id="offerCount">Choose a plan below</p>
+      </div>
     </div>
 
     <div id="dataPlanGrid" class="data-plan-grid"></div>
 
     <div id="selectedSummary" class="selected-summary">
 
-      <div>
-        <span>Selected</span>
+      <div class="summary-item">
+        <span>Data</span>
         <strong id="summaryData">No plan</strong>
       </div>
 
-      <div>
+      <div class="summary-item">
         <span>Network</span>
         <strong id="summaryNetwork">-</strong>
       </div>
 
-      <div>
+      <div class="summary-item">
         <span>Price</span>
         <strong id="summaryPrice">₦0</strong>
       </div>
 
     </div>
 
-    <label for="phone">Phone Number</label>
+    <div class="phone-section">
 
-    <input
-      id="phone"
-      type="tel"
-      inputmode="numeric"
-      placeholder="08012345678"
-      maxlength="11"
-    >
+      <label for="phone">Phone Number</label>
+
+      <input
+        id="phone"
+        type="tel"
+        inputmode="numeric"
+        placeholder="08012345678"
+        maxlength="11"
+      >
+
+      <p class="input-hint">
+        Enter the number you want to receive the data on.
+      </p>
+
+    </div>
 
     <button
       class="primary-btn"
       onclick="placeOrder()">
-      Continue
+      Buy Data
     </button>
 
     <button
@@ -545,14 +545,10 @@
       ← Back Home
     </button>
 
-    <div
-      id="orderMessage"
-      class="message">
-    </div>
+    <div id="orderMessage" class="message"></div>
 
     <div class="form-note">
-      This is currently a demo. Real payment and
-      automatic data delivery will be connected later.
+      Data delivery and real payment will be connected later.
     </div>
 
   </div>
