@@ -3637,3 +3637,389 @@ t: 72px;
       }
 
     }
+    /* =========================
+       PROFILE
+    ========================== */
+
+    function showProfile() {
+
+      hideAccountBoxes();
+
+
+      const account =
+        getAccount();
+
+      if (!account) {
+
+        showAccountHome();
+
+        return;
+
+      }
+
+
+      const avatar =
+        document.getElementById("profileAvatar");
+
+      const name =
+        document.getElementById("profileName");
+
+      const email =
+        document.getElementById("profileEmail");
+
+      const email2 =
+        document.getElementById("profileEmail2");
+
+      const phone =
+        document.getElementById("profilePhone");
+
+
+      if (avatar) {
+
+        avatar.textContent =
+          account.name.charAt(0).toUpperCase();
+
+      }
+
+
+      if (name) {
+
+        name.textContent =
+          account.name;
+
+      }
+
+
+      if (email) {
+
+        email.textContent =
+          account.email;
+
+      }
+
+
+      if (email2) {
+
+        email2.textContent =
+          account.email;
+
+      }
+
+
+      if (phone) {
+
+        phone.textContent =
+          account.phone;
+
+      }
+
+
+      document.getElementById(
+        "profileBox"
+      ).style.display = "block";
+
+    }
+
+
+    /* =========================
+       PROFILE SETTINGS
+    ========================== */
+
+    function showProfileSettings() {
+
+      hideAccountBoxes();
+
+
+      const account =
+        getAccount();
+
+      if (!account) {
+
+        showAccountHome();
+
+        return;
+
+      }
+
+
+      document.getElementById(
+        "profileEditName"
+      ).value = account.name;
+
+
+      document.getElementById(
+        "profileEditPhone"
+      ).value = account.phone;
+
+
+      document.getElementById(
+        "profileEditEmail"
+      ).value = account.email;
+
+
+      document.getElementById(
+        "profileSettingsBox"
+      ).style.display = "block";
+
+    }
+
+
+    function saveProfileSettings() {
+
+      const account =
+        getAccount();
+
+      if (!account) return;
+
+
+      const name =
+        document.getElementById(
+          "profileEditName"
+        ).value.trim();
+
+
+      const phone =
+        document.getElementById(
+          "profileEditPhone"
+        ).value.trim();
+
+
+      const message =
+        document.getElementById(
+          "profileMessage"
+        );
+
+
+      if (!name || !phone) {
+
+        message.textContent =
+          "Please fill all fields.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      if (!/^0[0-9]{10}$/.test(phone)) {
+
+        message.textContent =
+          "Enter a valid Nigerian phone number.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      account.name = name;
+
+      account.phone = phone;
+
+
+      localStorage.setItem(
+        "backupDataAccount",
+        JSON.stringify(account)
+      );
+
+
+      message.textContent =
+        "Profile updated successfully.";
+
+      message.className =
+        "message success";
+
+
+      setTimeout(() => {
+
+        showProfile();
+
+      },500);
+
+    }
+
+
+    /* =========================
+       SETTINGS
+    ========================== */
+
+    function showSettings() {
+
+      hideAccountBoxes();
+
+
+      const settings =
+        document.getElementById("settingsBox");
+
+      if (settings) {
+
+        settings.style.display = "block";
+
+      }
+
+
+      updateSettingsUI();
+
+    }
+
+
+    function toggleSettingsPanel(id) {
+
+      const panel =
+        document.getElementById(id);
+
+      if (!panel) return;
+
+
+      if (panel.style.display === "none") {
+
+        panel.style.display = "block";
+
+      } else {
+
+        panel.style.display = "none";
+
+      }
+
+    }
+
+
+    function toggleNotifications() {
+
+      const current =
+        localStorage.getItem(
+          "backupDataNotifications"
+        );
+
+
+      const enabled =
+        current !== "false";
+
+
+      localStorage.setItem(
+        "backupDataNotifications",
+        String(!enabled)
+      );
+
+
+      updateSettingsUI();
+
+    }
+
+
+    function updateSettingsUI() {
+
+      const notifications =
+        localStorage.getItem(
+          "backupDataNotifications"
+        ) !== "false";
+
+
+      const appearance =
+        localStorage.getItem(
+          "backupDataAppearance"
+        ) || "dark";
+
+
+      const notificationToggle =
+        document.getElementById(
+          "notificationToggle"
+        );
+
+
+      const appearanceToggle =
+        document.getElementById(
+          "appearanceToggle"
+        );
+
+
+      const appearanceText =
+        document.getElementById(
+          "appearanceText"
+        );
+
+
+      if (notificationToggle) {
+
+        notificationToggle.textContent =
+          notifications ? "ON" : "OFF";
+
+        notificationToggle.classList.toggle(
+          "on",
+          notifications
+        );
+
+      }
+
+
+      if (appearanceToggle) {
+
+        appearanceToggle.textContent =
+          appearance === "light"
+          ? "LIGHT"
+          : "DARK";
+
+      }
+
+
+      if (appearanceText) {
+
+        appearanceText.textContent =
+          appearance === "light"
+          ? "Light mode"
+          : "Dark mode";
+
+      }
+
+    }
+
+
+    /* =========================
+       APPEARANCE
+    ========================== */
+
+    function applyAppearance() {
+
+      const appearance =
+        localStorage.getItem(
+          "backupDataAppearance"
+        ) || "dark";
+
+
+      document.body.classList.toggle(
+        "light-mode",
+        appearance === "light"
+      );
+
+    }
+
+
+    function toggleAppearance() {
+
+      const current =
+        localStorage.getItem(
+          "backupDataAppearance"
+        ) || "dark";
+
+
+      const next =
+        current === "dark"
+        ? "light"
+        : "dark";
+
+
+      localStorage.setItem(
+        "backupDataAppearance",
+        next
+      );
+
+
+      applyAppearance();
+
+      updateSettingsUI();
+
+    }
