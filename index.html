@@ -534,7 +534,113 @@
       border-color: rgba(255,107,107,.2);
       color: #ffc2c2;
     }
+    /* =========================
+       DATA PLAN SELECTOR
+    ========================== */
 
+    .network-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .network-tab {
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      padding: 11px 5px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .network-tab.active {
+      background: rgba(32,232,137,.15);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .offers-title {
+      margin-top: 20px;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .offer-count {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .data-plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 13px;
+    }
+
+    .data-plan {
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.045);
+      border-radius: 15px;
+      padding: 14px;
+      text-align: left;
+    }
+
+    .data-plan.selected {
+      border-color: var(--green);
+      background: rgba(32,232,137,.12);
+    }
+
+    .data-plan-data {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .data-plan-price {
+      color: var(--green);
+      font-weight: 900;
+      margin-top: 5px;
+    }
+
+    .data-plan-validity {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    .selected-summary {
+      display: none;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 14px;
+      background: rgba(32,232,137,.08);
+      border: 1px solid rgba(32,232,137,.18);
+    }
+
+    .selected-summary span {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      margin-bottom: 4px;
+    }
+
+    .selected-summary strong {
+      font-size: 12px;
+    }
+
+    @media (max-width: 390px) {
+      .network-tab {
+        font-size: 10px;
+      }
+
+      .data-plan-grid {
+        grid-template-columns: 1fr;
+      }
+                       }
     /* =========================
        ACCOUNT
     ========================== */
