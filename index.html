@@ -18,8 +18,8 @@
     :root {
       --bg: #061410;
       --bg2: #0b211a;
-      --card: rgba(255,255,255,0.08);
-      --card-border: rgba(255,255,255,0.12);
+      --card: rgba(255,255,255,.065);
+      --card-border: rgba(255,255,255,.12);
       --green: #20e889;
       --green2: #11b86b;
       --text: #ffffff;
@@ -37,6 +37,18 @@
       padding-bottom: 85px;
     }
 
+    body.light-mode {
+      --bg: #f4f8f6;
+      --bg2: #ffffff;
+      --card: rgba(0,0,0,.045);
+      --card-border: rgba(0,0,0,.10);
+      --text: #10221c;
+      --muted: #66756f;
+      background:
+        radial-gradient(circle at top right, rgba(32,232,137,.13), transparent 35%),
+        #f4f8f6;
+    }
+
     button,
     select,
     input {
@@ -47,9 +59,7 @@
       cursor: pointer;
     }
 
-    /* =========================
-       SPLASH SCREEN
-    ========================== */
+    /* SPLASH */
 
     #splash {
       position: fixed;
@@ -91,7 +101,6 @@
       margin-top: 22px;
       font-size: 34px;
       font-weight: 900;
-      letter-spacing: -1px;
     }
 
     .splash-title span {
@@ -115,19 +124,15 @@
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
 
     @keyframes splashFade {
-      0%, 80% { opacity: 1; }
+      0%,80% { opacity: 1; }
       100% { opacity: 0; visibility: hidden; }
     }
 
-    /* =========================
-       APP HEADER
-    ========================== */
+    /* HEADER */
 
     .topbar {
       max-width: 600px;
@@ -154,14 +159,12 @@
       border-radius: 50%;
       border: 1px solid var(--card-border);
       background: var(--card);
-      color: white;
+      color: var(--text);
       font-size: 20px;
       backdrop-filter: blur(15px);
     }
 
-    /* =========================
-       MAIN
-    ========================== */
+    /* MAIN */
 
     .container {
       width: 100%;
@@ -184,15 +187,14 @@
         opacity: 0;
         transform: translateY(8px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    /* =========================
-       HOME HERO
-    ========================== */
+    /* HOME */
 
     .hero {
       margin-top: 15px;
@@ -201,25 +203,14 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(135deg,
+        linear-gradient(
+          135deg,
           rgba(32,232,137,.18),
           rgba(255,255,255,.055)
         );
       border: 1px solid var(--card-border);
       box-shadow: 0 25px 60px rgba(0,0,0,.25);
       backdrop-filter: blur(20px);
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      right: -80px;
-      top: -80px;
-      background: rgba(32,232,137,.12);
-      filter: blur(5px);
     }
 
     .hello {
@@ -233,7 +224,6 @@
       font-size: 32px;
       line-height: 1.05;
       letter-spacing: -1.2px;
-      max-width: 430px;
     }
 
     .hero p {
@@ -241,7 +231,6 @@
       margin-top: 13px;
       line-height: 1.5;
       font-size: 15px;
-      max-width: 470px;
     }
 
     .primary-btn {
@@ -251,7 +240,7 @@
       border-radius: 14px;
       padding: 16px;
       color: #03100c;
-      background: linear-gradient(135deg, #4dffab, #14d77c);
+      background: linear-gradient(135deg,#4dffab,#14d77c);
       font-weight: 900;
       font-size: 16px;
       box-shadow: 0 12px 30px rgba(32,232,137,.18);
@@ -260,10 +249,6 @@
     .primary-btn:active {
       transform: scale(.98);
     }
-
-    /* =========================
-       LIVE ACTIVITY
-    ========================== */
 
     .activity {
       margin-top: 18px;
@@ -287,16 +272,12 @@
 
     .activity-text {
       font-size: 13px;
-      color: #d9e5e1;
+      color: var(--muted);
     }
 
     .activity-text strong {
-      color: white;
+      color: var(--text);
     }
-
-    /* =========================
-       SECTION
-    ========================== */
 
     .section {
       margin-top: 27px;
@@ -315,13 +296,9 @@
 
     .section-head span {
       color: var(--green);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
     }
-
-    /* =========================
-       SERVICES
-    ========================== */
 
     .services {
       display: grid;
@@ -371,16 +348,12 @@
       border-radius: 7px;
       font-size: 9px;
       background: rgba(255,255,255,.08);
-      color: #c6d1cd;
+      color: var(--muted);
     }
-
-    /* =========================
-       POPULAR PLANS
-    ========================== */
 
     .plans {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2,1fr);
       gap: 11px;
     }
 
@@ -418,10 +391,6 @@
       font-weight: bold;
     }
 
-    /* =========================
-       WHY US
-    ========================== */
-
     .why {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -432,7 +401,7 @@
       padding: 15px;
       border-radius: 16px;
       background: rgba(255,255,255,.045);
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid var(--card-border);
     }
 
     .why-item b {
@@ -447,9 +416,7 @@
       line-height: 1.4;
     }
 
-    /* =========================
-       BUY DATA
-    ========================== */
+    /* PAGE */
 
     .page-title {
       margin-top: 20px;
@@ -460,37 +427,203 @@
       color: var(--muted);
       font-size: 14px;
       margin-top: 7px;
+      line-height: 1.5;
     }
 
-    .form-card {
+    /* BUY DATA */
+
+    .buy-top {
       margin-top: 20px;
-      padding: 20px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.06);
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.045);
       border: 1px solid var(--card-border);
     }
 
-    label {
-      display: block;
-      margin: 16px 0 7px;
-      font-size: 13px;
-      font-weight: bold;
-      color: #e4ece9;
+    .buy-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 9px;
     }
 
-    select,
-    input {
+    .network-tabs {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 6px;
+    }
+
+    .network-tab {
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 11px 5px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .network-tab.active {
+      color: #03100c;
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .offers-title {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .offers-title h2 {
+      font-size: 18px;
+    }
+
+    .offers-title span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* FLAT DATA CARDS */
+
+    .data-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 7px;
+      margin-top: 11px;
+    }
+
+    .data-plan-card {
+      position: relative;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      background: rgba(255,255,255,.045);
+      padding: 12px 5px;
+      text-align: center;
+      min-height: 108px;
+      color: var(--text);
+      transition: .18s;
+    }
+
+    .data-plan-card:active {
+      transform: scale(.97);
+    }
+
+    .data-plan-card.selected {
+      border-color: var(--green);
+      background: rgba(32,232,137,.12);
+      box-shadow: 0 0 0 1px var(--green);
+    }
+
+    .data-plan-card.selected::after {
+      content: "✓";
+      position: absolute;
+      top: 4px;
+      right: 5px;
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .data-plan-price {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .data-plan-amount {
+      font-size: 14px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .data-plan-validity {
+      color: var(--muted);
+      font-size: 9px;
+      margin-top: 6px;
+      line-height: 1.2;
+    }
+
+    .data-plan-badge {
+      display: inline-block;
+      margin-top: 7px;
+      font-size: 8px;
+      padding: 3px 5px;
+      border-radius: 4px;
+      background: rgba(32,232,137,.10);
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .selected-summary {
+      display: none;
+      margin-top: 17px;
+      padding: 14px;
+      border: 1px solid rgba(32,232,137,.25);
+      background: rgba(32,232,137,.08);
+      border-radius: 10px;
+    }
+
+    .selected-summary.show {
+      display: block;
+    }
+
+    .summary-title {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+
+    .summary-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .summary-main strong {
+      font-size: 16px;
+    }
+
+    .summary-price {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .summary-meta {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .phone-box {
+      margin-top: 17px;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--card-border);
+    }
+
+    .phone-box label {
+      display: block;
+      margin: 0 0 7px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
       width: 100%;
       padding: 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
       background: rgba(0,0,0,.18);
-      color: white;
+      color: var(--text);
       outline: none;
     }
 
-    select:focus,
-    input:focus {
+    input:focus,
+    select:focus {
       border-color: var(--green);
     }
 
@@ -499,33 +632,22 @@
       color: white;
     }
 
-    .form-note {
-      margin-top: 12px;
+    .buy-note {
+      margin-top: 10px;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
       line-height: 1.5;
-    }
-
-    .back-btn {
-      width: 100%;
-      padding: 13px;
-      margin-top: 11px;
-      border: 1px solid var(--card-border);
-      background: rgba(255,255,255,.05);
-      color: white;
-      border-radius: 12px;
-      font-weight: bold;
     }
 
     .message {
       display: none;
-      margin-top: 16px;
-      padding: 15px;
-      border-radius: 13px;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 10px;
       background: rgba(32,232,137,.12);
       border: 1px solid rgba(32,232,137,.2);
       color: #baffda;
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.6;
     }
 
@@ -535,205 +657,291 @@
       color: #ffc2c2;
     }
 
-    /* =========================
-       ACCOUNT
-    ========================== */
-    <!-- ACCOUNT -->
-<section class="screen" id="account">
+    .back-btn {
+      width: 100%;
+      padding: 13px;
+      margin-top: 10px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius: 10px;
+      font-weight: bold;
+    }
 
-  <div class="section-title">
-    <span>👤</span>
-    <div>
-      <h2>My Account</h2>
-      <p id="accountSubtitle">Welcome to BackupData</p>
-    </div>
-  </div>
+    /* ACCOUNT */
 
-  <!-- ACCOUNT HOME -->
-  <div class="account-card" id="accountHome">
+    .account-card {
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(15px);
+    }
 
-    <div class="account-big-icon">👤</div>
+    .account-icon {
+      width: 65px;
+      height: 65px;
+      margin: auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(32,232,137,.13);
+      font-size: 30px;
+    }
 
-    <h3 id="accountWelcome">BackupData Account</h3>
+    .account-card h2 {
+      text-align: center;
+      margin-top: 14px;
+    }
 
-    <p id="accountDescription">
-      Create an account or login to manage your BackupData account.
-    </p>
+    .account-card p {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 7px;
+      line-height: 1.5;
+    }
 
-    <button class="primary-btn" onclick="showAccountForm('create')">
-      📝 Create Account
-    </button>
+    .account-option {
+      margin-top: 11px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 11px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      text-align: left;
+    }
 
-    <button class="secondary-btn" onclick="showAccountForm('login')">
-      🔐 Login
-    </button>
+    .form-title {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
 
-    <button class="secondary-btn" onclick="showScreen('themes')">
-      🎨 View Themes
-    </button>
+    .form-description {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 15px;
+      text-align: left !important;
+    }
 
-  </div>
+    .field {
+      margin-top: 13px;
+    }
 
+    .field label {
+      display: block;
+      margin: 0 0 7px;
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--text);
+    }
 
-  <!-- CREATE ACCOUNT -->
-  <div class="account-card" id="createAccountBox" style="display:none;">
+    .password-wrap {
+      position: relative;
+    }
 
-    <button class="back-account" onclick="showAccountHome()">
-      ← Back
-    </button>
+    .password-wrap input {
+      padding-right: 55px;
+    }
 
-    <div class="account-big-icon">📝</div>
+    .show-password {
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      height: 40px;
+      padding: 0 9px;
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: bold;
+    }
 
-    <h3>Create Your Account</h3>
+    .switch-text {
+      text-align: center !important;
+      margin-top: 14px !important;
+      color: var(--muted);
+      font-size: 12px !important;
+    }
 
-    <p>Join BackupData today.</p>
+    .switch-text button {
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-weight: bold;
+    }
 
-    <input
-      type="text"
-      id="registerName"
-      class="account-input"
-      placeholder="Full name"
-      autocomplete="name"
-    >
+    .profile-head {
+      text-align: center;
+    }
 
-    <input
-      type="tel"
-      id="registerPhone"
-      class="account-input"
-      placeholder="Phone number"
-      maxlength="11"
-      autocomplete="tel"
-    >
+    .profile-avatar {
+      width: 78px;
+      height: 78px;
+      margin: auto;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#4dffab,#0ca964);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #03100c;
+      font-size: 30px;
+      font-weight: 900;
+    }
 
-    <input
-      type="email"
-      id="registerEmail"
-      class="account-input"
-      placeholder="Email address"
-      autocomplete="email"
-    >
+    .profile-name {
+      margin-top: 12px;
+      font-size: 22px;
+      font-weight: 900;
+    }
 
-    <div class="password-wrap">
-      <input
-        type="password"
-        id="registerPassword"
-        class="account-input"
-        placeholder="Create password"
-        autocomplete="new-password"
-      >
+    .profile-status {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: rgba(32,232,137,.12);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: bold;
+    }
 
-      <button
-        type="button"
-        class="password-toggle"
-        onclick="togglePassword('registerPassword', this)"
-      >
-        👁️
-      </button>
-    </div>
+    .profile-info {
+      margin-top: 20px;
+      border-top: 1px solid var(--card-border);
+    }
 
-    <div id="registerMessage" class="account-message"></div>
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 12px;
+    }
 
-    <button class="primary-btn" onclick="createAccount()">
-      ✅ Create Account
-    </button>
+    .info-row span:first-child {
+      color: var(--muted);
+    }
 
-    <p class="account-switch">
-      Already have an account?
-      <button type="button" onclick="showAccountForm('login')">
-        Login
-      </button>
-    </p>
+    .info-row span:last-child {
+      text-align: right;
+      word-break: break-word;
+    }
 
-  </div>
+    .settings-panel {
+      display: none;
+    }
 
+    .settings-panel.show {
+      display: block;
+    }
 
-  <!-- LOGIN -->
-  <div class="account-card" id="loginBox" style="display:none;">
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--card-border);
+    }
 
-    <button class="back-account" onclick="showAccountHome()">
-      ← Back
-    </button>
+    .setting-row:last-child {
+      border-bottom: 0;
+    }
 
-    <div class="account-big-icon">🔐</div>
+    .setting-title {
+      font-size: 13px;
+      font-weight: bold;
+    }
 
-    <h3>Welcome Back</h3>
+    .setting-description {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
 
-    <p>Login to your BackupData account.</p>
+    .toggle {
+      width: 46px;
+      height: 25px;
+      border-radius: 20px;
+      border: 0;
+      background: #50605b;
+      position: relative;
+      flex-shrink: 0;
+    }
 
-    <input
-      type="email"
-      id="loginEmail"
-      class="account-input"
-      placeholder="Email address"
-      autocomplete="email"
-    >
+    .toggle::after {
+      content: "";
+      width: 19px;
+      height: 19px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      transition: .2s;
+    }
 
-    <div class="password-wrap">
-      <input
-        type="password"
-        id="loginPassword"
-        class="account-input"
-        placeholder="Password"
-        autocomplete="current-password"
-      >
+    .toggle.on {
+      background: var(--green);
+    }
 
-      <button
-        type="button"
-        class="password-toggle"
-        onclick="togglePassword('loginPassword', this)"
-      >
-        👁️
-      </button>
-    </div>
+    .toggle.on::after {
+      left: 23px;
+    }
 
-    <div id="loginMessage" class="account-message"></div>
+    .danger-btn {
+      color: #ff8d8d !important;
+    }
 
-    <button class="primary-btn" onclick="loginAccount()">
-      🔓 Login
-    </button>
+    .panel-text {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 13px;
+      text-align: left !important;
+    }
 
-    <p class="account-switch">
-      Don't have an account?
-      <button type="button" onclick="showAccountForm('create')">
-        Create Account
-      </button>
-    </p>
+    /* THEMES */
 
-  </div>
+    .theme-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
 
+    .theme {
+      min-height: 105px;
+      padding: 15px;
+      border-radius: 15px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
+    }
 
-  <!-- LOGGED IN PROFILE -->
-  <div class="account-card" id="profileBox" style="display:none;">
+    .theme-preview {
+      height: 40px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
 
-    <div class="account-big-icon">🎉</div>
+    .theme-name {
+      font-weight: bold;
+      font-size: 13px;
+    }
 
-    <h3 id="profileName">Welcome!</h3>
+    .theme-status {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 5px;
+    }
 
-    <p id="profileEmail"></p>
-    <p id="profilePhone"></p>
-
-    <div class="profile-status">
-      🟢 Account active
-    </div>
-
-    <button class="primary-btn" onclick="showScreen('buy')">
-      📱 Buy Data
-    </button>
-
-    <button class="secondary-btn" onclick="showScreen('themes')">
-      🎨 View Themes
-    </button>
-
-    <button class="logout-btn" onclick="logoutAccount()">
-      🚪 Logout
-    </button>
-
-  </div>
-
-</section>
-    /* =========================
-       BACKUP AI
-    ========================== */
+    /* AI */
 
     #aiBubble {
       position: fixed;
@@ -744,16 +952,12 @@
       height: 58px;
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,.35);
-      background: linear-gradient(145deg, #1ee88b, #0a8f57);
+      background: linear-gradient(145deg,#1ee88b,#0a8f57);
       color: white;
       font-size: 28px;
       box-shadow: 0 12px 35px rgba(0,0,0,.35);
       cursor: grab;
       touch-action: none;
-    }
-
-    #aiBubble:active {
-      cursor: grabbing;
     }
 
     #aiChat {
@@ -762,8 +966,8 @@
       z-index: 8999;
       right: 16px;
       bottom: 155px;
-      width: min(350px, calc(100vw - 32px));
-      border-radius: 22px;
+      width: min(350px,calc(100vw - 32px));
+      border-radius: 20px;
       overflow: hidden;
       background: #0c1e18;
       border: 1px solid rgba(255,255,255,.15);
@@ -772,14 +976,10 @@
 
     .ai-header {
       padding: 16px;
-      background: linear-gradient(135deg, #153d2e, #0a251c);
+      background: linear-gradient(135deg,#153d2e,#0a251c);
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    .ai-header strong {
-      font-size: 15px;
     }
 
     .ai-close {
@@ -821,9 +1021,7 @@
       font-weight: bold;
     }
 
-    /* =========================
-       BOTTOM NAV
-    ========================== */
+    /* NAV */
 
     .bottom-nav {
       position: fixed;
@@ -831,1039 +1029,4 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 72px;
-      background: rgba(5,19,15,.9);
-      border-top: 1px solid rgba(255,255,255,.1);
-      backdrop-filter: blur(20px);
-      display: flex;
-      justify-content: center;
-    }
-
-    .nav-inner {
-      width: 100%;
-      max-width: 600px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .nav-btn {
-      border: 0;
-      background: transparent;
-      color: #81958e;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .nav-btn span {
-      font-size: 20px;
-    }
-
-    .nav-btn.active {
-      color: var(--green);
-    }
-
-    /* =========================
-       SUPPORT
-    ========================== */
-
-    .support {
-      text-align: center;
-      margin-top: 30px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .support a {
-      color: var(--green);
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    footer {
-      text-align: center;
-      color: #60736d;
-      font-size: 10px;
-      margin-top: 25px;
-    }
-
-    @media (max-width: 390px) {
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .services,
-      .why,
-      .plans,
-      .theme-grid {
-        gap: 8px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- =========================
-       SPLASH
-  ========================== -->
-
-  <div id="splash">
-    <div class="splash-logo">BD</div>
-    <div class="splash-title">BACKUP<span>DATA</span></div>
-    <div class="splash-subtitle">Fast • Affordable • Reliable</div>
-    <div class="loader"></div>
-  </div>
-
-  <!-- =========================
-       HEADER
-  ========================== -->
-
-  <div class="topbar">
-    <div class="brand">BACKUP<span>DATA</span></div>
-
-    <button class="account-btn" onclick="showScreen('account')">
-      👤
-    </button>
-  </div>
-
-  <main class="container">
-
-    <!-- =========================
-         HOME
-    ========================== -->
-
-    <section id="home" class="screen active">
-
-      <div class="hero">
-
-        <div class="hello">WELCOME TO BACKUPDATA 👋</div>
-
-        <h1>Stay connected without stress.</h1>
-
-        <p>
-          Get affordable mobile data quickly and easily.
-          Simple buying. Great prices. More services coming.
-        </p>
-
-        <button class="primary-btn" onclick="showScreen('buy')">
-          📱 BUY DATA NOW
-        </button>
-
-      </div>
-
-      <div class="activity">
-        <div class="live-dot"></div>
-
-        <div class="activity-text" id="activityText">
-          <strong>BackupData is ready.</strong>
-          More live activity will appear when real orders begin.
-        </div>
-      </div>
-
-      <!-- SERVICES -->
-
-      <div class="section">
-
-        <div class="section-head">
-          <h2>Our Services</h2>
-          <span>EXPANDING 🚀</span>
-        </div>
-
-        <div class="services">
-
-          <div class="service" onclick="showScreen('buy')">
-            <div class="service-icon">📱</div>
-            <h3>Buy Data</h3>
-            <p>Affordable mobile data</p>
-          </div>
-
-          <div class="service disabled">
-            <div class="service-icon">💳</div>
-            <h3>Data Card</h3>
-            <p>Physical & digital options</p>
-            <span class="soon">COMING SOON</span>
-          </div>
-
-          <div class="service disabled">
-            <div class="service-icon">☎️</div>
-            <h3>Airtime</h3>
-            <p>Recharge your line</p>
-            <span class="soon">COMING SOON</span>
-          </div>
-
-          <div class="service disabled">
-            <div class="service-icon">🎁</div>
-            <h3>Rewards</h3>
-            <p>Earn while you use BackupData</p>
-            <span class="soon">COMING SOON</span>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- POPULAR PLANS -->
-
-      <div class="section">
-
-        <div class="section-head">
-          <h2>Popular Data Plans</h2>
-          <span>DEMO PRICES</span>
-        </div>
-
-        <div class="plans">
-
-          <div class="plan">
-            <small>MTN</small>
-            <h3>1GB</h3>
-            <div class="plan-price">₦800</div>
-            <button onclick="quickBuy('MTN','1GB')">
-              Buy
-            </button>
-          </div>
-
-          <div class="plan">
-            <small>Airtel</small>
-            <h3>2GB</h3>
-            <div class="plan-price">₦1,500</div>
-            <button onclick="quickBuy('Airtel','2GB')">
-              Buy
-            </button>
-          </div>
-
-          <div class="plan">
-            <small>Glo</small>
-            <h3>5GB</h3>
-            <div class="plan-price">₦2,500</div>
-            <button onclick="quickBuy('Glo','5GB')">
-              Buy
-            </button>
-          </div>
-
-          <div class="plan">
-            <small>9mobile</small>
-            <h3>10GB</h3>
-            <div class="plan-price">₦4,500</div>
-            <button onclick="quickBuy('9mobile','10GB')">
-              Buy
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- WHY BACKUPDATA -->
-
-      <div class="section">
-
-        <div class="section-head">
-          <h2>Why BackupData?</h2>
-        </div>
-
-        <div class="why">
-
-          <div class="why-item">
-            <b>⚡ Fast</b>
-            <span>Designed for a simple buying experience.</span>
-          </div>
-
-          <div class="why-item">
-            <b>💰 Affordable</b>
-            <span>Competitive prices will be added after supplier setup.</span>
-          </div>
-
-          <div class="why-item">
-            <b>🔒 Secure</b>
-            <span>Your future account and <span>Your future account and payment information will be protected.</span>
-          </div>
-
-          <div class="why-item">
-            <b>🤖 Backup AI</b>
-            <span>Get help choosing plans and using BackupData.</span>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="support">
-        Need help?
-        <a href="https://wa.me/2347084912007" target="_blank">
-          Chat BackupData Support on WhatsApp
-        </a>
-      </div>
-
-      <footer>
-        © 2026 BackupData. All rights reserved.
-      </footer>
-
-    </section>
-
-
-    <!-- =========================
-         BUY DATA
-    ========================== -->
-
-    <section id="buy" class="screen">
-
-      <h1 class="page-title">Buy Data 📱</h1>
-
-      <p class="page-subtitle">
-        Choose your network and data plan.
-      </p>
-
-      <div class="form-card">
-
-        <label for="network">Network</label>
-
-        <select id="network">
-          <option value="">Select network</option>
-          <option value="MTN">MTN</option>
-          <option value="Airtel">Airtel</option>
-          <option value="Glo">Glo</option>
-          <option value="9mobile">9mobile</option>
-        </select>
-
-
-        <label for="plan">Data Plan</label>
-
-        <select id="plan">
-          <option value="">Select data plan</option>
-          <option value="500MB">500MB — ₦500</option>
-          <option value="1GB">1GB — ₦800</option>
-          <option value="2GB">2GB — ₦1,500</option>
-          <option value="5GB">5GB — ₦2,500</option>
-          <option value="10GB">10GB — ₦4,500</option>
-        </select>
-
-
-        <label for="phone">Phone Number</label>
-
-        <input
-          id="phone"
-          type="tel"
-          inputmode="numeric"
-          placeholder="08012345678"
-          maxlength="11"
-        >
-
-
-        <button class="primary-btn" onclick="placeOrder()">
-          Continue
-        </button>
-
-        <button class="back-btn" onclick="showScreen('home')">
-          ← Back Home
-        </button>
-
-        <div id="orderMessage" class="message"></div>
-
-        <div class="form-note">
-          This is currently a demo. Real payment and automatic
-          data delivery will be connected later.
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         THEMES
-    ========================== -->
-
-    <section id="themes" class="screen">
-
-      <h1 class="page-title">Themes 🎨</h1>
-
-      <p class="page-subtitle">
-        Unlock new BackupData looks as you complete achievements.
-      </p>
-
-      <div class="theme-grid">
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#20e889,#071b16);"></div>
-          <div class="theme-name">Backup Green</div>
-          <div class="theme-status">✅ Unlocked</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#00c6ff,#0072ff);"></div>
-          <div class="theme-name">Ocean</div>
-          <div class="theme-status">🔒 Buy data 3 times</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#ff512f,#dd2476);"></div>
-          <div class="theme-name">Fire</div>
-          <div class="theme-status">🔒 Complete 10 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#232526,#414345);"></div>
-          <div class="theme-name">Galaxy</div>
-          <div class="theme-status">🔒 7-day activity</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#bdc3c7,#2c3e50);"></div>
-          <div class="theme-name">Silver Glass</div>
-          <div class="theme-status">🔒 15 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#ff758c,#ff7eb3);"></div>
-          <div class="theme-name">Rose</div>
-          <div class="theme-status">🔒 Refer 3 friends</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#f7971e,#ffd200);"></div>
-          <div class="theme-name">Gold</div>
-          <div class="theme-status">🔒 30 successful orders</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#00f2fe,#4facfe);"></div>
-          <div class="theme-name">Aqua</div>
-          <div class="theme-status">🔒 20 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#7f00ff,#e100ff);"></div>
-          <div class="theme-name">Violet</div>
-          <div class="theme-status">🔒 50 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#56ab2f,#a8e063);"></div>
-          <div class="theme-name">Nature</div>
-          <div class="theme-status">🔒 14-day streak</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#141e30,#243b55);"></div>
-          <div class="theme-name">Midnight</div>
-          <div class="theme-status">🔒 25 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#ff9966,#ff5e62);"></div>
-          <div class="theme-name">Sunset</div>
-          <div class="theme-status">🔒 40 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#74ebd5,#ACB6E5);"></div>
-          <div class="theme-name">Sky</div>
-          <div class="theme-status">🔒 5-day streak</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#232526,#000000);"></div>
-          <div class="theme-name">Carbon</div>
-          <div class="theme-status">🔒 60 purchases</div>
-        </div>
-
-        <div class="theme">
-          <div class="theme-preview"
-               style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);"></div>
-          <div class="theme-name">Dream</div>
-          <div class="theme-status">🔒 Special achievement</div>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         ACCOUNT
-    ========================== -->
-
-    <section id="account" class="screen">
-
-      <h1 class="page-title">Your Account 👤</h1>
-
-      <p class="page-subtitle">
-        Your BackupData account will keep your information,
-        purchases and rewards together.
-      </p>
-
-      <div class="account-card">
-
-        <div class="account-icon">👤</div>
-
-        <h2>BackupData Account</h2>
-
-        <p>
-          Account login, saved numbers, purchase history,
-          rewards and device syncing are coming soon.
-        </p>
-
-        <button class="account-option" onclick="comingSoon()">
-          🔐 LOGIN
-
-        <button class="account-option" onclick="
-          </section>()">
-          <!-- ACCOUNT -->
-<section class="screen" id="account">
-  <div class="section-title">
-    <span>👤</span>
-    <div>
-      <h2>My Account</h2>
-      <p>Your BackupData account</p>
-    </div>
-  </div>
-
-  <div class="account-card">
-    <div class="account-icon">👤</div>
-
-    <h3>BackupData Account</h3>
-
-    <p>
-    <!-- ACCOUNT -->
-<section class="screen" id="account">
-
-  <div class="section-title">
-    <span>👤</span>
-    <div>
-      <h2>My Account</h2>
-      <p id="accountSubtitle">Welcome to BackupData</p>
-    </div>
-  </div>
-
-  <!-- ACCOUNT HOME -->
-  <div class="account-card" id="accountHome">
-
-    <div class="account-big-icon">👤</div>
-
-    <h3 id="accountWelcome">BackupData Account</h3>
-
-    <p id="accountDescription">
-      Create an account or login to manage your BackupData account.
-    </p>
-
-    <button class="primary-btn" onclick="showAccountForm('create')">
-      📝 Create Account
-    </button>
-
-    <button class="secondary-btn" onclick="showAccountForm('login')">
-      🔐 Login
-    </button>
-
-    <button class="secondary-btn" onclick="showScreen('themes')">
-      🎨 View Themes
-    </button>
-
-  </div>
-
-
-  <!-- CREATE ACCOUNT -->
-  <div class="account-card" id="createAccountBox" style="display:none;">
-
-    <button class="back-account" onclick="showAccountHome()">
-      ← Back
-    </button>
-
-    <div class="account-big-icon">📝</div>
-
-    <h3>Create Your Account</h3>
-
-    <p>Join BackupData today.</p>
-
-    <input
-      type="text"
-      id="registerName"
-      class="account-input"
-      placeholder="Full name"
-      autocomplete="name"
-    >
-
-    <input
-      type="tel"
-      id="registerPhone"
-      class="account-input"
-      placeholder="Phone number"
-      maxlength="11"
-      autocomplete="tel"
-    >
-
-    <input
-      type="email"
-      id="registerEmail"
-      class="account-input"
-      placeholder="Email address"
-      autocomplete="email"
-    >
-
-    <div class="password-wrap">
-      <input
-        type="password"
-        id="registerPassword"
-        class="account-input"
-        placeholder="Create password"
-        autocomplete="new-password"
-      >
-
-      <button
-        type="button"
-        class="password-toggle"
-        onclick="togglePassword('registerPassword', this)"
-      >
-        👁️
-      </button>
-    </div>
-
-    <div id="registerMessage" class="account-message"></div>
-
-    <button class="primary-btn" onclick="createAccount()">
-      ✅ Create Account
-    </button>
-
-    <p class="account-switch">
-      Already have an account?
-      <button type="button" onclick="showAccountForm('login')">
-        Login
-      </button>
-    </p>
-
-  </div>
-
-
-  <!-- LOGIN -->
-  <div class="account-card" id="loginBox" style="display:none;">
-
-    <button class="back-account" onclick="showAccountHome()">
-      ← Back
-    </button>
-
-    <div class="account-big-icon">🔐</div>
-
-    <h3>Welcome Back</h3>
-
-    <p>Login to your BackupData account.</p>
-
-    <input
-      type="email"
-      id="loginEmail"
-      class="account-input"
-      placeholder="Email address"
-      autocomplete="email"
-    >
-
-    <div class="password-wrap">
-      <input
-        type="password"
-        id="loginPassword"
-        class="account-input"
-        placeholder="Password"
-        autocomplete="current-password"
-      >
-
-      <button
-        type="button"
-        class="password-toggle"
-        onclick="togglePassword('loginPassword', this)"
-      >
-        👁️
-      </button>
-    </div>
-
-    <div id="loginMessage" class="account-message"></div>
-
-    <button class="primary-btn" onclick="loginAccount()">
-      🔓 Login
-    </button>
-
-    <p class="account-switch">
-      Don't have an account?
-      <button type="button" onclick="showAccountForm('create')">
-        Create Account
-      </button>
-    </p>
-
-  </div>
-
-
-  <!-- LOGGED IN PROFILE -->
-  <div class="account-card" id="profileBox" style="display:none;">
-
-    <div class="account-big-icon">🎉</div>
-
-    <h3 id="profileName">Welcome!</h3>
-
-    <p id="profileEmail"></p>
-    <p id="profilePhone"></p>
-
-    <div class="profile-status">
-      🟢 Account active
-    </div>
-
-    <button class="primary-btn" onclick="showScreen('buy')">
-      📱 Buy Data
-    </button>
-
-    <button class="secondary-btn" onclick="showScreen('themes')">
-      🎨 View Themes
-    </button>
-
-    <button class="logout-btn" onclick="logoutAccount()">
-      🚪 Logout
-    </button>
-
-  </div>
-
-</section>
-
-  <!-- =========================
-       BACKUP AI
-  ========================== -->
-
-  <button id="aiBubble" aria-label="Open Backup AI">
-    🤖
-  </button>
-
-  <div id="aiChat">
-
-    <div class="ai-header">
-
-      <strong>🤖 Backup AI</strong>
-
-      <button class="ai-close" onclick="closeAI()">
-        ×
-      </button>
-
-    </div>
-
-    <div class="ai-body">
-
-      <div class="ai-message" id="aiMessages">
-        Hello 👋 How was your day?<br><br>
-        I'm Backup AI. I can help you choose a data plan,
-        explain BackupData or connect you to customer support.
-      </div>
-
-      <div class="ai-input">
-
-        <input
-          id="aiInput"
-          type="text"
-          placeholder="Ask Backup AI..."
-          onkeydown="if(event.key==='Enter') sendAI()"
-        >
-
-        <button onclick="sendAI()">
-          ➤
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       BOTTOM NAV
-  ========================== -->
-
-  <nav class="bottom-nav">
-
-    <div class="nav-inner">
-
-      <button class="nav-btn active" data-screen="home"
-              onclick="showScreen('home')">
-        <span>🏠</span>
-        Home
-      </button>
-
-      <button class="nav-btn" data-screen="buy"
-              onclick="showScreen('buy')">
-        <span>📱</span>
-        Buy Data
-      </button>
-
-      <button class="nav-btn" data-screen="themes"
-              onclick="showScreen('themes')">
-        <span>🎨</span>
-        Themes
-      </button>
-
-      <button class="nav-btn" data-screen="account"
-              onclick="showScreen('account')">
-        <span>👤</span>
-        Account
-      </button>
-
-    </div>
-
-  </nav>
-
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
-  <script>
-
-    /* -------------------------
-       SCREEN NAVIGATION
-    ------------------------- */
-
-    function showScreen(screenName) {
-
-      const screens = document.querySelectorAll(".screen");
-
-      screens.forEach(function(screen) {
-        screen.classList.remove("active");
-      });
-
-      const selectedScreen = document.getElementById(screenName);
-
-      if (selectedScreen) {
-        selectedScreen.classList.add("active");
-      }
-
-      const navButtons = document.querySelectorAll(".nav-btn");
-
-      navButtons.forEach(function(button) {
-
-        button.classList.remove("active");
-
-        if (button.dataset.screen === screenName) {
-          button.classList.add("active");
-        }
-
-      });
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-
-    /* -------------------------
-       QUICK BUY
-    ------------------------- */
-
-    function quickBuy(network, plan) {
-
-      showScreen("buy");
-
-      document.getElementById("network").value = network;
-      document.getElementById("plan").value = plan;
-
-      document.getElementById("phone").focus();
-    }
-
-
-    /* -------------------------
-       PLACE ORDER
-    ------------------------- */
-
-    function placeOrder() {
-
-      const network = document.getElementById("network").value;
-      const plan = document.getElementById("plan").value;
-      const phone = document.getElementById("phone").value.trim();
-
-      const message = document.getElementById("orderMessage");
-
-      message.classList.remove("error");
-
-      if (!network || !plan || !phone) {
-
-        message.classList.add("error");
-
-        message.innerHTML =
-          "Please select a network, choose a data plan and enter your phone number.";
-
-        message.style.display = "block";
-
-        return;
-      }
-
-      if (!/^0[0-9]{10}$/.test(phone)) {
-
-        message.classList.add("error");
-
-        message.innerHTML =
-          "Please enter a valid Nigerian phone number, for example 08012345678.";
-
-        message.style.display = "block";
-
-        return;
-      }
-
-      message.innerHTML =
-        "✅ Demo order received!<br><br>" +
-        "<strong>" + network + " " + plan + "</strong>" +
-        " selected for <strong>" + phone + "</strong>.<br><br>" +
-        "Real payment and automatic data delivery will be connected later.";
-
-      message.style.display = "block";
-    }
-
-
-    /* -------------------------
-       COMING SOON
-    ------------------------- */
-
-    function comingSoon() {
-
-      alert(
-        "This feature is coming soon to BackupData 🚀"
-      );
-
-    }
-
-
-    /* -------------------------
-       BACKUP AI
-    ------------------------- */
-
-    const aiBubble = document.getElementById("aiBubble");
-    const aiChat = document.getElementById("aiChat");
-
-    aiBubble.addEventListener("click", function() {
-
-      aiChat.style.display =
-        aiChat.style.display === "block"
-          ? "none"
-          : "block";
-
-    });
-
-
-    function closeAI() {
-
-      aiChat.style.display = "none";
-
-    }
-
-
-    function sendAI() {
-
-      const input = document.getElementById("aiInput");
-      const messages = document.getElementById("aiMessages");
-
-      const text = input.value.trim();
-
-      if (!text) return;
-
-      let reply =
-        "I can help with data plans, buying data, BackupData features, or customer support. 😊";
-
-      const lower = text.toLowerCase();
-
-
-      if (
-        lower.includes("hello") ||
-        lower.includes("hi") ||
-        lower.includes("hey")
-      ) {
-
-        reply =
-          "Hello 👋 How was your day? I'm Backup AI. What can I help you with?";
-
-      }
-
-      else if (
-        lower.includes("price") ||
-        lower.includes("cost") ||
-        lower.includes("how much")
-      ) {
-
-        reply =
-          "Our current demo plans are: 500MB ₦500, 1GB ₦800, 2GB ₦1,500, 5GB ₦2,500 and 10GB ₦4,500.";
-
-      }
-
-      else if (
-        lower.includes("buy") ||
-        lower.includes("data")
-      ) {
-
-        reply =
-          "Sure 👍🏽. Tap 'Buy Data' below, choose your network and plan, then enter your phone number.";
-
-      }
-
-      else if (
-        lower.includes("support") ||
-        lower.includes("help") ||
-        lower.includes("problem")
-      ) {
-
-        reply =
-          "You can contact BackupData Support on WhatsApp: 07084912007.";
-
-      }
-
-
-      messages.innerHTML =
-        "<strong>You:</strong> " + escapeHTML(text) +
-        "<br><br>" +
-        "<strong>Backup AI:</strong> " + reply;
-
-      input.value = "";
-
-    }
-
-
-    function escapeHTML(text) {
-
-      return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* -------------------------
-       SPLASH SCREEN
-    ------------------------- */
-
-    window.addEventListener("load", function() {
-
-      setTimeout(function() {
-
-        const splash = document.getElementById("splash");
-
-        if (splash) {
-          splash.style.display = "none";
-        }
-
-      }, 1800);
-
-    });
-
-  </script>
-
-</body>
-            </html>
+      heigh
