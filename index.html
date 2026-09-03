@@ -3222,3 +3222,418 @@ t: 72px;
       }
 
     }
+    <script>
+
+    /* =========================
+       PLACE ORDER
+    ========================== */
+
+    function placeOrder() {
+
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      const message =
+        document.getElementById("orderMessage");
+
+
+      if (!selectedDataPlan) {
+
+        message.textContent =
+          "Please select a data plan first.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      if (!/^0[0-9]{10}$/.test(phone)) {
+
+        message.textContent =
+          "Please enter a valid 11-digit Nigerian phone number.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      message.textContent =
+        "✅ Order ready: " +
+        selectedNetwork +
+        " " +
+        selectedDataPlan.data +
+        " for " +
+        phone +
+        " • ₦" +
+        selectedDataPlan.price.toLocaleString() +
+        " • " +
+        selectedDataPlan.validity +
+        ".";
+
+
+      message.className =
+        "message success";
+
+    }
+
+
+    /* =========================
+       ACCOUNT HELPERS
+    ========================== */
+
+    function getAccount() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem("backupDataAccount")
+        );
+
+      } catch (error) {
+
+        return null;
+
+      }
+
+    }
+
+
+    function isLoggedIn() {
+
+      return (
+        localStorage.getItem("backupDataLoggedIn")
+        === "true"
+      );
+
+    }
+
+
+    function escapeHTML(value) {
+
+      return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+    }
+
+
+    /* =========================
+       ACCOUNT DISPLAY
+    ========================== */
+
+    function checkAccountLogin() {
+
+      if (isLoggedIn()) {
+
+        showProfile();
+
+      } else {
+
+        showAccountHome();
+
+      }
+
+    }
+
+
+    function hideAccountBoxes() {
+
+      const boxes = [
+
+        "accountHome",
+        "createAccountBox",
+        "loginBox",
+        "profileBox",
+        "profileSettingsBox",
+        "settingsBox"
+
+      ];
+
+
+      boxes.forEach(id => {
+
+        const box =
+          document.getElementById(id);
+
+        if (box) {
+
+          box.style.display = "none";
+
+        }
+
+      });
+
+    }
+
+
+    function showAccountHome() {
+
+      hideAccountBoxes();
+
+
+      const box =
+        document.getElementById("accountHome");
+
+      if (box) {
+
+        box.style.display = "block";
+
+      }
+
+    }
+
+
+    function showAccountForm(type) {
+
+      hideAccountBoxes();
+
+
+      if (type === "create") {
+
+        document.getElementById(
+          "createAccountBox"
+        ).style.display = "block";
+
+      }
+
+
+      if (type === "login") {
+
+        document.getElementById(
+          "loginBox"
+        ).style.display = "block";
+
+      }
+
+    }
+
+
+    /* =========================
+       CREATE ACCOUNT
+    ========================== */
+
+    function createAccount() {
+
+      const name =
+        document.getElementById("createName")
+        .value.trim();
+
+      const phone =
+        document.getElementById("createPhone")
+        .value.trim();
+
+      const email =
+        document.getElementById("createEmail")
+        .value.trim()
+        .toLowerCase();
+
+      const password =
+        document.getElementById("createPassword")
+        .value;
+
+
+      const message =
+        document.getElementById("createMessage");
+
+
+      if (!name || !phone || !email || !password) {
+
+        message.textContent =
+          "Please fill all fields.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      if (!/^0[0-9]{10}$/.test(phone)) {
+
+        message.textContent =
+          "Enter a valid Nigerian phone number.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      if (password.length < 6) {
+
+        message.textContent =
+          "Password must be at least 6 characters.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      if (getAccount()) {
+
+        message.textContent =
+          "An account already exists on this browser. Please login.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      const account = {
+
+        name: name,
+        phone: phone,
+        email: email,
+        password: password
+
+      };
+
+
+      localStorage.setItem(
+        "backupDataAccount",
+        JSON.stringify(account)
+      );
+
+
+      localStorage.setItem(
+        "backupDataLoggedIn",
+        "true"
+      );
+
+
+      message.textContent =
+        "Account created successfully!";
+
+      message.className =
+        "message success";
+
+
+      setTimeout(() => {
+
+        checkAccountLogin();
+
+      },500);
+
+    }
+
+
+    /* =========================
+       LOGIN
+    ========================== */
+
+    function loginAccount() {
+
+      const email =
+        document.getElementById("loginEmail")
+        .value.trim()
+        .toLowerCase();
+
+      const password =
+        document.getElementById("loginPassword")
+        .value;
+
+
+      const message =
+        document.getElementById("loginMessage");
+
+
+      const account =
+        getAccount();
+
+
+      if (!account) {
+
+        message.textContent =
+          "No account found. Please create an account first.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      if (
+        account.email !== email ||
+        account.password !== password
+      ) {
+
+        message.textContent =
+          "Incorrect email or password.";
+
+        message.className =
+          "message error";
+
+        return;
+
+      }
+
+
+      localStorage.setItem(
+        "backupDataLoggedIn",
+        "true"
+      );
+
+
+      message.textContent =
+        "Login successful!";
+
+      message.className =
+        "message success";
+
+
+      setTimeout(() => {
+
+        checkAccountLogin();
+
+      },400);
+
+    }
+
+
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================== */
+
+    function togglePassword(id,button) {
+
+      const input =
+        document.getElementById(id);
+
+      if (!input) return;
+
+
+      if (input.type === "password") {
+
+        input.type = "text";
+
+        button.textContent = "HIDE";
+
+      } else {
+
+        input.type = "password";
+
+        button.textContent = "SHOW";
+
+      }
+
+    }
