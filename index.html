@@ -2251,4 +2251,974 @@ t: 72px;
               placeholder="Your password"
             >
 
-            <bu
+                        <button
+              class="show-password"
+              onclick="togglePassword('loginPassword',this)">
+
+              SHOW
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          onclick="loginAccount()">
+
+          Login to Account
+
+        </button>
+
+
+        <button
+          class="back-btn"
+          onclick="showAccountHome()">
+
+          ← Back
+
+        </button>
+
+
+        <p class="switch-text">
+
+          Don't have an account?
+
+          <button
+            onclick="showAccountForm('create')">
+
+            Create Account
+
+          </button>
+
+        </p>
+
+
+        <div
+          id="loginMessage"
+          class="message">
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE -->
+
+      <div
+        class="account-card"
+        id="profileBox"
+        style="display:none;">
+
+        <div class="profile-avatar" id="profileAvatar">
+          B
+        </div>
+
+        <h2 id="profileName">
+          BackupData User
+        </h2>
+
+        <p id="profileEmail">
+          user@example.com
+        </p>
+
+
+        <div class="profile-info">
+
+          <div class="profile-row">
+
+            <span>
+              📱 Phone
+            </span>
+
+            <strong id="profilePhone">
+              08000000000
+            </strong>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <span>
+              ✉️ Email
+            </span>
+
+            <strong id="profileEmail2">
+              user@example.com
+            </strong>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <span>
+              🟢 Status
+            </span>
+
+            <strong>
+              Active
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          onclick="showScreen('buy')">
+
+          📱 Buy Data
+
+        </button>
+
+
+        <button
+          class="account-option"
+          onclick="showProfileSettings()">
+
+          👤 Profile Settings
+
+        </button>
+
+
+        <button
+          class="account-option"
+          onclick="showSettings()">
+
+          ⚙️ Settings
+
+        </button>
+
+
+        <button
+          class="account-option"
+          onclick="showScreen('themes')">
+
+          🎨 Themes
+
+        </button>
+
+
+        <button
+          class="logout-btn"
+          onclick="logoutAccount()">
+
+          🚪 Logout
+
+        </button>
+
+      </div>
+
+
+      <!-- PROFILE SETTINGS -->
+
+      <div
+        class="account-card"
+        id="profileSettingsBox"
+        style="display:none;">
+
+        <h2 class="form-title">
+          Profile Settings
+        </h2>
+
+        <p class="form-description">
+          Update your personal BackupData information.
+        </p>
+
+
+        <div class="field">
+
+          <label for="profileEditName">
+            Full Name
+          </label>
+
+          <input
+            id="profileEditName"
+            type="text"
+            placeholder="Your full name"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="profileEditPhone">
+            Phone Number
+          </label>
+
+          <input
+            id="profileEditPhone"
+            type="tel"
+            inputmode="numeric"
+            maxlength="11"
+            placeholder="08012345678"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            id="profileEditEmail"
+            type="email"
+            disabled
+          >
+
+        </div>
+
+
+        <button
+          class="primary-btn"
+          onclick="saveProfileSettings()">
+
+          Save Changes
+
+        </button>
+
+
+        <button
+          class="back-btn"
+          onclick="showProfile()">
+
+          ← Back to Profile
+
+        </button>
+
+
+        <div
+          id="profileMessage"
+          class="message">
+        </div>
+
+      </div>
+
+
+      <!-- NORMAL SETTINGS -->
+
+      <div
+        class="account-card"
+        id="settingsBox"
+        style="display:none;">
+
+        <h2 class="form-title">
+          Settings ⚙️
+        </h2>
+
+        <p class="form-description">
+          Control your BackupData preferences.
+        </p>
+
+
+        <div class="setting-row">
+
+          <div>
+
+            <strong>
+              🔔 Notifications
+            </strong>
+
+            <span>
+              Receive important BackupData updates.
+            </span>
+
+          </div>
+
+
+          <button
+            class="toggle"
+            id="notificationToggle"
+            onclick="toggleNotifications()">
+
+            ON
+
+          </button>
+
+        </div>
+
+
+        <div class="setting-row">
+
+          <div>
+
+            <strong>
+              🌙 Appearance
+            </strong>
+
+            <span id="appearanceText">
+              Dark mode
+            </span>
+
+          </div>
+
+
+          <button
+            class="toggle"
+            id="appearanceToggle"
+            onclick="toggleAppearance()">
+
+            DARK
+
+          </button>
+
+        </div>
+
+
+        <button
+          class="settings-action"
+          onclick="toggleSettingsPanel('privacyPanel')">
+
+          🔒 Privacy & Security
+
+          <span>
+            ›
+          </span>
+
+        </button>
+
+
+        <div
+          class="settings-panel"
+          id="privacyPanel"
+          style="display:none;">
+
+          <strong>
+            Privacy & Security
+          </strong>
+
+          <p>
+            Your demo account details are stored locally
+            in this browser using localStorage.
+          </p>
+
+          <p>
+            This is only a front-end demo. Do not use
+            real passwords or sensitive information here.
+          </p>
+
+        </div>
+
+
+        <button
+          class="settings-action"
+          onclick="toggleSettingsPanel('helpPanel')">
+
+          💬 Help & Support
+
+          <span>
+            ›
+          </span>
+
+        </button>
+
+
+        <div
+          class="settings-panel"
+          id="helpPanel"
+          style="display:none;">
+
+          <strong>
+            Need Help?
+          </strong>
+
+          <p>
+            Contact BackupData Support on WhatsApp.
+          </p>
+
+          <a
+            href="https://wa.me/2347084912007"
+            target="_blank">
+
+            Chat Support
+
+          </a>
+
+        </div>
+
+
+        <button
+          class="settings-action"
+          onclick="toggleSettingsPanel('aboutPanel')">
+
+          ℹ️ About BackupData
+
+          <span>
+            ›
+          </span>
+
+        </button>
+
+
+        <div
+          class="settings-panel"
+          id="aboutPanel"
+          style="display:none;">
+
+          <strong>
+            BackupData
+          </strong>
+
+          <p>
+            BackupData is a mobile-first Nigerian data
+            marketplace concept built for fast and simple
+            data purchases.
+          </p>
+
+          <p>
+            Version 1.0 • 2026
+          </p>
+
+        </div>
+
+
+        <button
+          class="back-btn"
+          onclick="showProfile()">
+
+          ← Back to Profile
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- BACKUP AI -->
+
+  <button
+    id="aiBubble"
+    onclick="toggleAI()"
+    aria-label="Open Backup AI">
+
+    🤖
+
+  </button>
+
+
+  <div
+    id="aiChat"
+    class="ai-chat"
+    style="display:none;">
+
+    <div class="ai-header">
+
+      <div>
+
+        <strong>
+          Backup AI
+        </strong>
+
+        <span>
+          Your BackupData assistant
+        </span>
+
+      </div>
+
+
+      <button
+        onclick="closeAI()">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="aiMessages"
+      class="ai-messages">
+
+      <div class="ai-message bot">
+
+        👋 Hi! I'm Backup AI.
+
+        <br><br>
+
+        Ask me about data plans,
+        networks or BackupData.
+
+      </div>
+
+    </div>
+
+
+    <div class="ai-input">
+
+      <input
+        id="aiInput"
+        type="text"
+        placeholder="Ask Backup AI..."
+        onkeydown="if(event.key==='Enter') sendAI()"
+      >
+
+      <button
+        onclick="sendAI()">
+
+        ➤
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- BOTTOM NAV -->
+
+  <nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+
+      <button
+        class="nav-btn active"
+        data-screen="home"
+        onclick="showScreen('home')">
+
+        <span>
+          🏠
+        </span>
+
+        Home
+
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-screen="buy"
+        onclick="showScreen('buy')">
+
+        <span>
+          📱
+        </span>
+
+        Buy Data
+
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-screen="themes"
+        onclick="showScreen('themes')">
+
+        <span>
+          🎨
+        </span>
+
+        Themes
+
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-screen="account"
+        onclick="showScreen('account')">
+
+        <span>
+          👤
+        </span>
+
+        Account
+
+      </button>
+
+
+    </div>
+
+  </nav>
+
+
+  <script>
+
+    /* =========================
+       DATA PLANS
+    ========================== */
+
+    const dataPlans = {
+
+      MTN: [
+
+        {id:"mtn100",price:100,data:"200MB",validity:"1 day"},
+        {id:"mtn200",price:200,data:"350MB",validity:"2 days"},
+        {id:"mtn300",price:300,data:"500MB",validity:"7 days"},
+        {id:"mtn500",price:500,data:"1GB",validity:"7 days"},
+        {id:"mtn700",price:700,data:"1.5GB",validity:"7 days"},
+        {id:"mtn800",price:800,data:"1GB",validity:"30 days"},
+        {id:"mtn1000",price:1000,data:"2GB",validity:"30 days"},
+        {id:"mtn1500",price:1500,data:"3GB",validity:"30 days"},
+        {id:"mtn2000",price:2000,data:"4GB",validity:"30 days"},
+        {id:"mtn2500",price:2500,data:"5GB",validity:"30 days"},
+        {id:"mtn3000",price:3000,data:"7GB",validity:"30 days"},
+        {id:"mtn4000",price:4000,data:"10GB",validity:"30 days"},
+        {id:"mtn5000",price:5000,data:"12GB",validity:"30 days"}
+
+      ],
+
+
+      Airtel: [
+
+        {id:"air100",price:100,data:"200MB",validity:"1 day"},
+        {id:"air200",price:200,data:"400MB",validity:"2 days"},
+        {id:"air300",price:300,data:"500MB",validity:"7 days"},
+        {id:"air500",price:500,data:"1GB",validity:"7 days"},
+        {id:"air700",price:700,data:"1.5GB",validity:"7 days"},
+        {id:"air1000",price:1000,data:"2GB",validity:"30 days"},
+        {id:"air1500",price:1500,data:"3GB",validity:"30 days"},
+        {id:"air2000",price:2000,data:"4.5GB",validity:"30 days"},
+        {id:"air2500",price:2500,data:"6GB",validity:"30 days"},
+        {id:"air3000",price:3000,data:"8GB",validity:"30 days"},
+        {id:"air4000",price:4000,data:"10GB",validity:"30 days"},
+        {id:"air5000",price:5000,data:"13GB",validity:"30 days"}
+
+      ],
+
+
+      Glo: [
+
+        {id:"glo100",price:100,data:"200MB",validity:"1 day"},
+        {id:"glo200",price:200,data:"400MB",validity:"2 days"},
+        {id:"glo300",price:300,data:"600MB",validity:"7 days"},
+        {id:"glo500",price:500,data:"1GB",validity:"7 days"},
+        {id:"glo700",price:700,data:"1.5GB",validity:"7 days"},
+        {id:"glo1000",price:1000,data:"2GB",validity:"30 days"},
+        {id:"glo1500",price:1500,data:"3GB",validity:"30 days"},
+        {id:"glo2000",price:2000,data:"4.5GB",validity:"30 days"},
+        {id:"glo2500",price:2500,data:"6GB",validity:"30 days"},
+        {id:"glo3000",price:3000,data:"8GB",validity:"30 days"},
+        {id:"glo4000",price:4000,data:"10GB",validity:"30 days"},
+        {id:"glo5000",price:5000,data:"15GB",validity:"30 days"}
+
+      ],
+
+
+      "9mobile": [
+
+        {id:"9m100",price:100,data:"200MB",validity:"1 day"},
+        {id:"9m200",price:200,data:"400MB",validity:"2 days"},
+        {id:"9m300",price:300,data:"600MB",validity:"7 days"},
+        {id:"9m500",price:500,data:"1GB",validity:"7 days"},
+        {id:"9m700",price:700,data:"1.5GB",validity:"7 days"},
+        {id:"9m1000",price:1000,data:"2GB",validity:"30 days"},
+        {id:"9m1500",price:1500,data:"3GB",validity:"30 days"},
+        {id:"9m2000",price:2000,data:"4GB",validity:"30 days"},
+        {id:"9m2500",price:2500,data:"6GB",validity:"30 days"},
+        {id:"9m3000",price:3000,data:"8GB",validity:"30 days"},
+        {id:"9m4000",price:4000,data:"10GB",validity:"30 days"},
+        {id:"9m5000",price:5000,data:"14GB",validity:"30 days"}
+
+      ]
+
+    };
+
+
+    let selectedNetwork = "MTN";
+
+    let selectedDataPlan = null;
+
+
+    /* =========================
+       SCREEN NAVIGATION
+    ========================== */
+
+    function showScreen(screenName) {
+
+      document.querySelectorAll(".screen").forEach(screen => {
+
+        screen.classList.remove("active");
+
+      });
+
+
+      const target = document.getElementById(screenName);
+
+      if (target) {
+
+        target.classList.add("active");
+
+      }
+
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+
+        btn.classList.toggle(
+          "active",
+          btn.dataset.screen === screenName
+        );
+
+      });
+
+
+      if (screenName === "account") {
+
+        checkAccountLogin();
+
+      }
+
+
+      if (screenName === "buy") {
+
+        renderDataPlans();
+
+        updateSelectedSummary();
+
+      }
+
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+    }
+
+
+    /* =========================
+       NETWORK SELECTION
+    ========================== */
+
+    function changeNetwork(network) {
+
+      selectedNetwork = network;
+
+      selectedDataPlan = null;
+
+
+      document.querySelectorAll(".network-tab").forEach(btn => {
+
+        btn.classList.remove("active");
+
+      });
+
+
+      const activeButton =
+        document.getElementById("network-" + network);
+
+      if (activeButton) {
+
+        activeButton.classList.add("active");
+
+      }
+
+
+      const title =
+        document.getElementById("offersTitle");
+
+      if (title) {
+
+        title.textContent =
+          network.toUpperCase() + " DATA";
+
+      }
+
+
+      renderDataPlans();
+
+      updateSelectedSummary();
+
+    }
+
+
+    /* =========================
+       RENDER DATA PLANS
+    ========================== */
+
+    function renderDataPlans() {
+
+      const grid =
+        document.getElementById("dataPlanGrid");
+
+      if (!grid) return;
+
+
+      const plans =
+        dataPlans[selectedNetwork] || [];
+
+
+      const count =
+        document.getElementById("offerCount");
+
+      if (count) {
+
+        count.textContent =
+          plans.length + " offers";
+
+      }
+
+
+      grid.innerHTML =
+        plans.map((plan,index) => `
+
+          <button
+            class="data-plan-card ${
+              selectedDataPlan &&
+              selectedDataPlan.id === plan.id
+              ? "selected"
+              : ""
+            }"
+            onclick="selectDataPlan(${index})">
+
+            <div class="data-plan-price">
+              ₦${plan.price.toLocaleString()}
+            </div>
+
+            <div class="data-plan-amount">
+              ${escapeHTML(plan.data)}
+            </div>
+
+            <div class="data-plan-validity">
+              ${escapeHTML(plan.validity)}
+            </div>
+
+            <span class="data-plan-badge">
+              SELECT
+            </span>
+
+          </button>
+
+        `).join("");
+
+    }
+
+
+    /* =========================
+       SELECT PLAN
+    ========================== */
+
+    function selectDataPlan(index) {
+
+      const plans =
+        dataPlans[selectedNetwork] || [];
+
+
+      selectedDataPlan =
+        plans[index] || null;
+
+
+      renderDataPlans();
+
+      updateSelectedSummary();
+
+    }
+
+
+    /* =========================
+       SELECTED SUMMARY
+    ========================== */
+
+    function updateSelectedSummary() {
+
+      const box =
+        document.getElementById("selectedSummary");
+
+      if (!box) return;
+
+
+      if (!selectedDataPlan) {
+
+        box.classList.remove("show");
+
+        return;
+
+      }
+
+
+      document.getElementById("summaryData").textContent =
+        selectedDataPlan.data;
+
+
+      document.getElementById("summaryNetwork").textContent =
+        selectedNetwork +
+        " • " +
+        selectedDataPlan.validity;
+
+
+      document.getElementById("summaryPrice").textContent =
+        "₦" +
+        selectedDataPlan.price.toLocaleString();
+
+
+      box.classList.add("show");
+
+    }
+
+
+    /* =========================
+       QUICK BUY
+    ========================== */
+
+    function quickBuyPlan(network,data) {
+
+      showScreen("buy");
+
+
+      selectedNetwork = network;
+
+
+      selectedDataPlan =
+        (dataPlans[network] || []).find(
+          plan =>
+            plan.data.toLowerCase() ===
+            data.toLowerCase()
+        ) || null;
+
+
+      document.querySelectorAll(".network-tab")
+        .forEach(btn => {
+
+          btn.classList.remove("active");
+
+        });
+
+
+      const networkButton =
+        document.getElementById("network-" + network);
+
+      if (networkButton) {
+
+        networkButton.classList.add("active");
+
+      }
+
+
+      const title =
+        document.getElementById("offersTitle");
+
+      if (title) {
+
+        title.textContent =
+          network.toUpperCase() + " DATA";
+
+      }
+
+
+      renderDataPlans();
+
+      updateSelectedSummary();
+
+
+      const phone =
+        document.getElementById("phone");
+
+      if (phone) {
+
+        setTimeout(() => phone.focus(),150);
+
+      }
+
+    }
