@@ -538,78 +538,199 @@
     /* =========================
        ACCOUNT
     ========================== */
-    .account-icon {
-      width: 65px;
-      height: 65px;
-      margin: auto;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(32,232,137,.13);
-      font-size: 30px;
-    }
+    <!-- ACCOUNT -->
+<section class="screen" id="account">
 
-    .account-card h2 {
-      text-align: center;
-      margin-top: 14px;
-    }
+  <div class="section-title">
+    <span>👤</span>
+    <div>
+      <h2>My Account</h2>
+      <p id="accountSubtitle">Welcome to BackupData</p>
+    </div>
+  </div>
 
-    .account-card p {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 7px;
-      line-height: 1.5;
-    }
+  <!-- ACCOUNT HOME -->
+  <div class="account-card" id="accountHome">
 
-    .account-option {
-      margin-top: 12px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: rgba(255,255,255,.05);
-      color: white;
-      text-align: left;
-    }
+    <div class="account-big-icon">👤</div>
 
-    /* =========================
-       THEMES
-    ========================== */
+    <h3 id="accountWelcome">BackupData Account</h3>
 
-    .theme-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 18px;
-    }
+    <p id="accountDescription">
+      Create an account or login to manage your BackupData account.
+    </p>
 
-    .theme {
-      min-height: 105px;
-      padding: 15px;
-      border-radius: 18px;
-      border: 1px solid var(--card-border);
-      background: rgba(255,255,255,.06);
-    }
+    <button class="primary-btn" onclick="showAccountForm('create')">
+      📝 Create Account
+    </button>
 
-    .theme-preview {
-      height: 40px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
+    <button class="secondary-btn" onclick="showAccountForm('login')">
+      🔐 Login
+    </button>
 
-    .theme-name {
-      font-weight: bold;
-      font-size: 13px;
-    }
+    <button class="secondary-btn" onclick="showScreen('themes')">
+      🎨 View Themes
+    </button>
 
-    .theme-status {
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 5px;
-    }
+  </div>
 
+
+  <!-- CREATE ACCOUNT -->
+  <div class="account-card" id="createAccountBox" style="display:none;">
+
+    <button class="back-account" onclick="showAccountHome()">
+      ← Back
+    </button>
+
+    <div class="account-big-icon">📝</div>
+
+    <h3>Create Your Account</h3>
+
+    <p>Join BackupData today.</p>
+
+    <input
+      type="text"
+      id="registerName"
+      class="account-input"
+      placeholder="Full name"
+      autocomplete="name"
+    >
+
+    <input
+      type="tel"
+      id="registerPhone"
+      class="account-input"
+      placeholder="Phone number"
+      maxlength="11"
+      autocomplete="tel"
+    >
+
+    <input
+      type="email"
+      id="registerEmail"
+      class="account-input"
+      placeholder="Email address"
+      autocomplete="email"
+    >
+
+    <div class="password-wrap">
+      <input
+        type="password"
+        id="registerPassword"
+        class="account-input"
+        placeholder="Create password"
+        autocomplete="new-password"
+      >
+
+      <button
+        type="button"
+        class="password-toggle"
+        onclick="togglePassword('registerPassword', this)"
+      >
+        👁️
+      </button>
+    </div>
+
+    <div id="registerMessage" class="account-message"></div>
+
+    <button class="primary-btn" onclick="createAccount()">
+      ✅ Create Account
+    </button>
+
+    <p class="account-switch">
+      Already have an account?
+      <button type="button" onclick="showAccountForm('login')">
+        Login
+      </button>
+    </p>
+
+  </div>
+
+
+  <!-- LOGIN -->
+  <div class="account-card" id="loginBox" style="display:none;">
+
+    <button class="back-account" onclick="showAccountHome()">
+      ← Back
+    </button>
+
+    <div class="account-big-icon">🔐</div>
+
+    <h3>Welcome Back</h3>
+
+    <p>Login to your BackupData account.</p>
+
+    <input
+      type="email"
+      id="loginEmail"
+      class="account-input"
+      placeholder="Email address"
+      autocomplete="email"
+    >
+
+    <div class="password-wrap">
+      <input
+        type="password"
+        id="loginPassword"
+        class="account-input"
+        placeholder="Password"
+        autocomplete="current-password"
+      >
+
+      <button
+        type="button"
+        class="password-toggle"
+        onclick="togglePassword('loginPassword', this)"
+      >
+        👁️
+      </button>
+    </div>
+
+    <div id="loginMessage" class="account-message"></div>
+
+    <button class="primary-btn" onclick="loginAccount()">
+      🔓 Login
+    </button>
+
+    <p class="account-switch">
+      Don't have an account?
+      <button type="button" onclick="showAccountForm('create')">
+        Create Account
+      </button>
+    </p>
+
+  </div>
+
+
+  <!-- LOGGED IN PROFILE -->
+  <div class="account-card" id="profileBox" style="display:none;">
+
+    <div class="account-big-icon">🎉</div>
+
+    <h3 id="profileName">Welcome!</h3>
+
+    <p id="profileEmail"></p>
+    <p id="profilePhone"></p>
+
+    <div class="profile-status">
+      🟢 Account active
+    </div>
+
+    <button class="primary-btn" onclick="showScreen('buy')">
+      📱 Buy Data
+    </button>
+
+    <button class="secondary-btn" onclick="showScreen('themes')">
+      🎨 View Themes
+    </button>
+
+    <button class="logout-btn" onclick="logoutAccount()">
+      🚪 Logout
+    </button>
+
+  </div>
+
+</section>
     /* =========================
        BACKUP AI
     ========================== */
