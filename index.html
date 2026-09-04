@@ -1844,8 +1844,109 @@ function closeAI() {
   if (chat) {
     chat.style.display = "none";
   }
-}
+  if (
+    lower.includes("hello") ||
+    lower.includes("hi") ||
+    lower.includes("hey") ||
+    lower.includes("how far") ||
+    lower.includes("wassup") ||
+    lower.includes("good morning") ||
+    lower.includes("good evening")
+  ) {
 
+    reply =
+      "I dey here ooo 😂🤖. How far? Wetin you wan sort out today?";
+
+  } else if (
+    lower.includes("price") ||
+    lower.includes("cost") ||
+    lower.includes("how much") ||
+    lower.includes("1gb") ||
+    lower.includes("2gb") ||
+    lower.includes("5gb")
+  ) {
+
+    reply =
+      "No wahala 👍🏽. Go to Buy Data and choose your network. You go see all the available data plans and their prices there.";
+
+  } else if (
+    lower.includes("buy data") ||
+    lower.includes("buy") ||
+    lower.includes("data")
+  ) {
+
+    reply =
+      "Sharp bro 🔥. Tap Buy Data, choose your network and plan, then enter the phone number wey you wan send the data to.";
+
+  } else if (
+    lower.includes("mtn") ||
+    lower.includes("airtel") ||
+    lower.includes("glo") ||
+    lower.includes("9mobile") ||
+    lower.includes("network")
+  ) {
+
+    reply =
+      "We get MTN, Airtel, Glo and 9mobile for BackupData 🇳🇬. Choose your network inside Buy Data to see the available plans.";
+
+  } else if (
+    lower.includes("balance") ||
+    lower.includes("wallet") ||
+    lower.includes("fund") ||
+    lower.includes("money")
+  ) {
+
+    reply =
+      "Your BackupData wallet balance go show inside your Account 💰. You go also fit fund your wallet and use the balance to buy data.";
+
+  } else if (
+    lower.includes("account") ||
+    lower.includes("profile") ||
+    lower.includes("login")
+  ) {
+
+    reply =
+      "Your Account na where you go manage your profile, wallet balance, transactions and settings 👤.";
+
+  } else if (
+    lower.includes("support") ||
+    lower.includes("help") ||
+    lower.includes("problem") ||
+    lower.includes("issue")
+  ) {
+
+    reply =
+      "No wahala bro 🤝🏽. If you need human support, contact BackupData Support on WhatsApp: 07084912007.";
+
+  } else if (
+    lower.includes("thank") ||
+    lower.includes("thanks")
+  ) {
+
+    reply =
+      "You're welcome bro 😎❤️. Anything else, just ask me.";
+
+  } else if (
+    lower.includes("bye") ||
+    lower.includes("good night")
+  ) {
+
+    reply =
+      "Alright bro 😂. Take care. Backup AI dey here whenever you need am. 🤖🇳🇬";
+  }
+
+  messages.innerHTML +=
+    '<div class="ai-user">' +
+    escapeHTML(text) +
+    '</div>' +
+    '<div class="ai-bot">' +
+    escapeHTML(reply) +
+    '</div>';
+
+  input.value = "";
+
+  messages.scrollTop = messages.scrollHeight;
+    }
 
 function sendAI() {
 
@@ -1863,140 +1964,7 @@ function sendAI() {
 
   const lower = text.toLowerCase();
 
-/* =========================
-   BACKUP AI
-========================== */
-
-#aiBubble {
-  position: fixed;
-  right: 18px;
-  bottom: 88px;
-  z-index: 9000;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,.35);
-  background: linear-gradient(145deg, #1ee88b, #0a8f57);
-  color: white;
-  font-size: 28px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.35);
-  cursor: pointer;
-  touch-action: none;
-}
-
-#aiBubble:active {
-  transform: scale(.96);
-}
-
-#aiChat {
-  display: none;
-  position: fixed;
-  z-index: 8999;
-  right: 16px;
-  bottom: 155px;
-  width: min(350px, calc(100vw - 32px));
-  max-height: 520px;
-  border-radius: 22px;
-  overflow: hidden;
-  background: #0c1e18;
-  border: 1px solid rgba(255,255,255,.15);
-  box-shadow: 0 25px 70px rgba(0,0,0,.45);
-}
-
-.ai-header {
-  padding: 15px 16px;
-  background: linear-gradient(135deg, #153d2e, #0a251c);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ai-header strong {
-  font-size: 15px;
-}
-
-.ai-header small {
-  display: block;
-  color: #8ed8b5;
-  font-size: 10px;
-  margin-top: 3px;
-}
-
-.ai-close {
-  border: 0;
-  background: transparent;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.ai-body {
-  padding: 14px;
-}
-
-#aiMessages {
-  max-height: 330px;
-  overflow-y: auto;
-  padding: 2px;
-  scroll-behavior: smooth;
-}
-
-.ai-user,
-.ai-bot {
-  max-width: 82%;
-  padding: 10px 12px;
-  border-radius: 15px;
-  font-size: 13px;
-  line-height: 1.5;
-  margin-bottom: 9px;
-  word-wrap: break-word;
-}
-
-.ai-user {
-  margin-left: auto;
-  background: #15945c;
-  color: white;
-  border-bottom-right-radius: 5px;
-}
-
-.ai-bot {
-  margin-right: auto;
-  background: rgba(255,255,255,.08);
-  color: #dbe7e2;
-  border-bottom-left-radius: 5px;
-}
-
-.ai-label {
-  display: block;
-  font-size: 9px;
-  font-weight: bold;
-  opacity: .65;
-  margin-bottom: 3px;
-}
-
-.ai-input {
-  display: flex;
-  gap: 7px;
-  margin-top: 12px;
-}
-
-.ai-input input {
-  flex: 1;
-  min-width: 0;
-  border-radius: 12px;
-}
-
-.ai-input button {
-  width: 48px;
-  min-width: 48px;
-  border: 0;
-  border-radius: 11px;
-  background: var(--green);
-  color: #03100c;
-  font-weight: bold;
-  cursor: pointer;
-}
-
+ 
 /* ESCAPE HTML */
 
 function escapeHTML(text) {
