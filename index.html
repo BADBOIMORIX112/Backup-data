@@ -1512,7 +1512,7 @@
        JAVASCRIPT
   ========================== -->
 
-    <script>
+ <script>
 
 /* =========================
    SCREEN NAVIGATION
@@ -1767,6 +1767,217 @@ function resetSelectedPlan() {
   if (price) price.textContent = "₦0";
 }
 
+
+/* =========================
+   QUICK BUY
+========================== */
+
+function quickBuy(network, plan) {
+
+  showScreen("buy");
+
+  changeNetwork(network);
+
+  const plans = dataPlans[network];
+
+  if (!plans) return;
+
+  const index = plans.findIndex(function(item) {
+    return item.data === plan;
+  });
+
+  if (index !== -1) {
+    selectPlan(index);
+  }
+}
+
+
+/* =========================
+   PLACE ORDER
+========================== */
+
+function placeOrder() {
+
+  const phoneInput = document.getElementById("phone");
+  const message = document.getElementById("orderMessage");
+
+  if (!message) return;
+
+  message.classList.remove("error");
+
+  if (!selectedPlan) {
+    message.textContent = "Please select a data plan.";
+    message.style.color = "#ff6b6b";
+    message.style.display = "block";
+    return;
+  }
+
+  if (!phoneInput || !/^0[0-9]{10}$/.test(phoneInput.value.trim())) {
+    message.textContent =
+      "Please enter a valid Nigerian phone number, for example 08012345678.";
+    message.style.color = "#ff6b6b";
+    message.style.display = "block";
+    return;
+  }
+
+  message.innerHTML =
+    "✅ Demo order received!<br><br>" +
+    currentNetwork + " " +
+    selectedPlan.data +
+    " selected for " +
+    escapeHTML(phoneInput.value.trim()) +
+    ".<br><br>" +
+    "Real payment and automatic data delivery will be connected later.";
+
+  message.style.color = "var(--green)";
+  message.style.display = "block";
+}
+
+
+/* =========================
+   COMING SOON
+========================== */
+
+function comingSoon() {
+
+  alert(
+    "This feature is coming soon to BackupData 🚀"
+  );
+
+}
+
+
+/* =========================
+   BACKUP AI
+========================== */
+
+const aiBubble = document.getElementById("aiBubble");
+const aiChat = document.getElementById("aiChat");
+
+if (aiBubble && aiChat) {
+
+  aiBubble.addEventListener("click", function() {
+
+    aiChat.style.display =
+      aiChat.style.display === "block"
+        ? "none"
+        : "block";
+
+  });
+
+}
+
+
+function closeAI() {
+
+  if (aiChat) {
+    aiChat.style.display = "none";
+  }
+
+}
+
+
+function sendAI() {
+
+  const input = document.getElementById("aiInput");
+  const messages = document.getElementById("aiMessages");
+
+  if (!input || !messages) return;
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  let reply =
+    "I can help with data plans, buying data, BackupData features, or customer support. 😊";
+
+  const lower = text.toLowerCase();
+
+  if (
+    lower.includes("hello") ||
+    lower.includes("hi") ||
+    lower.includes("hey")
+  ) {
+
+    reply =
+      "Hello 👋 How was your day? I'm Backup AI. What can I help you with?";
+
+  } else if (
+    lower.includes("price") ||
+    lower.includes("cost") ||
+    lower.includes("how much")
+  ) {
+
+    reply =
+      "Our current demo plans include different MTN, Airtel, Glo and 9mobile options. Open Buy Data to see the available plans and prices.";
+
+  } else if (
+    lower.includes("buy") ||
+    lower.includes("data")
+  ) {
+
+    reply =
+      "Sure 👍🏽. Tap 'Buy Data' below, choose your network and plan, then enter your phone number.";
+
+  } else if (
+    lower.includes("support") ||
+    lower.includes("help") ||
+    lower.includes("problem")
+  ) {
+
+    reply =
+      "You can contact BackupData Support on WhatsApp: 07084912007.";
+
+  }
+
+  messages.innerHTML +=
+    `<div class="ai-user">${escapeHTML(text)}</div>` +
+    `<div class="ai-bot">${escapeHTML(reply)}</div>`;
+
+  input.value = "";
+
+  messages.scrollTop = messages.scrollHeight;
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================== */
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================
+   START APP
+========================== */
+
+window.addEventListener("load", function() {
+
+  renderDataPlans();
+
+  setTimeout(function() {
+
+    const splash =
+      document.getElementById("splash");
+
+    if (splash) {
+      splash.style.display = "none";
+    }
+
+  }, 1800);
+
+});
+
+ </script>
 
 /* =========================
    QUICK BUY
