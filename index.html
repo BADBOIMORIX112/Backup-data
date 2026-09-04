@@ -593,17 +593,32 @@
       font-weight: 900;
     }
 
-    .offer-count {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-    .data-plan-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
-  margin-top: 13px;
-    }
+     @media (max-width: 390px) {
+  .network-tab {
+    font-size: 10px;
+  }
+
+  .data-plan-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .data-plan {
+    padding: 9px 4px;
+  }
+
+  .data-plan-data {
+    font-size: 14px;
+  }
+
+  .data-plan-price {
+    font-size: 11px;
+  }
+
+  .data-plan-validity {
+    font-size: 8px;
+  }
+     }
 
     .data-plan {
       border: 1px solid var(--card-border);
