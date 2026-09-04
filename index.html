@@ -1511,12 +1511,79 @@
   <!-- =========================
        JAVASCRIPT
   ========================== -->
-
  <script>
 
-/* =========================
-   SCREEN NAVIGATION
-========================== */
+const dataPlans = {
+  MTN: [
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"4GB",price:800,validity:"30 days"},
+    {data:"5GB",price:1000,validity:"30 days"},
+    {data:"6GB",price:1200,validity:"30 days"},
+    {data:"7GB",price:1400,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"},
+    {data:"12GB",price:2400,validity:"30 days"},
+    {data:"15GB",price:3000,validity:"30 days"}
+  ],
+
+  Airtel: [
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"4GB",price:900,validity:"30 days"},
+    {data:"5GB",price:1100,validity:"30 days"},
+    {data:"6GB",price:1300,validity:"30 days"},
+    {data:"8GB",price:1600,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"},
+    {data:"12GB",price:2400,validity:"30 days"},
+    {data:"15GB",price:3000,validity:"30 days"}
+  ],
+
+  Glo: [
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"4GB",price:900,validity:"30 days"},
+    {data:"5GB",price:1000,validity:"30 days"},
+    {data:"6GB",price:1200,validity:"30 days"},
+    {data:"8GB",price:1600,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"},
+    {data:"12GB",price:2400,validity:"30 days"},
+    {data:"15GB",price:3000,validity:"30 days"}
+  ],
+
+  "9mobile": [
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"4GB",price:900,validity:"30 days"},
+    {data:"5GB",price:1000,validity:"30 days"},
+    {data:"6GB",price:1200,validity:"30 days"},
+    {data:"8GB",price:1600,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"},
+    {data:"12GB",price:2400,validity:"30 days"},
+    {data:"15GB",price:3000,validity:"30 days"}
+  ]
+};
+
+let currentNetwork = "MTN";
+let selectedPlan = null;
+
+
+/* NAVIGATION */
 
 function showScreen(screenName) {
 
@@ -1524,20 +1591,18 @@ function showScreen(screenName) {
     screen.classList.remove("active");
   });
 
-  const selectedScreen = document.getElementById(screenName);
+  const screen = document.getElementById(screenName);
 
-  if (selectedScreen) {
-    selectedScreen.classList.add("active");
+  if (screen) {
+    screen.classList.add("active");
   }
 
   document.querySelectorAll(".nav-btn").forEach(function(button) {
-
     button.classList.remove("active");
 
     if (button.dataset.screen === screenName) {
       button.classList.add("active");
     }
-
   });
 
   window.scrollTo({
@@ -1547,90 +1612,7 @@ function showScreen(screenName) {
 }
 
 
-/* =========================
-   DATA PLANS
-========================== */
-
-const dataPlans = {
-
-  MTN: [
-    {data:"200MB", price:100, validity:"30 days"},
-    {data:"500MB", price:200, validity:"30 days"},
-    {data:"1GB", price:300, validity:"30 days"},
-    {data:"1.5GB", price:400, validity:"30 days"},
-    {data:"2GB", price:500, validity:"30 days"},
-    {data:"3GB", price:700, validity:"30 days"},
-    {data:"4GB", price:800, validity:"30 days"},
-    {data:"5GB", price:1000, validity:"30 days"},
-    {data:"6GB", price:1200, validity:"30 days"},
-    {data:"7GB", price:1400, validity:"30 days"},
-    {data:"10GB", price:2000, validity:"30 days"},
-    {data:"12GB", price:2400, validity:"30 days"},
-    {data:"15GB", price:3000, validity:"30 days"}
-  ],
-
-  Airtel: [
-    {data:"200MB", price:100, validity:"30 days"},
-    {data:"500MB", price:200, validity:"30 days"},
-    {data:"1GB", price:300, validity:"30 days"},
-    {data:"1.5GB", price:400, validity:"30 days"},
-    {data:"2GB", price:500, validity:"30 days"},
-    {data:"3GB", price:700, validity:"30 days"},
-    {data:"4GB", price:900, validity:"30 days"},
-    {data:"5GB", price:1100, validity:"30 days"},
-    {data:"6GB", price:1300, validity:"30 days"},
-    {data:"8GB", price:1600, validity:"30 days"},
-    {data:"10GB", price:2000, validity:"30 days"},
-    {data:"12GB", price:2400, validity:"30 days"},
-    {data:"15GB", price:3000, validity:"30 days"}
-  ],
-
-  Glo: [
-    {data:"200MB", price:100, validity:"30 days"},
-    {data:"500MB", price:200, validity:"30 days"},
-    {data:"1GB", price:300, validity:"30 days"},
-    {data:"1.5GB", price:400, validity:"30 days"},
-    {data:"2GB", price:500, validity:"30 days"},
-    {data:"3GB", price:700, validity:"30 days"},
-    {data:"4GB", price:900, validity:"30 days"},
-    {data:"5GB", price:1000, validity:"30 days"},
-    {data:"6GB", price:1200, validity:"30 days"},
-    {data:"8GB", price:1600, validity:"30 days"},
-    {data:"10GB", price:2000, validity:"30 days"},
-    {data:"12GB", price:2400, validity:"30 days"},
-    {data:"15GB", price:3000, validity:"30 days"}
-  ],
-
-  "9mobile": [
-    {data:"200MB", price:100, validity:"30 days"},
-    {data:"500MB", price:200, validity:"30 days"},
-    {data:"1GB", price:300, validity:"30 days"},
-    {data:"1.5GB", price:400, validity:"30 days"},
-    {data:"2GB", price:500, validity:"30 days"},
-    {data:"3GB", price:700, validity:"30 days"},
-    {data:"4GB", price:900, validity:"30 days"},
-    {data:"5GB", price:1000, validity:"30 days"},
-    {data:"6GB", price:1200, validity:"30 days"},
-    {data:"8GB", price:1600, validity:"30 days"},
-    {data:"10GB", price:2000, validity:"30 days"},
-    {data:"12GB", price:2400, validity:"30 days"},
-    {data:"15GB", price:3000, validity:"30 days"}
-  ]
-
-};
-
-
-/* =========================
-   DATA PLAN VARIABLES
-========================== */
-
-let currentNetwork = "MTN";
-let selectedPlan = null;
-
-
-/* =========================
-   SHOW DATA PLANS
-========================== */
+/* DATA PLANS */
 
 function renderDataPlans() {
 
@@ -1652,32 +1634,32 @@ function renderDataPlans() {
 
   grid.innerHTML = "";
 
-  plans.forEach(function(plan, index) {
+  plans.forEach(function(plan,index) {
 
     const card = document.createElement("button");
 
     card.type = "button";
     card.className = "data-plan";
 
-    card.innerHTML = `
-      <div class="data-plan-data">${plan.data}</div>
-      <div class="data-plan-price">₦${plan.price.toLocaleString()}</div>
-      <div class="data-plan-validity">${plan.validity}</div>
-    `;
+    card.innerHTML =
+      '<div class="data-plan-data">' +
+      plan.data +
+      '</div>' +
+      '<div class="data-plan-price">₦' +
+      plan.price.toLocaleString() +
+      '</div>' +
+      '<div class="data-plan-validity">' +
+      plan.validity +
+      '</div>';
 
     card.onclick = function() {
       selectPlan(index);
     };
 
     grid.appendChild(card);
-
   });
 }
 
-
-/* =========================
-   CHANGE NETWORK
-========================== */
 
 function changeNetwork(network) {
 
@@ -1690,21 +1672,17 @@ function changeNetwork(network) {
     button.classList.remove("active");
   });
 
-  const activeButton =
+  const button =
     document.getElementById("network-" + network);
 
-  if (activeButton) {
-    activeButton.classList.add("active");
+  if (button) {
+    button.classList.add("active");
   }
 
   resetSelectedPlan();
   renderDataPlans();
 }
 
-
-/* =========================
-   SELECT PLAN
-========================== */
 
 function selectPlan(index) {
 
@@ -1722,33 +1700,24 @@ function selectPlan(index) {
     cards[index].classList.add("selected");
   }
 
-  const summaryData = document.getElementById("summaryData");
-  const summaryNetwork = document.getElementById("summaryNetwork");
-  const summaryPrice = document.getElementById("summaryPrice");
-  const selectedSummary = document.getElementById("selectedSummary");
+  const data = document.getElementById("summaryData");
+  const network = document.getElementById("summaryNetwork");
+  const price = document.getElementById("summaryPrice");
+  const summary = document.getElementById("selectedSummary");
 
-  if (summaryData) {
-    summaryData.textContent = selectedPlan.data;
-  }
+  if (data) data.textContent = selectedPlan.data;
+  if (network) network.textContent = currentNetwork;
 
-  if (summaryNetwork) {
-    summaryNetwork.textContent = currentNetwork;
-  }
-
-  if (summaryPrice) {
-    summaryPrice.textContent =
+  if (price) {
+    price.textContent =
       "₦" + selectedPlan.price.toLocaleString();
   }
 
-  if (selectedSummary) {
-    selectedSummary.style.display = "grid";
+  if (summary) {
+    summary.style.display = "grid";
   }
 }
 
-
-/* =========================
-   RESET SELECTED PLAN
-========================== */
 
 function resetSelectedPlan() {
 
@@ -1768,14 +1737,11 @@ function resetSelectedPlan() {
 }
 
 
-/* =========================
-   QUICK BUY
-========================== */
+/* QUICK BUY */
 
-function quickBuy(network, plan) {
+function quickBuy(network,plan) {
 
   showScreen("buy");
-
   changeNetwork(network);
 
   const plans = dataPlans[network];
@@ -1792,9 +1758,7 @@ function quickBuy(network, plan) {
 }
 
 
-/* =========================
-   PLACE ORDER
-========================== */
+/* PLACE ORDER */
 
 function placeOrder() {
 
@@ -1803,8 +1767,6 @@ function placeOrder() {
 
   if (!message) return;
 
-  message.classList.remove("error");
-
   if (!selectedPlan) {
     message.textContent = "Please select a data plan.";
     message.style.color = "#ff6b6b";
@@ -1812,11 +1774,17 @@ function placeOrder() {
     return;
   }
 
-  if (!phoneInput || !/^0[0-9]{10}$/.test(phoneInput.value.trim())) {
+  const phone =
+    phoneInput ? phoneInput.value.trim() : "";
+
+  if (!/^0[0-9]{10}$/.test(phone)) {
+
     message.textContent =
       "Please enter a valid Nigerian phone number, for example 08012345678.";
+
     message.style.color = "#ff6b6b";
     message.style.display = "block";
+
     return;
   }
 
@@ -1825,7 +1793,7 @@ function placeOrder() {
     currentNetwork + " " +
     selectedPlan.data +
     " selected for " +
-    escapeHTML(phoneInput.value.trim()) +
+    escapeHTML(phone) +
     ".<br><br>" +
     "Real payment and automatic data delivery will be connected later.";
 
@@ -1834,46 +1802,25 @@ function placeOrder() {
 }
 
 
-/* =========================
-   COMING SOON
-========================== */
+/* COMING SOON */
 
 function comingSoon() {
 
   alert(
     "This feature is coming soon to BackupData 🚀"
   );
-
 }
 
 
-/* =========================
-   BACKUP AI
-========================== */
-
-const aiBubble = document.getElementById("aiBubble");
-const aiChat = document.getElementById("aiChat");
-
-if (aiBubble && aiChat) {
-
-  aiBubble.addEventListener("click", function() {
-
-    aiChat.style.display =
-      aiChat.style.display === "block"
-        ? "none"
-        : "block";
-
-  });
-
-}
-
+/* BACKUP AI */
 
 function closeAI() {
 
-  if (aiChat) {
-    aiChat.style.display = "none";
-  }
+  const chat = document.getElementById("aiChat");
 
+  if (chat) {
+    chat.style.display = "none";
+  }
 }
 
 
@@ -1909,7 +1856,7 @@ function sendAI() {
   ) {
 
     reply =
-      "Our current demo plans include different MTN, Airtel, Glo and 9mobile options. Open Buy Data to see the available plans and prices.";
+      "Our current demo plans are available on the Buy Data page. Choose your network to see the available plans and prices.";
 
   } else if (
     lower.includes("buy") ||
@@ -1917,7 +1864,7 @@ function sendAI() {
   ) {
 
     reply =
-      "Sure 👍🏽. Tap 'Buy Data' below, choose your network and plan, then enter your phone number.";
+      "Sure 👍🏽. Tap Buy Data, choose your network and plan, then enter your phone number.";
 
   } else if (
     lower.includes("support") ||
@@ -1927,23 +1874,23 @@ function sendAI() {
 
     reply =
       "You can contact BackupData Support on WhatsApp: 07084912007.";
-
   }
 
   messages.innerHTML +=
-    `<div class="ai-user">${escapeHTML(text)}</div>` +
-    `<div class="ai-bot">${escapeHTML(reply)}</div>`;
+    '<div class="ai-user">' +
+    escapeHTML(text) +
+    '</div>' +
+    '<div class="ai-bot">' +
+    escapeHTML(reply) +
+    '</div>';
 
   input.value = "";
 
   messages.scrollTop = messages.scrollHeight;
-
 }
 
 
-/* =========================
-   ESCAPE HTML
-========================== */
+/* ESCAPE HTML */
 
 function escapeHTML(text) {
 
@@ -1952,17 +1899,33 @@ function escapeHTML(text) {
   div.textContent = text;
 
   return div.innerHTML;
-
 }
 
 
-/* =========================
-   START APP
-========================== */
+/* START */
 
-window.addEventListener("load", function() {
+window.addEventListener("load",function() {
 
   renderDataPlans();
+
+  const aiBubble =
+    document.getElementById("aiBubble");
+
+  const aiChat =
+    document.getElementById("aiChat");
+
+  if (aiBubble && aiChat) {
+
+    aiBubble.addEventListener("click",function() {
+
+      aiChat.style.display =
+        aiChat.style.display === "block"
+          ? "none"
+          : "block";
+
+    });
+
+  }
 
   setTimeout(function() {
 
@@ -1973,222 +1936,11 @@ window.addEventListener("load", function() {
       splash.style.display = "none";
     }
 
-  }, 1800);
+  },1800);
 
 });
 
- </script>
-
-/* =========================
-   QUICK BUY
-========================== */
-
-function quickBuy(network, plan) {
-
-  showScreen("buy");
-
-  changeNetwork(network);
-
-  const plans = dataPlans[network];
-
-  if (!plans) return;
-
-  const index = plans.findIndex(function(item) {
-    return item.data === plan;
-  });
-
-  if (index !== -1) {
-    selectPlan(index);
-  }
-}
-
-
-/* =========================
-   PLACE ORDER
-========================== */
-
-function placeOrder() {
-
-  const phoneInput = document.getElementById("phone");
-  const message = document.getElementById("orderMessage");
-
-  if (!message) return;
-
-  message.classList.remove("error");
-
-  if (!selectedPlan) {
-    message.textContent = "Please select a data plan.";
-    message.style.color = "#ff6b6b";
-    message.style.display = "block";
-    return;
-  }
-
-  if (!phoneInput || !/^0[0-9]{10}$/.test(phoneInput.value.trim())) {
-    message.textContent =
-      "Please enter a valid Nigerian phone number, for example 08012345678.";
-    message.style.color = "#ff6b6b";
-    message.style.display = "block";
-    return;
-  }
-
-  message.innerHTML =
-    "✅ Demo order received!<br><br>" +
-    currentNetwork + " " +
-    selectedPlan.data +
-    " selected for " +
-    escapeHTML(phoneInput.value.trim()) +
-    ".<br><br>" +
-    "Real payment and automatic data delivery will be connected later.";
-
-  message.style.color = "var(--green)";
-  message.style.display = "block";
-}
-
-
-/* =========================
-   COMING SOON
-========================== */
-
-function comingSoon() {
-
-  alert(
-    "This feature is coming soon to BackupData 🚀"
-  );
-
-}
-
-
-/* =========================
-   BACKUP AI
-========================== */
-
-const aiBubble = document.getElementById("aiBubble");
-const aiChat = document.getElementById("aiChat");
-
-if (aiBubble && aiChat) {
-
-  aiBubble.addEventListener("click", function() {
-
-    aiChat.style.display =
-      aiChat.style.display === "block"
-        ? "none"
-        : "block";
-
-  });
-
-}
-
-
-function closeAI() {
-
-  if (aiChat) {
-    aiChat.style.display = "none";
-  }
-
-}
-
-
-function sendAI() {
-
-  const input = document.getElementById("aiInput");
-  const messages = document.getElementById("aiMessages");
-
-  if (!input || !messages) return;
-
-  const text = input.value.trim();
-
-  if (!text) return;
-
-  let reply =
-    "I can help with data plans, buying data, BackupData features, or customer support. 😊";
-
-  const lower = text.toLowerCase();
-
-  if (
-    lower.includes("hello") ||
-    lower.includes("hi") ||
-    lower.includes("hey")
-  ) {
-
-    reply =
-      "Hello 👋 How was your day? I'm Backup AI. What can I help you with?";
-
-  } else if (
-    lower.includes("price") ||
-    lower.includes("cost") ||
-    lower.includes("how much")
-  ) {
-
-    reply =
-      "Our current demo plans include different MTN, Airtel, Glo and 9mobile options. Open Buy Data to see the available plans and prices.";
-
-  } else if (
-    lower.includes("buy") ||
-    lower.includes("data")
-  ) {
-
-    reply =
-      "Sure 👍🏽. Tap 'Buy Data' below, choose your network and plan, then enter your phone number.";
-
-  } else if (
-    lower.includes("support") ||
-    lower.includes("help") ||
-    lower.includes("problem")
-  ) {
-
-    reply =
-      "You can contact BackupData Support on WhatsApp: 07084912007.";
-
-  }
-
-  messages.innerHTML +=
-    `<div class="ai-user">${escapeHTML(text)}</div>` +
-    `<div class="ai-bot">${escapeHTML(reply)}</div>`;
-
-  input.value = "";
-
-  messages.scrollTop = messages.scrollHeight;
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================== */
-
-function escapeHTML(text) {
-
-  const div = document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
-
-}
-
-
-/* =========================
-   START APP
-========================== */
-
-window.addEventListener("load", function() {
-
-  renderDataPlans();
-
-  setTimeout(function() {
-
-    const splash =
-      document.getElementById("splash");
-
-    if (splash) {
-      splash.style.display = "none";
-    }
-
-  }, 1800);
-
-});
-
-    </script>
+     </script>
  
     /* -------------------------
        QUICK BUY
