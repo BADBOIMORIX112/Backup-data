@@ -1834,7 +1834,6 @@ function comingSoon() {
   );
 }
 
-
 /* BACKUP AI */
 
 function closeAI() {
@@ -1844,6 +1843,27 @@ function closeAI() {
   if (chat) {
     chat.style.display = "none";
   }
+}
+
+
+function sendAI() {
+
+  const input = document.getElementById("aiInput");
+  const messages = document.getElementById("aiMessages");
+
+  if (!input || !messages) return;
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  let reply =
+    "No wahala bro 😎. I fit help you with data plans, buying data, your account, wallet or BackupData support.";
+
+
+  const lower = text.toLowerCase();
+
+
   if (
     lower.includes("hello") ||
     lower.includes("hi") ||
@@ -1867,7 +1887,7 @@ function closeAI() {
   ) {
 
     reply =
-      "No wahala 👍🏽. Go to Buy Data and choose your network. You go see all the available data plans and their prices there.";
+      "No wahala 👍🏽. Go to Buy Data and choose your network. You go see the available plans and their prices there.";
 
   } else if (
     lower.includes("buy data") ||
@@ -1935,35 +1955,23 @@ function closeAI() {
       "Alright bro 😂. Take care. Backup AI dey here whenever you need am. 🤖🇳🇬";
   }
 
+
   messages.innerHTML +=
     '<div class="ai-user">' +
-    escapeHTML(text) +
+      '<span class="ai-label">YOU</span>' +
+      escapeHTML(text) +
     '</div>' +
+
     '<div class="ai-bot">' +
-    escapeHTML(reply) +
+      '<span class="ai-label">BACKUP AI</span>' +
+      escapeHTML(reply) +
     '</div>';
+
 
   input.value = "";
 
   messages.scrollTop = messages.scrollHeight;
-    }
-
-function sendAI() {
-
-  const input = document.getElementById("aiInput");
-  const messages = document.getElementById("aiMessages");
-
-  if (!input || !messages) return;
-
-  const text = input.value.trim();
-
-  if (!text) return;
-
-  let reply =
-    "I can help with data plans, buying data, BackupData features, or customer support. 😊";
-
-  const lower = text.toLowerCase();
-
+}
  
 /* ESCAPE HTML */
 
