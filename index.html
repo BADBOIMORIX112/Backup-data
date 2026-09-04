@@ -1,1 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b16">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
+<title>BackupData — Stay Connected</title>
+
+<style>
+
+:root{
+  --bg:#071b16;
+  --bg2:#0b241d;
+  --card:rgba(255,255,255,.055);
+  --card-border:rgba(255,255,255,.10);
+  --text:#f5fff9;
+  --muted:#9eb4aa;
+  --green:#20e889;
+  --green-dark:#0d6b43;
+  --danger:#ff6b6b;
+  --shadow:0 18px 45px rgba(0,0,0,.25);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top right,rgba(32,232,137,.10),transparent 35%),
+    linear-gradient(180deg,var(--bg),#04100c);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px;
+  overflow-x:hidden;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+a{
+  color:var(--green);
+  text-decoration:none;
+}
+
+/* SPLASH */
+
+#splash{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#061812;
+}
+
+.splash-logo{
+  width:64px;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:20px;
+  background:var(--green);
+  color:#03120d;
+  font-size:22px;
+  font-weight:900;
+  box-shadow:0 12px 35px rgba(32,232,137,.20);
+}
+
+.splash-title{
+  margin-top:14px;
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.splash-title span,
+.brand span{
+  color:var(--green);
+}
+
+.splash-subtitle{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.loader{
+  width:20px;
+  height:20px;
+  margin-top:22px;
+  border:2px solid rgba(255,255,255,.15);
+  border-top-color:var(--green);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* TOP BAR */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:rgba(5,20,15,.82);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.brand{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:.7px;
+}
+
+.account-btn{
+  width:38px;
+  height:38px;
+  border:1px solid var(--card-border);
+  border-radius:50%;
+  background:rgba(255,255,255,.07);
+  color:white;
+  font-size:16px;
+}
+
+/* MAIN */
+
+.container{
+  width:min(100%,620px);
+  margin:auto;
+  padding:18px 16px 110px;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  padding:28px 4px 22px;
+}
+
+.hello{
+  color:var(--green);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.7px;
+}
+
+.hero h1{
+  max-width:470px;
+  margin-top:10px;
+  font-size:34px;
+  line-height:1.08;
+  letter-spacing:-1.2px;
+}
+
+.hero p{
+  max-width:500px;
+  margin-top:13px;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:14px;
+}
+
+/* BUTTONS */
+
+.primary-btn{
+  width:100%;
+  margin-top:20px;
+  padding:14px 16px;
+  border:0;
+  border-radius:14px;
+  background:var(--green);
+  color:#03120d;
+  font-weight:900;
+  box-shadow:0 10px 25px rgba(32,232,137,.13);
+}
+
+.secondary-btn{
+  width:100%;
+  margin-top:10px;
+  padding:13px 16px;
+  border:1px solid var(--card-border);
+  border-radius:14px;
+  background:rgba(255,255,255,.055);
+  color:var(--text);
+}
+
+/* ACTIVITY */
+
+.activity{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 14px;
+  border:1px solid var(--card-border);
+  border-radius:15px;
+  background:var(--card);
+  box-shadow:var(--shadow);
+}
+
+.live-dot{
+  width:8px;
+  height:8px;
+  flex:none;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px rgba(32,232,137,.65);
+}
+
+.activity-text{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+.activity-text strong{
+  color:var(--text);
+}
+
+/* SECTIONS */
+
+.section{
+  margin-top:28px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.section-head h2{
+  font-size:18px;
+}
+
+.section-head span{
+  color:var(--green);
+  font-size:9px;
+  font-weight:800;
+}
+
+/* SERVICES */
+
+.services{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.service{
+  position:relative;
+  min-height:135px;
+  padding:16px;
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  background:var(--card);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.service.disabled{
+  opacity:.62;
+}
+
+.service-icon{
+  font-size:20px;
+  margin-bottom:12px;
+}
+
+.service h3{
+  font-size:14px;
+}
+
+.service p{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+.soon{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 7px;
+  border-radius:7px;
+  background:rgba(255,255,255,.07);
+  color:var(--muted);
+  font-size:8px;
+  font-weight:800;
+}
+
+/* POPULAR PLANS */
+
+.plans{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.plan{
+  padding:15px;
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  background:var(--card);
+}
+
+.plan small{
+  color:var(--muted);
+  font-size:9px;
+  font-weight:700;
+}
+
+.plan h3{
+  margin-top:8px;
+  font-size:21px;
+}
+
+.plan-price{
+  margin-top:4px;
+  color:var(--green);
+  font-size:14px;
+  font-weight:800;
+}
+
+.plan button{
+  width:100%;
+  margin-top:12px;
+  padding:9px;
+  border:0;
+  border-radius:10px;
+  background:rgba(32,232,137,.13);
+  color:var(--green);
+  font-size:11px;
+  font-weight:800;
+}
+
+/* WHY BACKUPDATA */
+
+.why-button{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:16px;
+  border:1px solid var(--card-border);
+  border-radius:17px;
+  background:var(--card);
+  color:var(--text);
+  text-align:left;
+}
+
+.why-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.why-icon{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:11px;
+  background:rgba(32,232,137,.10);
+  font-size:15px;
+}
+
+.why-copy strong{
+  display:block;
+  font-size:13px;
+}
+
+.why-copy span{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.why-arrow{
+  color:var(--green);
+  font-size:16px;
+}
+
+/* SUPPORT */
+
+.support{
+  margin-top:28px;
+  padding:17px;
+  border:1px solid var(--card-border);
+  border-radius:17px;
+  background:var(--card);
+  color:var(--muted);
+  text-align:center;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.support a{
+  display:block;
+  margin-top:5px;
+  font-weight:800;
+}
+
+footer{
+  padding:24px 0 10px;
+  color:#70857c;
+  text-align:center;
+  font-size:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:390px){
+
+  .container{
+    padding-left:13px;
+    padding-right:13px;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .services,
+  .plans{
+    gap:8px;
+  }
+
+  .service,
+  .plan{
+    padding:13px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="splash">
+  <div class="splash-logo">BD</div>
+  <div class="splash-title">BACKUP<span>DATA</span></div>
+  <div class="splash-subtitle">
+    Fast • Affordable • Reliable
+  </div>
+  <div class="loader"></div>
+</div>
+
+<header class="topbar">
+
+  <div class="brand">
+    BACKUP<span>DATA</span>
+  </div>
+
+  <button
+    class="account-btn"
+    onclick="showScreen('account')"
+    aria-label="Open account">
+    👤
+  </button>
+
+</header>
+
+<main class="container">
+
+<section id="home" class="screen active">
+
+  <div class="hero">
+
+    <div class="hello">
+      WELCOME TO BACKUPDATA 👋
+    </div>
+
+    <h1>
+      Stay connected without stress.
+    </h1>
+
+    <p>
+      Get affordable mobile data quickly and easily.
+      Simple buying, useful rewards and more services
+      coming to BackupData.
+    </p>
+
+    <button
+      class="primary-btn"
+      onclick="showScreen('buy')">
+      📱 BUY DATA NOW
+    </button>
+
+  </div>
+
+  <div class="activity">
+
+    <div class="live-dot"></div>
+
+    <div class="activity-text">
+      <strong>BackupData is ready.</strong>
+      Your latest activity will appear here.
+    </div>
+
+  </div>
+
+  <section class="section">
+
+    <div class="section-head">
+      <h2>Our Services</h2>
+      <span>EXPANDING</span>
+    </div>
+
+    <div class="services">
+
+      <div
+        class="service"
+        onclick="showScreen('buy')">
+
+        <div class="service-icon">📱</div>
+
+        <h3>Buy Data</h3>
+
+        <p>
+          Affordable mobile data
+          for your network.
+        </p>
+
+      </div>
+
+      <div class="service disabled">
+
+        <div class="service-icon">💳</div>
+
+        <h3>Data Card</h3>
+
+        <p>
+          Physical and digital
+          options coming soon.
+        </p>
+
+        <span class="soon">
+          COMING SOON
+        </span>
+
+      </div>
+
+      <div class="service disabled">
+
+        <div class="service-icon">☎️</div>
+
+        <h3>Airtime</h3>
+
+        <p>
+          Recharge your line
+          with BackupData.
+        </p>
+
+        <span class="soon">
+          COMING SOON
+        </span>
+
+      </div>
+
+      <div class="service disabled">
+
+        <div class="service-icon">🎁</div>
+
+        <h3>Rewards</h3>
+
+        <p>
+          Earn bonus data through
+          BackupData challenges.
+        </p>
+
+        <span class="soon">
+          COMING SOON
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <h2>Popular Data Plans</h2>
+
+      <span>
+        DEMO PRICES
+      </span>
+
+    </div>
+
+    <div class="plans">
+
+      <div class="plan">
+
+        <small>MTN</small>
+
+        <h3>1GB</h3>
+
+        <div class="plan-price">
+          ₦800
+        </div>
+
+        <button
+          onclick="quickBuy('MTN','1GB')">
+          Buy
+        </button>
+
+      </div>
+
+      <div class="plan">
+
+        <small>Airtel</small>
+
+        <h3>2GB</h3>
+
+        <div class="plan-price">
+          ₦1,500
+        </div>
+
+        <button
+          onclick="quickBuy('Airtel','2GB')">
+          Buy
+        </button>
+
+      </div>
+
+      <div class="plan">
+
+        <small>Glo</small>
+
+        <h3>5GB</h3>
+
+        <div class="plan-price">
+          ₦2,500
+        </div>
+
+        <button
+          onclick="quickBuy('Glo','5GB')">
+          Buy
+        </button>
+
+      </div>
+
+      <div class="plan">
+
+        <small>9mobile</small>
+
+        <h3>10GB</h3>
+
+        <div class="plan-price">
+          ₦4,500
+        </div>
+
+        <button
+          onclick="quickBuy('9mobile','10GB')">
+          Buy
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="section-head">
+      <h2>Why BackupData?</h2>
+    </div>
+
+    <button
+      class="why-button"
+      onclick="showWhyDetails()">
+
+      <div class="why-left">
+
+        <div class="why-icon">
+          ✓
+        </div>
+
+        <div class="why-copy">
+
+          <strong>
+            Simple, secure and built for you
+          </strong>
+
+          <span>
+            Check details
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="why-arrow">
+        →
+      </div>
+
+    </button>
+
+  </section>
+
+  <div class="support">
+
+    Need help?
+
+    <a
+      href="https://wa.me/2347084912007"
+      target="_blank">
+      Chat BackupData Support on WhatsApp
+    </a>
+
+  </div>
+
+  <footer>
+    © 2026 BackupData. All rights reserved.
+  </footer>
+
+</section>
+
+</main>
+
+<script>
+
+function showScreen(screenName){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(function(screen){
+      screen.classList.remove("active");
+    });
+
+  const screen =
+    document.getElementById(screenName);
+
+  if(screen){
+    screen.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+function quickBuy(network,plan){
+
+  showScreen("buy");
+
+  window.pendingNetwork = network;
+  window.pendingPlan = plan;
+
+}
+
+function showWhyDetails(){
+
+  alert(
+    "BackupData is designed to be simple, affordable and secure. More details about our services, security, rewards and account features will appear here."
+  );
+
+}
+
+window.addEventListener(
+  "load",
+  function(){
+
+    setTimeout(
+      function(){
+
+        const splash =
+          document.getElementById("splash");
+
+        if(splash){
+          splash.style.display = "none";
+        }
+
+      },
+      1600
+    );
+
+  }
+);
+
+</script>
+
+</body>
+  </html>
+  <!-- =========================
+     BUY DATA
+========================== -->
+
+<section id="buy" class="screen">
+
+  <h1 class="page-title">
+    Buy Data
+  </h1>
+
+  <p class="page-subtitle">
+    Choose your network and data plan.
+  </p>
+
+  <div class="form-card">
+
+    <label>
+      Choose Network
+    </label>
+
+    <div class="network-tabs">
+
+      <button
+        type="button"
+        class="network-tab active"
+        id="network-MTN"
+        onclick="changeNetwork('MTN')">
+        MTN
+      </button>
+
+      <button
+        type="button"
+        class="network-tab"
+        id="network-Airtel"
+        onclick="changeNetwork('Airtel')">
+        Airtel
+      </button>
+
+      <button
+        type="button"
+        class="network-tab"
+        id="network-Glo"
+        onclick="changeNetwork('Glo')">
+        Glo
+      </button>
+
+      <button
+        type="button"
+        class="network-tab"
+        id="network-9mobile"
+        onclick="changeNetwork('9mobile')">
+        9mobile
+      </button>
+
+    </div>
+
+    <div class="plans-heading">
+
+      <div>
+        <h2 id="offersTitle">
+          MTN Data Plans
+        </h2>
+
+        <p id="offerCount">
+          Choose a plan below
+        </p>
+      </div>
+
+    </div>
+
+    <div
+      id="dataPlanGrid"
+      class="data-plan-grid">
+    </div>
+
+    <div
+      id="selectedSummary"
+      class="selected-summary">
+
+      <div class="summary-item">
+        <span>Data</span>
+        <strong id="summaryData">
+          No plan
+        </strong>
+      </div>
+
+      <div class="summary-item">
+        <span>Network</span>
+        <strong id="summaryNetwork">
+          -
+        </strong>
+      </div>
+
+      <div class="summary-item">
+        <span>Price</span>
+        <strong id="summaryPrice">
+          ₦0
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="phone-section">
+
+      <label for="phone">
+        Phone Number
+      </label>
+
+      <input
+        id="phone"
+        type="tel"
+        inputmode="numeric"
+        autocomplete="tel"
+        placeholder="08012345678"
+        maxlength="11">
+
+      <p class="input-hint">
+        Enter the number that should receive the data.
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="primary-btn"
+      id="buyDataButton"
+      onclick="placeOrder()">
+      Buy Data
+    </button>
+
+    <button
+      type="button"
+      class="secondary-btn"
+      onclick="showScreen('home')">
+      ← Back Home
+    </button>
+
+    <div
+      id="orderMessage"
+      class="message">
+    </div>
+
+    <div class="form-note">
+      Real payment and automatic data delivery will be
+      connected when the BackupData backend is ready.
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+/* BUY DATA */
+
+.page-title{
+  margin-top:10px;
+  font-size:28px;
+  letter-spacing:-.7px;
+}
+
+.page-subtitle{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.form-card{
+  margin-top:20px;
+  padding:17px;
+  border:1px solid var(--card-border);
+  border-radius:20px;
+  background:rgba(255,255,255,.045);
+  box-shadow:var(--shadow);
+}
+
+.form-card label{
+  display:block;
+  margin-bottom:9px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.network-tabs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+}
+
+.network-tab{
+  padding:10px 5px;
+  border:1px solid var(--card-border);
+  border-radius:11px;
+  background:rgba(255,255,255,.045);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+
+.network-tab.active{
+  background:rgba(32,232,137,.13);
+  border-color:rgba(32,232,137,.45);
+  color:var(--green);
+}
+
+.plans-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:22px;
+  margin-bottom:11px;
+}
+
+.plans-heading h2{
+  font-size:16px;
+}
+
+.plans-heading p{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.data-plan-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.data-plan{
+  padding:12px 10px;
+  border:1px solid var(--card-border);
+  border-radius:14px;
+  background:rgba(255,255,255,.045);
+  color:var(--text);
+  text-align:left;
+}
+
+.data-plan.selected{
+  border-color:var(--green);
+  background:rgba(32,232,137,.10);
+}
+
+.data-plan-data{
+  font-size:16px;
+  font-weight:900;
+}
+
+.data-plan-price{
+  margin-top:5px;
+  color:var(--green);
+  font-size:13px;
+  font-weight:800;
+}
+
+.data-plan-validity{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.selected-summary{
+  display:none;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:7px;
+  margin-top:12px;
+}
+
+.summary-item{
+  padding:10px;
+  border-radius:12px;
+  background:rgba(255,255,255,.055);
+}
+
+.summary-item span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.summary-item strong{
+  display:block;
+  margin-top:4px;
+  font-size:11px;
+}
+
+.phone-section{
+  margin-top:18px;
+}
+
+.phone-section label{
+  margin-bottom:7px;
+}
+
+.phone-section input{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--card-border);
+  border-radius:12px;
+  outline:none;
+  background:rgba(0,0,0,.15);
+  color:var(--text);
+}
+
+.phone-section input:focus{
+  border-color:rgba(32,232,137,.55);
+}
+
+.phone-section input::placeholder{
+  color:#687d74;
+}
+
+.input-hint{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.4;
+}
+
+.message{
+  display:none;
+  margin-top:12px;
+  padding:11px;
+  border-radius:11px;
+  background:rgba(255,255,255,.05);
+  font-size:10px;
+  line-height:1.5;
+}
+
+.form-note{
+  margin-top:14px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+  text-align:center;
+}
+
+@media(max-width:390px){
+
+  .network-tabs{
+    gap:5px;
+  }
+
+  .network-tab{
+    font-size:9px;
+  }
+
+  .data-plan-grid{
+    gap:7px;
+  }
+
+}
+
+</style>
+
+<script>
+
+/* DATA PLANS */
+
+const dataPlans = {
+
+  MTN:[
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"4GB",price:800,validity:"30 days"},
+    {data:"5GB",price:1000,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"}
+  ],
+
+  Airtel:[
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"4GB",price:900,validity:"30 days"},
+    {data:"5GB",price:1100,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"}
+  ],
+
+  Glo:[
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"5GB",price:1000,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"}
+  ],
+
+  "9mobile":[
+    {data:"200MB",price:100,validity:"30 days"},
+    {data:"500MB",price:200,validity:"30 days"},
+    {data:"1GB",price:300,validity:"30 days"},
+    {data:"1.5GB",price:400,validity:"30 days"},
+    {data:"2GB",price:500,validity:"30 days"},
+    {data:"3GB",price:700,validity:"30 days"},
+    {data:"5GB",price:1000,validity:"30 days"},
+    {data:"10GB",price:2000,validity:"30 days"}
+  ]
+
+};
+
+let currentNetwork="MTN";
+let selectedPlan=null;
+
+function renderDataPlans(){
+
+  const grid=
+    document.getElementById("dataPlanGrid");
+
+  const title=
+    document.getElementById("offersTitle");
+
+  const count=
+    document.getElementById("offerCount");
+
+  if(!grid)return;
+
+  const plans=dataPlans[currentNetwork];
+
+  if(title){
+    title.textContent=
+      currentNetwork+" Data Plans";
+  }
+
+  if(count){
+    count.textContent=
+      plans.length+" plans available";
+  }
+
+  grid.innerHTML="";
+
+  plans.forEach(function(plan,index){
+
+    const card=
+      document.createElement("button");
+
+    card.type="button";
+    card.className="data-plan";
+
+    card.innerHTML=
+      '<div class="data-plan-data">'+
+      plan.data+
+      '</div>'+
+      '<div class="data-plan-price">₦'+
+      plan.price.toLocaleString()+
+      '</div>'+
+      '<div class="data-plan-validity">'+
+      plan.validity+
+      '</div>';
+
+    card.onclick=function(){
+      selectPlan(index);
+    };
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+function changeNetwork(network){
+
+  if(!dataPlans[network])return;
+
+  currentNetwork=network;
+  selectedPlan=null;
+
+  document
+    .querySelectorAll(".network-tab")
+    .forEach(function(button){
+      button.classList.remove("active");
+    });
+
+  const activeButton=
+    document.getElementById(
+      "network-"+network
+    );
+
+  if(activeButton){
+    activeButton.classList.add("active");
+  }
+
+  resetSelectedPlan();
+  renderDataPlans();
+
+}
+
+function selectPlan(index){
+
+  const plans=
+    dataPlans[currentNetwork];
+
+  selectedPlan=plans[index];
+
+  document
+    .querySelectorAll(".data-plan")
+    .forEach(function(card){
+      card.classList.remove("selected");
+    });
+
+  const cards=
+    document.querySelectorAll(".data-plan");
+
+  if(cards[index]){
+    cards[index].classList.add("selected");
+  }
+
+  document.getElementById("summaryData")
+    .textContent=selectedPlan.data;
+
+  document.getElementById("summaryNetwork")
+    .textContent=currentNetwork;
+
+  document.getElementById("summaryPrice")
+    .textContent=
+      "₦"+selectedPlan.price.toLocaleString();
+
+  document.getElementById("selectedSummary")
+    .style.display="grid";
+
+}
+
+function resetSelectedPlan(){
+
+  const summary=
+    document.getElementById("selectedSummary");
+
+  if(summary){
+    summary.style.display="none";
+  }
+
+}
+
+function quickBuy(network,plan){
+
+  showScreen("buy");
+
+  changeNetwork(network);
+
+  const plans=
+    dataPlans[network];
+
+  if(!plans)return;
+
+  const index=
+    plans.findIndex(function(item){
+      return item.data===plan;
+    });
+
+  if(index!==-1){
+    selectPlan(index);
+  }
+
+}
+
+function placeOrder(){
+
+  const phone=
+    document.getElementById("phone");
+
+  const message=
+    document.getElementById("orderMessage");
+
+  if(!message)return;
+
+  if(!selectedPlan){
+
+    message.textContent=
+      "Please select a data plan.";
+
+    message.style.color=
+      "var(--danger)";
+
+    message.style.display="block";
+
+    return;
+  }
+
+  const number=
+    phone
+      ? phone.value.trim()
+      : "";
+
+  if(!/^0[0-9]{10}$/.test(number)){
+
+    message.textContent=
+      "Please enter a valid Nigerian phone number.";
+
+    message.style.color=
+      "var(--danger)";
+
+    message.style.display="block";
+
+    return;
+  }
+
+  message.textContent=
+    "Demo order received. "+
+    currentNetwork+" "+
+    selectedPlan.data+
+    " for "+number+
+    ". Real payment and delivery will be connected later.";
+
+  message.style.color=
+    "var(--green)";
+
+  message.style.display="block";
+
+}
+
+renderDataPlans();
+
+        </script>
