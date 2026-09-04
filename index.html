@@ -3110,3 +3110,326 @@ function toggleFAQ(id){
     item.style.display === "block" ? "none" : "block";
 }
 </script>
+<style>
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1000;
+  background:rgba(255,255,255,.92);
+  border-top:1px solid var(--card-border);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  padding:7px 7px calc(7px + env(safe-area-inset-bottom));
+}
+
+.nav-inner{
+  max-width:520px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:3px;
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:7px 3px 6px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:10px;
+  font-weight:700;
+}
+
+.nav-icon{
+  width:27px;
+  height:27px;
+  margin:0 auto 3px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+
+.nav-btn.active{
+  color:var(--green);
+  background:rgba(22,163,74,.08);
+}
+
+.nav-btn.active .nav-icon{
+  background:rgba(22,163,74,.12);
+}
+
+body{
+  padding-bottom:78px;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+.page-title{
+  margin-bottom:14px;
+}
+
+.page-title h2{
+  margin:0 0 4px;
+  font-size:22px;
+}
+
+.page-title p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.back-button{
+  width:100%;
+  border:1px solid var(--card-border);
+  background:var(--card);
+  color:var(--text);
+  padding:12px;
+  border-radius:12px;
+  font-weight:700;
+  margin-top:10px;
+}
+
+@media(max-width:390px){
+  .nav-btn{
+    font-size:9px;
+  }
+
+  .nav-icon{
+    width:25px;
+    height:25px;
+  }
+}
+</style>
+
+<nav class="bottom-nav">
+
+  <div class="nav-inner">
+
+    <button
+      class="nav-btn active"
+      data-screen="home"
+      onclick="navigateTo('home')"
+    >
+      <div class="nav-icon">⌂</div>
+      Home
+    </button>
+
+    <button
+      class="nav-btn"
+      data-screen="buy"
+      onclick="navigateTo('buy')"
+    >
+      <div class="nav-icon">▣</div>
+      Buy Data
+    </button>
+
+    <button
+      class="nav-btn"
+      data-screen="orders"
+      onclick="navigateTo('orders')"
+    >
+      <div class="nav-icon">☷</div>
+      Orders
+    </button>
+
+    <button
+      class="nav-btn"
+      data-screen="wallet"
+      onclick="navigateTo('wallet')"
+    >
+      <div class="nav-icon">₦</div>
+      Wallet
+    </button>
+
+    <button
+      class="nav-btn"
+      data-screen="account"
+      onclick="navigateTo('account')"
+    >
+      <div class="nav-icon">●</div>
+      Account
+    </button>
+
+  </div>
+
+</nav>
+
+<section id="wallet" class="screen">
+
+  <div class="page-title">
+    <h2>Wallet</h2>
+    <p>Manage your BackupData wallet.</p>
+  </div>
+
+  <div class="balance-card">
+
+    <div class="balance-top">
+      <span class="balance-label">Available Balance</span>
+
+      <button
+        class="balance-eye"
+        onclick="toggleBalance()"
+      >
+        ◉
+      </button>
+    </div>
+
+    <div class="balance-amount" id="walletPageBalance">
+      ₦0.00
+    </div>
+
+    <div class="balance-actions">
+
+      <button
+        class="balance-action"
+        onclick="showWalletFund()"
+      >
+        + Fund Wallet
+      </button>
+
+      <button
+        class="balance-action"
+        onclick="showTransactions()"
+      >
+        Transactions
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="account-card">
+
+    <strong style="font-size:14px;">
+      Wallet activity
+    </strong>
+
+    <p
+      style="color:var(--muted);font-size:11px;line-height:1.5;margin:6px 0 0;"
+    >
+      Your wallet transactions, funding history and payment records
+      will appear here once the secure payment backend is connected.
+    </p>
+
+  </div>
+
+  <button
+    class="auth-submit"
+    onclick="showWalletFund()"
+  >
+    Fund Wallet
+  </button>
+
+  <button
+    class="back-button"
+    onclick="navigateTo('home')"
+  >
+    Back Home
+  </button>
+
+</section>
+
+<script>
+function navigateTo(screenName){
+
+  document.querySelectorAll(".screen").forEach(function(screen){
+    screen.classList.remove("active");
+  });
+
+  const target = document.getElementById(screenName);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav-btn").forEach(function(button){
+    button.classList.remove("active");
+  });
+
+  const activeButton =
+    document.querySelector('.nav-btn[data-screen="' + screenName + '"]');
+
+  if(activeButton){
+    activeButton.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  syncWalletDisplay();
+}
+
+function showScreen(screenName){
+
+  navigateTo(screenName);
+}
+
+function syncWalletDisplay(){
+
+  const amount = "₦" + Number(walletBalance || 0).toFixed(2);
+
+  const accountBalance =
+    document.getElementById("balanceAmount");
+
+  const walletBalanceElement =
+    document.getElementById("walletPageBalance");
+
+  if(balanceVisible){
+    if(accountBalance){
+      accountBalance.textContent = amount;
+    }
+
+    if(walletBalanceElement){
+      walletBalanceElement.textContent = amount;
+    }
+  }else{
+    if(accountBalance){
+      accountBalance.textContent = "₦••••";
+    }
+
+    if(walletBalanceElement){
+      walletBalanceElement.textContent = "₦••••";
+    }
+  }
+}
+
+function quickBuy(network,plan){
+
+  navigateTo("buy");
+
+  window.pendingNetwork = network;
+  window.pendingPlan = plan;
+
+  if(typeof changeNetwork === "function"){
+    changeNetwork(network);
+  }
+
+  if(typeof selectPlan === "function"){
+    const plans = dataPlans[network] || [];
+
+    const index = plans.findIndex(function(item){
+      return item.data === plan;
+    });
+
+    if(index >= 0){
+      selectPlan(index);
+    }
+  }
+}
+
+syncWalletDisplay();
+</script>
