@@ -2711,3 +2711,402 @@ function comingSoon(feature){
   alert(feature + " is coming soon.");
 }
 </script>
+<style>
+.ai-card{
+  background:linear-gradient(145deg,#101a16,#17261f);
+  color:#fff;
+  border-radius:20px;
+  padding:18px;
+  margin-top:14px;
+  box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.ai-card h3{
+  margin:0 0 5px;
+  font-size:18px;
+}
+
+.ai-card p{
+  margin:0;
+  color:#b9c9c1;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.ai-input-row{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.ai-input{
+  flex:1;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:12px;
+  border-radius:12px;
+  outline:none;
+}
+
+.ai-send{
+  border:0;
+  background:var(--green);
+  color:#fff;
+  padding:0 14px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+.ai-response{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,.07);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.help-list{
+  display:grid;
+  gap:9px;
+  margin-top:14px;
+}
+
+.help-item{
+  width:100%;
+  box-sizing:border-box;
+  text-align:left;
+  border:1px solid var(--card-border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:15px;
+  padding:14px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+
+.help-item strong{
+  display:block;
+  font-size:13px;
+}
+
+.help-item span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.task-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:17px;
+  padding:15px;
+  margin-top:10px;
+  box-shadow:var(--shadow);
+}
+
+.task-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.task-icon{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:rgba(22,163,74,.10);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.task-info{
+  flex:1;
+}
+
+.task-info strong{
+  display:block;
+  font-size:13px;
+}
+
+.task-info span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.task-button{
+  border:0;
+  background:var(--green);
+  color:#fff;
+  border-radius:9px;
+  padding:8px 10px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.task-button.disabled{
+  background:rgba(127,127,127,.15);
+  color:var(--muted);
+}
+
+.faq-answer{
+  display:none;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  margin-top:9px;
+}
+</style>
+
+<section id="ai" class="screen">
+
+  <div class="page-title">
+    <h2>Backup AI</h2>
+    <p>Your simple assistant for BackupData questions.</p>
+  </div>
+
+  <div class="ai-card">
+
+    <h3>Hi 👋 I'm Backup AI</h3>
+
+    <p>
+      Ask me about data plans, your wallet, orders, rewards or how BackupData works.
+    </p>
+
+    <div class="ai-input-row">
+      <input
+        class="ai-input"
+        id="aiQuestion"
+        type="text"
+        placeholder="Ask Backup AI..."
+      >
+
+      <button class="ai-send" onclick="askBackupAI()">
+        Ask
+      </button>
+    </div>
+
+    <div class="ai-response" id="aiResponse"></div>
+
+  </div>
+
+  <div class="account-card" style="margin-top:14px;">
+    <strong style="font-size:14px;">Quick questions</strong>
+
+    <div class="help-list">
+
+      <button class="help-item" onclick="askQuickAI('How do I buy data?')">
+        <strong>How do I buy data?</strong>
+        <span>Get help choosing a plan.</span>
+      </button>
+
+      <button class="help-item" onclick="askQuickAI('How do rewards work?')">
+        <strong>How do rewards work?</strong>
+        <span>Learn about free-data challenges.</span>
+      </button>
+
+      <button class="help-item" onclick="askQuickAI('How do I fund my wallet?')">
+        <strong>How do I fund my wallet?</strong>
+        <span>Learn how wallet funding will work.</span>
+      </button>
+
+    </div>
+  </div>
+
+</section>
+
+<section id="help" class="screen">
+
+  <div class="page-title">
+    <h2>Help & Support</h2>
+    <p>We're here to help you use BackupData.</p>
+  </div>
+
+  <div class="help-list">
+
+    <button class="help-item" onclick="toggleFAQ('faq1')">
+      <strong>How do I purchase data?</strong>
+      <span>Tap Buy Data and select your network and plan.</span>
+      <div class="faq-answer" id="faq1">
+        Choose your network, select a data plan, enter the recipient's
+        phone number and continue with the secure payment process.
+      </div>
+    </button>
+
+    <button class="help-item" onclick="toggleFAQ('faq2')">
+      <strong>Where can I see my orders?</strong>
+      <span>Open Orders from the bottom navigation.</span>
+      <div class="faq-answer" id="faq2">
+        Successful and pending purchases will appear in your order history.
+      </div>
+    </button>
+
+    <button class="help-item" onclick="toggleFAQ('faq3')">
+      <strong>How can I contact support?</strong>
+      <span>Use WhatsApp support for assistance.</span>
+      <div class="faq-answer" id="faq3">
+        Support will be available through the official BackupData support channel.
+      </div>
+    </button>
+
+  </div>
+
+  <a
+    href="https://wa.me/2347084912007"
+    target="_blank"
+    class="auth-submit"
+    style="display:block;text-align:center;text-decoration:none;margin-top:14px;box-sizing:border-box;"
+  >
+    Chat on WhatsApp
+  </a>
+
+</section>
+
+<section id="tasks" class="screen">
+
+  <div class="page-title">
+    <h2>Earn Free Data</h2>
+    <p>Complete eligible tasks and earn data rewards.</p>
+  </div>
+
+  <div class="task-card">
+
+    <div class="task-row">
+      <div class="task-icon">🎁</div>
+
+      <div class="task-info">
+        <strong>Welcome Bonus</strong>
+        <span>Eligible new users receive 500MB.</span>
+      </div>
+
+      <button class="task-button disabled">
+        500MB
+      </button>
+    </div>
+
+  </div>
+
+  <div class="task-card">
+
+    <div class="task-row">
+      <div class="task-icon">👥</div>
+
+      <div class="task-info">
+        <strong>Refer a Friend</strong>
+        <span>Invite a genuine new user and earn 500MB.</span>
+      </div>
+
+      <button class="task-button" onclick="showScreen('rewards')">
+        Invite
+      </button>
+    </div>
+
+  </div>
+
+  <div class="task-card">
+
+    <div class="task-row">
+      <div class="task-icon">✓</div>
+
+      <div class="task-info">
+        <strong>First Purchase</strong>
+        <span>Make your first successful data purchase.</span>
+      </div>
+
+      <button class="task-button disabled">
+        250MB
+      </button>
+    </div>
+
+  </div>
+
+  <div class="task-card">
+
+    <div class="task-row">
+      <div class="task-icon">♪</div>
+
+      <div class="task-info">
+        <strong>Follow BackupData on TikTok</strong>
+        <span>Official account verification required.</span>
+      </div>
+
+      <button class="task-button disabled">
+        Soon
+      </button>
+    </div>
+
+  </div>
+
+  <div class="reward-note">
+    Rewards are not awarded by the frontend alone. Eligible activity will
+    be verified by the BackupData server before data is credited.
+  </div>
+
+</section>
+
+<script>
+function askBackupAI(){
+  const input = document.getElementById("aiQuestion");
+  const response = document.getElementById("aiResponse");
+
+  const question = input.value.trim().toLowerCase();
+
+  if(!question){
+    response.style.display = "block";
+    response.textContent = "Ask me anything about BackupData.";
+    return;
+  }
+
+  response.style.display = "block";
+
+  if(question.includes("buy") || question.includes("data")){
+    response.textContent =
+      "To buy data, open Buy Data, choose your network and plan, enter the phone number, then continue with payment.";
+    return;
+  }
+
+  if(question.includes("reward") || question.includes("free")){
+    response.textContent =
+      "You can earn free data through eligible challenges, referrals and verified tasks. Check Challenges & Rewards.";
+    return;
+  }
+
+  if(question.includes("wallet") || question.includes("fund")){
+    response.textContent =
+      "Your wallet will let you fund your account and pay for eligible BackupData purchases.";
+    return;
+  }
+
+  if(question.includes("order")){
+    response.textContent =
+      "Your data purchases will appear in the Orders section with their status.";
+    return;
+  }
+
+  response.textContent =
+    "I'm still learning. Try asking about data, orders, wallet, rewards or referrals.";
+}
+
+function askQuickAI(question){
+  document.getElementById("aiQuestion").value = question;
+  askBackupAI();
+}
+
+function toggleFAQ(id){
+  const item = document.getElementById(id);
+
+  if(!item) return;
+
+  item.style.display =
+    item.style.display === "block" ? "none" : "block";
+}
+</script>
