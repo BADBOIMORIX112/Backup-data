@@ -3990,3 +3990,170 @@ function showWalletFund(){
   openFundWallet();
 }
 </script>
+<style>
+.install-card{
+  background:linear-gradient(145deg,#101a16,#17261f);
+  color:#fff;
+  border-radius:19px;
+  padding:17px;
+  margin-top:14px;
+}
+
+.install-card h3{
+  margin:0 0 5px;
+  font-size:16px;
+}
+
+.install-card p{
+  margin:0;
+  color:#b9c9c1;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.install-button{
+  width:100%;
+  border:0;
+  background:var(--green);
+  color:#fff;
+  padding:12px;
+  border-radius:12px;
+  margin-top:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.app-info{
+  display:grid;
+  gap:9px;
+  margin-top:12px;
+}
+
+.app-info-item{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:14px;
+  padding:13px;
+}
+
+.app-info-item strong{
+  display:block;
+  font-size:12px;
+}
+
+.app-info-item span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+</style>
+
+<section id="app" class="screen">
+
+  <div class="page-title">
+    <h2>BackupData App</h2>
+    <p>Use BackupData comfortably on your phone.</p>
+  </div>
+
+  <div class="install-card">
+
+    <h3>Install BackupData 📱</h3>
+
+    <p>
+      Add BackupData to your phone's home screen for a faster,
+      app-like experience.
+    </p>
+
+    <button
+      class="install-button"
+      id="installButton"
+      onclick="installBackupData()"
+    >
+      Install App
+    </button>
+
+  </div>
+
+  <div class="app-info">
+
+    <div class="app-info-item">
+      <strong>📲 Mobile First</strong>
+      <span>Designed primarily for Nigerian mobile users.</span>
+    </div>
+
+    <div class="app-info-item">
+      <strong>⚡ Fast Experience</strong>
+      <span>Simple screens with lightweight navigation.</span>
+    </div>
+
+    <div class="app-info-item">
+      <strong>🔐 Secure by Design</strong>
+      <span>Payments, wallet and rewards will be verified by the backend.</span>
+    </div>
+
+  </div>
+
+  <div class="account-card" style="margin-top:12px;">
+
+    <strong style="font-size:14px;">
+      App version
+    </strong>
+
+    <p
+      style="margin:5px 0 0;color:var(--muted);font-size:11px;"
+    >
+      BackupData v1.0
+    </p>
+
+  </div>
+
+</section>
+
+<script>
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt",function(event){
+
+  event.preventDefault();
+
+  deferredInstallPrompt = event;
+
+  const button =
+    document.getElementById("installButton");
+
+  if(button){
+    button.style.display = "block";
+  }
+});
+
+function installBackupData(){
+
+  if(!deferredInstallPrompt){
+
+    alert(
+      "If the install option is not available yet, use your browser menu and choose 'Add to Home Screen' when available."
+    );
+
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+
+  deferredInstallPrompt.userChoice.then(function(){
+
+    deferredInstallPrompt = null;
+  });
+}
+
+window.addEventListener("appinstalled",function(){
+
+  const button =
+    document.getElementById("installButton");
+
+  if(button){
+    button.textContent = "BackupData Installed ✓";
+    button.disabled = true;
+  }
+});
+</script>
