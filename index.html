@@ -1930,3 +1930,410 @@ function loginAccount(){
 
 updateWalletBalance();
 </script>
+<style>
+.orders-list{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+
+.order-item{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:var(--shadow);
+}
+
+.order-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.order-name{
+  font-weight:800;
+  font-size:14px;
+}
+
+.order-status{
+  font-size:11px;
+  color:var(--green);
+  font-weight:700;
+}
+
+.order-details{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:6px;
+}
+
+.reward-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:11px;
+  box-shadow:var(--shadow);
+}
+
+.reward-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.reward-icon{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  background:rgba(22,163,74,.10);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.reward-title{
+  flex:1;
+}
+
+.reward-title strong{
+  display:block;
+  font-size:14px;
+}
+
+.reward-title span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.reward-badge{
+  font-size:11px;
+  font-weight:800;
+  color:var(--green);
+}
+
+.progress-track{
+  height:7px;
+  background:rgba(127,127,127,.15);
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:13px;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:var(--green);
+  border-radius:20px;
+}
+
+.reward-progress{
+  display:flex;
+  justify-content:space-between;
+  margin-top:6px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.referral-box{
+  background:linear-gradient(145deg,#102019,#183025);
+  color:#fff;
+  border-radius:19px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.referral-box h3{
+  margin:0 0 5px;
+  font-size:17px;
+}
+
+.referral-box p{
+  margin:0;
+  color:#b9c9c1;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.referral-code{
+  margin-top:14px;
+  padding:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.referral-code strong{
+  letter-spacing:1px;
+}
+
+.copy-referral{
+  border:0;
+  background:var(--green);
+  color:#fff;
+  padding:8px 10px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.reward-note{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  margin-top:10px;
+}
+</style>
+
+<section id="orders" class="screen">
+
+  <div class="page-title">
+    <h2>My Orders</h2>
+    <p>Track your BackupData purchases and order history.</p>
+  </div>
+
+  <div class="orders-list" id="ordersList">
+
+    <div class="order-item">
+      <div class="order-top">
+        <span class="order-name">No orders yet</span>
+        <span class="order-status">Ready</span>
+      </div>
+
+      <div class="order-details">
+        Your successful data purchases will appear here.
+      </div>
+    </div>
+
+  </div>
+
+  <button
+    class="auth-submit"
+    style="margin-top:14px;"
+    onclick="showScreen('buy')"
+  >
+    Buy Data
+  </button>
+
+</section>
+
+<section id="rewards" class="screen">
+
+  <div class="page-title">
+    <h2>Challenges & Rewards</h2>
+    <p>Complete eligible activities and earn free data.</p>
+  </div>
+
+  <div class="referral-box">
+    <h3>Invite & Earn 500MB 🎁</h3>
+
+    <p>
+      Invite a genuine new BackupData user. When they create their first
+      eligible account through your referral, you receive 500MB and they
+      receive 1GB total referral + welcome bonus.
+    </p>
+
+    <div class="referral-code">
+      <strong id="referralCode">BD-NEWUSER</strong>
+
+      <button class="copy-referral" onclick="copyReferral()">
+        Copy
+      </button>
+    </div>
+  </div>
+
+  <div class="reward-card">
+
+    <div class="reward-top">
+      <div class="reward-icon">✓</div>
+
+      <div class="reward-title">
+        <strong>First Data Purchase</strong>
+        <span>Make your first successful purchase</span>
+      </div>
+
+      <div class="reward-badge">+250MB</div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" style="width:0%;"></div>
+    </div>
+
+    <div class="reward-progress">
+      <span>0 / 1</span>
+      <span>Locked</span>
+    </div>
+
+  </div>
+
+  <div class="reward-card">
+
+    <div class="reward-top">
+      <div class="reward-icon">3</div>
+
+      <div class="reward-title">
+        <strong>3-Day Purchase Streak</strong>
+        <span>Make a qualifying purchase for 3 days</span>
+      </div>
+
+      <div class="reward-badge">+500MB</div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" style="width:0%;"></div>
+    </div>
+
+    <div class="reward-progress">
+      <span>0 / 3 days</span>
+      <span>Locked</span>
+    </div>
+
+  </div>
+
+  <div class="reward-card">
+
+    <div class="reward-top">
+      <div class="reward-icon">7</div>
+
+      <div class="reward-title">
+        <strong>7-Day Activity Challenge</strong>
+        <span>Login + make a qualifying purchase each day</span>
+      </div>
+
+      <div class="reward-badge">+500MB</div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" style="width:0%;"></div>
+    </div>
+
+    <div class="reward-progress">
+      <span>0 / 7 days</span>
+      <span>Locked</span>
+    </div>
+
+  </div>
+
+  <div class="reward-card">
+
+    <div class="reward-top">
+      <div class="reward-icon">5</div>
+
+      <div class="reward-title">
+        <strong>5 Successful Purchases</strong>
+        <span>Complete 5 successful data purchases</span>
+      </div>
+
+      <div class="reward-badge">+500MB</div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" style="width:0%;"></div>
+    </div>
+
+    <div class="reward-progress">
+      <span>0 / 5</span>
+      <span>Locked</span>
+    </div>
+
+  </div>
+
+  <div class="reward-card">
+
+    <div class="reward-top">
+      <div class="reward-icon">₦</div>
+
+      <div class="reward-title">
+        <strong>₦10,000 Purchase Challenge</strong>
+        <span>Reach ₦10,000 in successful data purchases in one day</span>
+      </div>
+
+      <div class="reward-badge">+5GB</div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" style="width:0%;"></div>
+    </div>
+
+    <div class="reward-progress">
+      <span>₦0 / ₦10,000</span>
+      <span>Locked</span>
+    </div>
+
+  </div>
+
+  <div class="reward-card">
+
+    <div class="reward-top">
+      <div class="reward-icon">♪</div>
+
+      <div class="reward-title">
+        <strong>Follow BackupData on TikTok</strong>
+        <span>Follow our official TikTok account</span>
+      </div>
+
+      <div class="reward-badge">+500MB</div>
+    </div>
+
+    <div class="reward-note">
+      Coming Soon. Verification will be required before this reward is awarded.
+    </div>
+
+  </div>
+
+  <div class="reward-note">
+    Rewards are subject to eligibility checks, fraud protection and daily/monthly limits.
+    Money, referral and reward completion will be verified securely by the server.
+  </div>
+
+</section>
+
+<script>
+function copyReferral(){
+  const code = document.getElementById("referralCode").textContent;
+
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(code).then(function(){
+      alert("Referral code copied!");
+    });
+  }else{
+    alert("Your referral code is: " + code);
+  }
+}
+
+function addOrderToHistory(network, plan, phone, price){
+  const list = document.getElementById("ordersList");
+
+  if(!list) return;
+
+  const empty = list.querySelector(".order-item");
+
+  if(empty && empty.querySelector(".order-name").textContent === "No orders yet"){
+    list.innerHTML = "";
+  }
+
+  const item = document.createElement("div");
+  item.className = "order-item";
+
+  item.innerHTML =
+    '<div class="order-top">' +
+      '<span class="order-name">' + network + " " + plan + '</span>' +
+      '<span class="order-status">Pending</span>' +
+    '</div>' +
+    '<div class="order-details">' +
+      'Phone: ' + phone + ' · ₦' + price +
+    '</div>';
+
+  list.prepend(item);
+}
+</script>
