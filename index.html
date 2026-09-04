@@ -1948,7 +1948,29 @@ function comingSoon() {
     "This feature is coming soon to BackupData 🚀"
   );
 }
+/* BALANCE */
 
+function toggleBalance() {
+
+  const amount = document.getElementById("balanceAmount");
+  const eye = document.getElementById("balanceEye");
+
+  if (!amount || !eye) return;
+
+  if (amount.dataset.hidden === "true") {
+
+    amount.textContent = "₦0.00";
+    amount.dataset.hidden = "false";
+    eye.textContent = "👁️";
+
+  } else {
+
+    amount.textContent = "••••••";
+    amount.dataset.hidden = "true";
+    eye.textContent = "🙈";
+
+  }
+   }
 /* BACKUP AI */
 
 function closeAI() {
