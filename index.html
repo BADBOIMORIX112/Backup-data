@@ -2337,3 +2337,377 @@ function addOrderToHistory(network, plan, phone, price){
   list.prepend(item);
 }
 </script>
+<style>
+.settings-group{
+  margin-top:14px;
+  display:grid;
+  gap:9px;
+}
+
+.setting-item{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow:var(--shadow);
+}
+
+.setting-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.setting-icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:rgba(22,163,74,.10);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  flex-shrink:0;
+}
+
+.setting-text strong{
+  display:block;
+  font-size:13px;
+}
+
+.setting-text span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.switch{
+  width:42px;
+  height:23px;
+  border:0;
+  border-radius:20px;
+  background:#bbb;
+  padding:2px;
+  cursor:pointer;
+  position:relative;
+  flex-shrink:0;
+}
+
+.switch-dot{
+  width:19px;
+  height:19px;
+  background:#fff;
+  border-radius:50%;
+  display:block;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--green);
+}
+
+.switch.on .switch-dot{
+  transform:translateX(19px);
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.theme-btn{
+  border:1px solid var(--card-border);
+  background:var(--card);
+  color:var(--text);
+  padding:12px 6px;
+  border-radius:12px;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.theme-btn.active{
+  border-color:var(--green);
+  color:var(--green);
+  font-weight:800;
+}
+
+.notice-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  padding:14px;
+  margin-top:12px;
+}
+
+.notice-item{
+  padding:12px 0;
+  border-bottom:1px solid var(--card-border);
+}
+
+.notice-item:last-child{
+  border-bottom:0;
+  padding-bottom:0;
+}
+
+.notice-item:first-child{
+  padding-top:0;
+}
+
+.notice-item strong{
+  display:block;
+  font-size:13px;
+}
+
+.notice-item span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  margin-top:4px;
+}
+
+.security-box{
+  margin-top:14px;
+  background:rgba(22,163,74,.07);
+  border:1px solid rgba(22,163,74,.15);
+  border-radius:16px;
+  padding:14px;
+}
+
+.security-box strong{
+  font-size:13px;
+}
+
+.security-box p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+  margin:5px 0 0;
+}
+</style>
+
+<section id="settings" class="screen">
+
+  <div class="page-title">
+    <h2>Settings</h2>
+    <p>Control your BackupData experience.</p>
+  </div>
+
+  <div class="settings-group">
+
+    <div class="setting-item">
+      <div class="setting-left">
+        <div class="setting-icon">🔔</div>
+
+        <div class="setting-text">
+          <strong>Notifications</strong>
+          <span>Receive important account updates</span>
+        </div>
+      </div>
+
+      <button
+        class="switch on"
+        id="notificationSwitch"
+        onclick="toggleSetting('notificationSwitch')"
+      >
+        <span class="switch-dot"></span>
+      </button>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-left">
+        <div class="setting-icon">🔒</div>
+
+        <div class="setting-text">
+          <strong>Secure Login</strong>
+          <span>Keep your account protected</span>
+        </div>
+      </div>
+
+      <button
+        class="switch on"
+        id="secureSwitch"
+        onclick="toggleSetting('secureSwitch')"
+      >
+        <span class="switch-dot"></span>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="account-card" style="margin-top:14px;">
+    <strong style="font-size:14px;">Appearance</strong>
+
+    <p style="color:var(--muted);font-size:11px;margin:5px 0 0;">
+      Choose how BackupData looks on your device.
+    </p>
+
+    <div class="theme-grid">
+
+      <button
+        class="theme-btn active"
+        id="themeSystem"
+        onclick="setBackupTheme('system')"
+      >
+        System
+      </button>
+
+      <button
+        class="theme-btn"
+        id="themeLight"
+        onclick="setBackupTheme('light')"
+      >
+        Light
+      </button>
+
+      <button
+        class="theme-btn"
+        id="themeDark"
+        onclick="setBackupTheme('dark')"
+      >
+        Dark
+      </button>
+
+    </div>
+  </div>
+
+  <div class="security-box">
+    <strong>🔐 Security & Privacy</strong>
+
+    <p>
+      BackupData is being designed with secure account access,
+      transaction protection and fraud prevention. Passkey,
+      Face ID and fingerprint support will be connected with
+      the secure backend.
+    </p>
+  </div>
+
+  <div class="settings-group">
+
+    <button class="setting-item" onclick="comingSoon('Privacy Policy')">
+      <div class="setting-left">
+        <div class="setting-icon">🛡</div>
+
+        <div class="setting-text">
+          <strong>Privacy Policy</strong>
+          <span>How your information is handled</span>
+        </div>
+      </div>
+
+      <span>›</span>
+    </button>
+
+    <button class="setting-item" onclick="comingSoon('Terms & Conditions')">
+      <div class="setting-left">
+        <div class="setting-icon">📄</div>
+
+        <div class="setting-text">
+          <strong>Terms & Conditions</strong>
+          <span>Rules for using BackupData</span>
+        </div>
+      </div>
+
+      <span>›</span>
+    </button>
+
+    <button class="setting-item" onclick="comingSoon('Help Centre')">
+      <div class="setting-left">
+        <div class="setting-icon">?</div>
+
+        <div class="setting-text">
+          <strong>Help Centre</strong>
+          <span>Get help with your account</span>
+        </div>
+      </div>
+
+      <span>›</span>
+    </button>
+
+  </div>
+
+</section>
+
+<section id="notifications" class="screen">
+
+  <div class="page-title">
+    <h2>Notifications</h2>
+    <p>Important updates from BackupData.</p>
+  </div>
+
+  <div class="notice-card">
+
+    <div class="notice-item">
+      <strong>Welcome to BackupData 👋</strong>
+      <span>
+        Your data, wallet and rewards will all be managed from one simple app.
+      </span>
+    </div>
+
+    <div class="notice-item">
+      <strong>Rewards are coming</strong>
+      <span>
+        Complete eligible activities to earn free data when the reward system is live.
+      </span>
+    </div>
+
+    <div class="notice-item">
+      <strong>Stay secure</strong>
+      <span>
+        Never share your password or payment information with anyone.
+      </span>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+function toggleSetting(id){
+  const button = document.getElementById(id);
+
+  if(!button) return;
+
+  button.classList.toggle("on");
+}
+
+function setBackupTheme(theme){
+  document.body.classList.remove("theme-light");
+  document.body.classList.remove("theme-dark");
+
+  if(theme === "light"){
+    document.body.classList.add("theme-light");
+  }
+
+  if(theme === "dark"){
+    document.body.classList.add("theme-dark");
+  }
+
+  document.querySelectorAll(".theme-btn").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+
+  if(theme === "system"){
+    document.getElementById("themeSystem").classList.add("active");
+  }
+
+  if(theme === "light"){
+    document.getElementById("themeLight").classList.add("active");
+  }
+
+  if(theme === "dark"){
+    document.getElementById("themeDark").classList.add("active");
+  }
+}
+
+function comingSoon(feature){
+  alert(feature + " is coming soon.");
+}
+</script>
