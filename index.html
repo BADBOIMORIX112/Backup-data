@@ -1863,55 +1863,15 @@ function sendAI() {
 
   const lower = text.toLowerCase();
 
-  if (
-    lower.includes("hello") ||
-    lower.includes("hi") ||
-    lower.includes("hey")
-  ) {
+<div id="aiMessages">
 
-    reply =
-      "Hello 👋 How was your day? I'm Backup AI. What can I help you with?";
+  <div class="ai-bot">
+    Hello 👋 How was your day?<br><br>
+    I'm Backup AI. I can help you choose a data plan,
+    explain BackupData, or connect you to customer support. 🇳🇬
+  </div>
 
-  } else if (
-    lower.includes("price") ||
-    lower.includes("cost") ||
-    lower.includes("how much")
-  ) {
-
-    reply =
-      "Our current demo plans are available on the Buy Data page. Choose your network to see the available plans and prices.";
-
-  } else if (
-    lower.includes("buy") ||
-    lower.includes("data")
-  ) {
-
-    reply =
-      "Sure 👍🏽. Tap Buy Data, choose your network and plan, then enter your phone number.";
-
-  } else if (
-    lower.includes("support") ||
-    lower.includes("help") ||
-    lower.includes("problem")
-  ) {
-
-    reply =
-      "You can contact BackupData Support on WhatsApp: 07084912007.";
-  }
-
-  messages.innerHTML +=
-    '<div class="ai-user">' +
-    escapeHTML(text) +
-    '</div>' +
-    '<div class="ai-bot">' +
-    escapeHTML(reply) +
-    '</div>';
-
-  input.value = "";
-
-  messages.scrollTop = messages.scrollHeight;
-}
-
+</div>
 
 /* ESCAPE HTML */
 
