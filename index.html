@@ -1457,3 +1457,476 @@ function placeOrder(){
 renderDataPlans();
 
         </script>
+<!-- PART 3: ACCOUNT + WALLET + AUTH -->
+
+<style>
+.account-head{
+  margin-bottom:16px;
+}
+
+.account-head h2{
+  margin:0 0 5px;
+  font-size:22px;
+}
+
+.account-head p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.balance-card{
+  background:linear-gradient(145deg,#101a16,#17261f);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:22px;
+  padding:20px;
+  color:#fff;
+  box-shadow:0 16px 35px rgba(0,0,0,.18);
+  margin-bottom:14px;
+}
+
+.balance-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.balance-label{
+  font-size:12px;
+  color:#aab8b1;
+}
+
+.balance-eye{
+  border:0;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.balance-amount{
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:-1px;
+  margin-bottom:16px;
+}
+
+.balance-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.balance-action{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  padding:11px 8px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.account-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
+}
+
+.profile-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.profile-avatar{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.profile-info strong{
+  display:block;
+  font-size:15px;
+}
+
+.profile-info span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.account-menu{
+  display:grid;
+  gap:8px;
+}
+
+.account-menu button{
+  width:100%;
+  border:1px solid var(--card-border);
+  background:var(--card);
+  color:var(--text);
+  padding:13px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.menu-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.menu-icon{
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  background:rgba(22,163,74,.10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--green);
+  font-size:14px;
+}
+
+.auth-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.auth-btn{
+  border:0;
+  border-radius:13px;
+  padding:13px 8px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.auth-primary{
+  background:var(--green);
+  color:#fff;
+}
+
+.auth-secondary{
+  background:rgba(22,163,74,.10);
+  color:var(--green);
+}
+
+.auth-panel{
+  display:none;
+  margin-top:12px;
+}
+
+.auth-panel.active{
+  display:block;
+}
+
+.auth-panel h3{
+  margin:0 0 5px;
+  font-size:17px;
+}
+
+.auth-panel p{
+  margin:0 0 14px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.auth-input{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid var(--card-border);
+  background:var(--bg2);
+  color:var(--text);
+  padding:13px;
+  border-radius:12px;
+  outline:none;
+  margin-bottom:9px;
+}
+
+.auth-submit{
+  width:100%;
+  border:0;
+  background:var(--green);
+  color:#fff;
+  padding:13px;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.auth-message{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--green);
+}
+
+.wallet-note{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:8px;
+}
+</style>
+
+<section id="account" class="screen">
+
+  <div class="account-head">
+    <h2>My Account</h2>
+    <p>Manage your BackupData account and wallet.</p>
+  </div>
+
+  <div class="balance-card">
+    <div class="balance-top">
+      <span class="balance-label">Wallet Balance</span>
+      <button class="balance-eye" onclick="toggleBalance()" id="balanceEye">◉</button>
+    </div>
+
+    <div class="balance-amount" id="balanceAmount">₦0.00</div>
+
+    <div class="balance-actions">
+      <button class="balance-action" onclick="showWalletFund()">
+        + Fund Wallet
+      </button>
+
+      <button class="balance-action" onclick="showTransactions()">
+        Transactions
+      </button>
+    </div>
+  </div>
+
+  <div class="account-card">
+    <div class="profile-row">
+      <div class="profile-avatar" id="profileAvatar">BD</div>
+
+      <div class="profile-info">
+        <strong id="profileName">BackupData User</strong>
+        <span id="profilePhone">Create an account to get started</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="account-card">
+    <div class="account-menu">
+
+      <button onclick="showWalletFund()">
+        <div class="menu-left">
+          <div class="menu-icon">₦</div>
+          <span>Fund Wallet</span>
+        </div>
+        <span>›</span>
+      </button>
+
+      <button onclick="showTransactions()">
+        <div class="menu-left">
+          <div class="menu-icon">↕</div>
+          <span>Transactions</span>
+        </div>
+        <span>›</span>
+      </button>
+
+      <button onclick="showScreen('rewards')">
+        <div class="menu-left">
+          <div class="menu-icon">★</div>
+          <span>Rewards & Referrals</span>
+        </div>
+        <span>›</span>
+      </button>
+
+      <button onclick="showScreen('settings')">
+        <div class="menu-left">
+          <div class="menu-icon">⚙</div>
+          <span>Settings</span>
+        </div>
+        <span>›</span>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="account-card">
+    <div class="account-head">
+      <h2 style="font-size:17px;">Account Access</h2>
+      <p>Create your account or login to continue.</p>
+    </div>
+
+    <div class="auth-grid">
+      <button class="auth-btn auth-primary" onclick="openAuth('signup')">
+        Create Account
+      </button>
+
+      <button class="auth-btn auth-secondary" onclick="openAuth('login')">
+        Login
+      </button>
+    </div>
+
+    <div class="auth-panel" id="signupPanel">
+      <h3>Create Account</h3>
+      <p>Get started with BackupData and unlock your account benefits.</p>
+
+      <input
+        class="auth-input"
+        id="signupName"
+        type="text"
+        placeholder="Full name"
+      >
+
+      <input
+        class="auth-input"
+        id="signupPhone"
+        type="tel"
+        placeholder="Phone number"
+        maxlength="11"
+      >
+
+      <input
+        class="auth-input"
+        id="signupPassword"
+        type="password"
+        placeholder="Create password"
+      >
+
+      <button class="auth-submit" onclick="createAccount()">
+        Create Account
+      </button>
+
+      <div class="auth-message" id="signupMessage"></div>
+    </div>
+
+    <div class="auth-panel" id="loginPanel">
+      <h3>Welcome Back</h3>
+      <p>Login to access your wallet, orders and rewards.</p>
+
+      <input
+        class="auth-input"
+        id="loginPhone"
+        type="tel"
+        placeholder="Phone number"
+        maxlength="11"
+      >
+
+      <input
+        class="auth-input"
+        id="loginPassword"
+        type="password"
+        placeholder="Password"
+      >
+
+      <button class="auth-submit" onclick="loginAccount()">
+        Login
+      </button>
+
+      <div class="auth-message" id="loginMessage"></div>
+    </div>
+  </div>
+
+  <div class="account-card">
+    <strong style="font-size:14px;">Wallet security</strong>
+    <div class="wallet-note">
+      Your wallet balance and transactions will be protected by your BackupData account.
+      Secure login and passkey/biometric support will be connected when the backend is added.
+    </div>
+  </div>
+
+</section>
+
+<script>
+let balanceVisible = true;
+let walletBalance = 0;
+
+function toggleBalance(){
+  const amount = document.getElementById("balanceAmount");
+  const eye = document.getElementById("balanceEye");
+
+  balanceVisible = !balanceVisible;
+
+  if(balanceVisible){
+    amount.textContent = "₦" + walletBalance.toFixed(2);
+    eye.textContent = "◉";
+  }else{
+    amount.textContent = "₦••••";
+    eye.textContent = "○";
+  }
+}
+
+function updateWalletBalance(){
+  const amount = document.getElementById("balanceAmount");
+
+  if(balanceVisible){
+    amount.textContent = "₦" + walletBalance.toFixed(2);
+  }
+}
+
+function showWalletFund(){
+  alert("Wallet funding will be connected to secure payment processing in the next stage.");
+}
+
+function showTransactions(){
+  alert("Your transactions will appear here after the order and payment system is connected.");
+}
+
+function openAuth(type){
+  document.getElementById("signupPanel").classList.remove("active");
+  document.getElementById("loginPanel").classList.remove("active");
+
+  if(type === "signup"){
+    document.getElementById("signupPanel").classList.add("active");
+  }
+
+  if(type === "login"){
+    document.getElementById("loginPanel").classList.add("active");
+  }
+}
+
+function createAccount(){
+  const name = document.getElementById("signupName").value.trim();
+  const phone = document.getElementById("signupPhone").value.trim();
+  const password = document.getElementById("signupPassword").value.trim();
+  const message = document.getElementById("signupMessage");
+
+  if(!name || !/^0[0-9]{10}$/.test(phone) || password.length < 6){
+    message.textContent = "Enter your name, valid 11-digit phone number and a password of at least 6 characters.";
+    return;
+  }
+
+  document.getElementById("profileName").textContent = name;
+  document.getElementById("profilePhone").textContent = phone;
+  document.getElementById("profileAvatar").textContent =
+    name.substring(0,2).toUpperCase();
+
+  message.textContent = "Account created successfully. Welcome to BackupData!";
+}
+
+function loginAccount(){
+  const phone = document.getElementById("loginPhone").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
+  const message = document.getElementById("loginMessage");
+
+  if(!/^0[0-9]{10}$/.test(phone) || password.length < 6){
+    message.textContent = "Enter a valid phone number and password.";
+    return;
+  }
+
+  message.textContent = "Login details accepted. Secure backend authentication will be connected next.";
+}
+
+updateWalletBalance();
+</script>
