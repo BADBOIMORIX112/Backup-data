@@ -687,179 +687,137 @@
         grid-template-columns: 1fr;
       }
                        }
-    /* =========================
-       ACCOUNT
-    ========================== */
+  <!-- =========================
+     ACCOUNT
+========================== -->
 
-    .account-card {
-      margin-top: 20px;
-      padding: 22px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--card-border);
-    }
+<section id="account" class="screen">
 
-    .account-icon {
-      width: 65px;
-      height: 65px;
-      margin: auto;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(32,232,137,.13);
-      font-size: 30px;
-    }
+  <h1 class="page-title">Your Account 👤</h1>
 
-    .account-card h2 {
-      text-align: center;
-      margin-top: 14px;
-    }
+  <p class="page-subtitle">
+    Manage your BackupData wallet, account and transactions.
+  </p>
 
-    .account-card p {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 7px;
-      line-height: 1.5;
-    }
 
-    .account-option {
-      margin-top: 12px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: rgba(255,255,255,.05);
-      color: white;
-      text-align: left;
-    }
-/* =========================
-   LIQUID GLASS BALANCE
-========================== */
+  <!-- LIQUID GLASS BALANCE -->
 
-.balance-card {
-  margin-top: 16px;
-  padding: 20px;
-  border-radius: 26px;
-  position: relative;
-  overflow: hidden;
+  <div class="balance-card">
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.18),
-      rgba(255,255,255,.06)
-    );
+    <div class="balance-top">
 
-  border: 1px solid rgba(255,255,255,.20);
+      <div>
+        <div class="balance-label">
+          AVAILABLE BALANCE
+        </div>
 
-  box-shadow:
-    0 20px 45px rgba(0,0,0,.25),
-    inset 0 1px 1px rgba(255,255,255,.25);
+        <div
+          id="balanceAmount"
+          class="balance-amount">
+          ₦0.00
+        </div>
+      </div>
 
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-}
+      <button
+        id="balanceEye"
+        class="balance-eye"
+        onclick="toggleBalance()"
+        aria-label="Hide balance">
+        👁️
+      </button>
 
-.balance-card::before {
-  content: "";
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  right: -70px;
-  top: -70px;
-  border-radius: 50%;
-  background: rgba(32,232,137,.18);
-  filter: blur(15px);
-}
+    </div>
 
-.balance-top {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.balance-label {
-  color: var(--muted);
-  font-size: 11px;
-}
+    <div class="balance-details">
 
-.balance-eye {
-  border: 0;
-  background: rgba(255,255,255,.10);
-  color: white;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  font-size: 16px;
-}
+      <div class="balance-detail">
+        <span>WALLET ID</span>
+        <strong>BD-WALLET</strong>
+      </div>
 
-.balance-amount {
-  position: relative;
-  margin-top: 8px;
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
+      <div class="balance-detail">
+        <span>ACCOUNT STATUS</span>
+        <strong>Active</strong>
+      </div>
 
-.balance-details {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 18px;
-}
+      <div class="balance-detail">
+        <span>TOTAL PURCHASES</span>
+        <strong>₦0.00</strong>
+      </div>
 
-.balance-detail {
-  padding: 10px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.08);
-}
+      <div class="balance-detail">
+        <span>DATA ORDERS</span>
+        <strong>0 Orders</strong>
+      </div>
 
-.balance-detail span {
-  display: block;
-  color: var(--muted);
-  font-size: 9px;
-  margin-bottom: 4px;
-}
+    </div>
 
-.balance-detail strong {
-  font-size: 11px;
-}
 
-.balance-actions {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 14px;
-}
+    <div class="balance-actions">
 
-.balance-action {
-  border: 0;
-  padding: 12px;
-  border-radius: 13px;
-  font-weight: bold;
-  font-size: 12px;
-}
+      <button
+        class="balance-action balance-fund"
+        onclick="comingSoon()">
+        💳 Fund Wallet
+      </button>
 
-.balance-fund {
-  background: var(--green);
-  color: #03100c;
-}
+      <button
+        class="balance-action balance-history"
+        onclick="comingSoon()">
+        📜 Transactions
+      </button>
 
-.balance-history {
-  background: rgba(255,255,255,.10);
-  color: white;
-  border: 1px solid rgba(255,255,255,.12);
-}
+    </div>
 
-.balance-hidden {
-  letter-spacing: 4px;
-}
+  </div>
+
+
+  <!-- ACCOUNT PROFILE -->
+
+  <div class="account-card">
+
+    <div class="account-icon">
+      👤
+    </div>
+
+    <h2>BackupData Account</h2>
+
+    <p>
+      Login to save your numbers, track purchases,
+      manage your wallet and unlock more BackupData features.
+    </p>
+
+
+    <button
+      class="account-option"
+      onclick="comingSoon()">
+      🔐 Login
+    </button>
+
+
+    <button
+      class="account-option"
+      onclick="comingSoon()">
+      ✨ Create Account
+    </button>
+
+
+    <button
+      class="account-option"
+      onclick="showScreen('themes')">
+      🎨 View Themes
+    </button>
+
+  </div>
+
+
+  <div class="form-note">
+    Your wallet and transaction history will be connected
+    to the BackupData backend later.
+  </div>
+
+</section>
     /* =========================
        THEMES
     ========================== */
