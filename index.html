@@ -1512,43 +1512,398 @@
        JAVASCRIPT
   ========================== -->
 
-  <script>
+    <script>
 
-    /* -------------------------
-       SCREEN NAVIGATION
-    ------------------------- */
+/* =========================
+   SCREEN NAVIGATION
+========================== */
 
-    function showScreen(screenName) {
+function showScreen(screenName) {
 
-      const screens = document.querySelectorAll(".screen");
+  const screens = document.querySelectorAll(".screen");
 
-      screens.forEach(function(screen) {
-        screen.classList.remove("active");
-      });
+  screens.forEach(function(screen) {
+    screen.classList.remove("active");
+  });
 
-      const selectedScreen = document.getElementById(screenName);
+  const selectedScreen = document.getElementById(screenName);
 
-      if (selectedScreen) {
-        selectedScreen.classList.add("active");
-      }
+  if (selectedScreen) {
+    selectedScreen.classList.add("active");
+  }
 
-      const navButtons = document.querySelectorAll(".nav-btn");
+  const navButtons = document.querySelectorAll(".nav-btn");
 
-      navButtons.forEach(function(button) {
+  navButtons.forEach(function(button) {
 
-        button.classList.remove("active");
+    button.classList.remove("active");
 
-        if (button.dataset.screen === screenName) {
-          button.classList.add("active");
-        }
-
-      });
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+    if (button.dataset.screen === screenName) {
+      button.classList.add("active");
     }
+
+  });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =========================
+   DATA PLANS
+========================== */
+
+const dataPlans = {
+
+  MTN: [
+    {data:"200MB", price:100, validity:"30 days"},
+    {data:"500MB", price:200, validity:"30 days"},
+    {data:"1GB", price:300, validity:"30 days"},
+    {data:"1.5GB", price:400, validity:"30 days"},
+    {data:"2GB", price:500, validity:"30 days"},
+    {data:"3GB", price:700, validity:"30 days"},
+    {data:"4GB", price:800, validity:"30 days"},
+    {data:"5GB", price:1000, validity:"30 days"},
+    {data:"6GB", price:1200, validity:"30 days"},
+    {data:"7GB", price:1400, validity:"30 days"},
+    {data:"10GB", price:2000, validity:"30 days"},
+    {data:"12GB", price:2400, validity:"30 days"},
+    {data:"15GB", price:3000, validity:"30 days"}
+  ],
+
+  Airtel: [
+    {data:"200MB", price:100, validity:"30 days"},
+    {data:"500MB", price:200, validity:"30 days"},
+    {data:"1GB", price:300, validity:"30 days"},
+    {data:"1.5GB", price:400, validity:"30 days"},
+    {data:"2GB", price:500, validity:"30 days"},
+    {data:"3GB", price:700, validity:"30 days"},
+    {data:"4GB", price:900, validity:"30 days"},
+    {data:"5GB", price:1100, validity:"30 days"},
+    {data:"6GB", price:1300, validity:"30 days"},
+    {data:"8GB", price:1600, validity:"30 days"},
+    {data:"10GB", price:2000, validity:"30 days"},
+    {data:"12GB", price:2400, validity:"30 days"},
+    {data:"15GB", price:3000, validity:"30 days"}
+  ],
+
+  Glo: [
+    {data:"200MB", price:100, validity:"30 days"},
+    {data:"500MB", price:200, validity:"30 days"},
+    {data:"1GB", price:300, validity:"30 days"},
+    {data:"1.5GB", price:400, validity:"30 days"},
+    {data:"2GB", price:500, validity:"30 days"},
+    {data:"3GB", price:700, validity:"30 days"},
+    {data:"4GB", price:900, validity:"30 days"},
+    {data:"5GB", price:1000, validity:"30 days"},
+    {data:"6GB", price:1200, validity:"30 days"},
+    {data:"8GB", price:1600, validity:"30 days"},
+    {data:"10GB", price:2000, validity:"30 days"},
+    {data:"12GB", price:2400, validity:"30 days"},
+    {data:"15GB", price:3000, validity:"30 days"}
+  ],
+
+  "9mobile": [
+    {data:"200MB", price:100, validity:"30 days"},
+    {data:"500MB", price:200, validity:"30 days"},
+    {data:"1GB", price:300, validity:"30 days"},
+    {data:"1.5GB", price:400, validity:"30 days"},
+    {data:"2GB", price:500, validity:"30 days"},
+    {data:"3GB", price:700, validity:"30 days"},
+    {data:"4GB", price:900, validity:"30 days"},
+    {data:"5GB", price:1000, validity:"30 days"},
+    {data:"6GB", price:1200, validity:"30 days"},
+    {data:"8GB", price:1600, validity:"30 days"},
+    {data:"10GB", price:2000, validity:"30 days"},
+    {data:"12GB", price:2400, validity:"30 days"},
+    {data:"15GB", price:3000, validity:"30 days"}
+  ]
+
+};
+
+
+/* =========================
+   DATA PLAN VARIABLES
+========================== */
+
+let currentNetwork = "MTN";
+let selectedPlan = null;
+
+
+/* =========================
+   SHOW DATA PLANS
+========================== */
+
+function renderDataPlans() {
+
+  const grid = document.getElementById("dataPlanGrid");
+  const title = document.getElementById("offersTitle");
+  const count = document.getElementById("offerCount");
+
+  if (!grid) return;
+
+  const plans = dataPlans[currentNetwork];
+
+  title.textContent = currentNetwork + " Data Plans";
+  count.textContent = plans.length + " plans available";
+
+  grid.innerHTML = "";
+
+  plans.forEach(function(plan, index) {
+
+    const card = document.createElement("button");
+
+    card.type = "button";
+    card.className = "data-plan";
+
+    card.innerHTML = `
+      <div class="data-plan-data">${plan.data}</div>
+      <div class="data-plan-price">₦${plan.price.toLocaleString()}</div>
+      <div class="data-plan-validity">${plan.validity}</div>
+    `;
+
+    card.onclick = function() {
+      selectPlan(index);
+    };
+
+    grid.appendChild(card);
+
+  });
+}
+
+
+/* =========================
+   CHANGE NETWORK
+========================== */
+
+function changeNetwork(network) {
+
+  if (!dataPlans[network]) return;
+
+  currentNetwork = network;
+  selectedPlan = null;
+
+  document.querySelectorAll(".network-tab").forEach(function(button) {
+    button.classList.remove("active");
+  });
+
+  const activeButton =
+    document.getElementById("network-" + network);
+
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+
+  resetSelectedPlan();
+
+  renderDataPlans();
+}
+
+
+/* =========================
+   SELECT PLAN
+========================== */
+
+function selectPlan(index) {
+
+  const plans = dataPlans[currentNetwork];
+
+  selectedPlan = plans[index];
+
+  document.querySelectorAll(".data-plan").forEach(function(card) {
+    card.classList.remove("selected");
+  });
+
+  const cards = document.querySelectorAll(".data-plan");
+
+  if (cards[index]) {
+    cards[index].classList.add("selected");
+  }
+
+  document.getElementById("summaryData").textContent =
+    selectedPlan.data;
+
+  document.getElementById("summaryNetwork").textContent =
+    currentNetwork;
+
+  document.getElementById("summaryPrice").textContent =
+    "₦" + selectedPlan.price.toLocaleString();
+
+  document.getElementById("selectedSummary").style.display =
+    "grid";
+}
+
+
+/* =========================
+   RESET SELECTED PLAN
+========================== */
+
+function resetSelectedPlan() {
+
+  const summary =
+    document.getElementById("selectedSummary");
+
+  if (summary) {
+    summary.style.display = "none";
+  }
+
+  const data =
+    document.getElementById("summaryData");
+
+  const network =
+    document.getElementById("summaryNetwork");
+
+  const price =
+    document.getElementById("summaryPrice");
+
+  if (data) data.textContent = "No plan";
+  if (network) network.textContent = "-";
+  if (price) price.textContent = "₦0";
+}
+
+
+/* =========================
+   QUICK BUY
+========================== */
+
+function quickBuy(network, plan) {
+
+  showScreen("buy");
+
+  currentNetwork = network;
+
+  changeNetwork(network);
+
+  const plans = dataPlans[network];
+
+  const index = plans.findIndex(function(item) {
+    return item.data === plan;
+  });
+
+  if (index !== -1) {
+    selectPlan(index);
+  }
+}
+
+
+/* =========================
+   PLACE ORDER
+========================== */
+
+function placeOrder() {
+
+  const phoneInput = document.getElementById("phone");
+  const message = document.getElementById("orderMessage");
+
+  if (!selectedPlan) {
+    message.textContent = "Please select a data plan.";
+    message.style.color = "#ff6b6b";
+    return;
+  }
+
+  if (!phoneInput || phoneInput.value.length < 11) {
+    message.textContent =
+      "Please enter a valid 11-digit phone number.";
+    message.style.color = "#ff6b6b";
+    return;
+  }
+
+  message.textContent =
+    "Selected " +
+    selectedPlan.data +
+    " " +
+    currentNetwork +
+    " for ₦" +
+    selectedPlan.price.toLocaleString() +
+    ". Payment will be connected soon.";
+
+  message.style.color = "var(--green)";
+}
+
+
+/* =========================
+   BACKUP AI
+========================== */
+
+const aiBubble = document.getElementById("aiBubble");
+const aiChat = document.getElementById("aiChat");
+
+if (aiBubble && aiChat) {
+
+  aiBubble.addEventListener("click", function() {
+
+    aiChat.style.display =
+      aiChat.style.display === "block"
+        ? "none"
+        : "block";
+
+  });
+
+}
+
+
+function closeAI() {
+
+  if (aiChat) {
+    aiChat.style.display = "none";
+  }
+
+}
+
+
+function sendAI() {
+
+  const input = document.getElementById("aiInput");
+  const messages = document.getElementById("aiMessages");
+
+  if (!input || !messages) return;
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  messages.innerHTML +=
+    `<div class="ai-user">${escapeHTML(text)}</div>`;
+
+  input.value = "";
+
+  setTimeout(function() {
+
+    messages.innerHTML +=
+      `<div class="ai-bot">
+        Hi 👋 I'm Backup AI. How can I help you?
+      </div>`;
+
+    messages.scrollTop = messages.scrollHeight;
+
+  }, 400);
+
+}
+
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+}
+
+
+/* =========================
+   START APP
+========================== */
+
+window.addEventListener("load", function() {
+
+  renderDataPlans();
+
+});
+
+</script>
     
  
     /* -------------------------
