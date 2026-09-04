@@ -1520,9 +1520,7 @@
 
 function showScreen(screenName) {
 
-  const screens = document.querySelectorAll(".screen");
-
-  screens.forEach(function(screen) {
+  document.querySelectorAll(".screen").forEach(function(screen) {
     screen.classList.remove("active");
   });
 
@@ -1532,9 +1530,7 @@ function showScreen(screenName) {
     selectedScreen.classList.add("active");
   }
 
-  const navButtons = document.querySelectorAll(".nav-btn");
-
-  navButtons.forEach(function(button) {
+  document.querySelectorAll(".nav-btn").forEach(function(button) {
 
     button.classList.remove("active");
 
@@ -1646,8 +1642,13 @@ function renderDataPlans() {
 
   const plans = dataPlans[currentNetwork];
 
-  title.textContent = currentNetwork + " Data Plans";
-  count.textContent = plans.length + " plans available";
+  if (title) {
+    title.textContent = currentNetwork + " Data Plans";
+  }
+
+  if (count) {
+    count.textContent = plans.length + " plans available";
+  }
 
   grid.innerHTML = "";
 
@@ -1697,7 +1698,6 @@ function changeNetwork(network) {
   }
 
   resetSelectedPlan();
-
   renderDataPlans();
 }
 
@@ -1722,17 +1722,27 @@ function selectPlan(index) {
     cards[index].classList.add("selected");
   }
 
-  document.getElementById("summaryData").textContent =
-    selectedPlan.data;
+  const summaryData = document.getElementById("summaryData");
+  const summaryNetwork = document.getElementById("summaryNetwork");
+  const summaryPrice = document.getElementById("summaryPrice");
+  const selectedSummary = document.getElementById("selectedSummary");
 
-  document.getElementById("summaryNetwork").textContent =
-    currentNetwork;
+  if (summaryData) {
+    summaryData.textContent = selectedPlan.data;
+  }
 
-  document.getElementById("summaryPrice").textContent =
-    "₦" + selectedPlan.price.toLocaleString();
+  if (summaryNetwork) {
+    summaryNetwork.textContent = currentNetwork;
+  }
 
-  document.getElementById("selectedSummary").style.display =
-    "grid";
+  if (summaryPrice) {
+    summaryPrice.textContent =
+      "₦" + selectedPlan.price.toLocaleString();
+  }
+
+  if (selectedSummary) {
+    selectedSummary.style.display = "grid";
+  }
 }
 
 
@@ -1742,21 +1752,15 @@ function selectPlan(index) {
 
 function resetSelectedPlan() {
 
-  const summary =
-    document.getElementById("selectedSummary");
+  const summary = document.getElementById("selectedSummary");
 
   if (summary) {
     summary.style.display = "none";
   }
 
-  const data =
-    document.getElementById("summaryData");
-
-  const network =
-    document.getElementById("summaryNetwork");
-
-  const price =
-    document.getElementById("summaryPrice");
+  const data = document.getElementById("summaryData");
+  const network = document.getElementById("summaryNetwork");
+  const price = document.getElementById("summaryPrice");
 
   if (data) data.textContent = "No plan";
   if (network) network.textContent = "-";
@@ -1772,11 +1776,11 @@ function quickBuy(network, plan) {
 
   showScreen("buy");
 
-  currentNetwork = network;
-
   changeNetwork(network);
 
   const plans = dataPlans[network];
+
+  if (!plans) return;
 
   const index = plans.findIndex(function(item) {
     return item.data === plan;
@@ -1797,29 +1801,49 @@ function placeOrder() {
   const phoneInput = document.getElementById("phone");
   const message = document.getElementById("orderMessage");
 
+  if (!message) return;
+
+  message.classList.remove("error");
+
   if (!selectedPlan) {
     message.textContent = "Please select a data plan.";
     message.style.color = "#ff6b6b";
+    message.style.display = "block";
     return;
   }
 
-  if (!phoneInput || phoneInput.value.length < 11) {
+  if (!phoneInput || !/^0[0-9]{10}$/.test(phoneInput.value.trim())) {
     message.textContent =
-      "Please enter a valid 11-digit phone number.";
+      "Please enter a valid Nigerian phone number, for example 08012345678.";
     message.style.color = "#ff6b6b";
+    message.style.display = "block";
     return;
   }
 
-  message.textContent =
-    "Selected " +
+  message.innerHTML =
+    "✅ Demo order received!<br><br>" +
+    currentNetwork + " " +
     selectedPlan.data +
-    " " +
-    currentNetwork +
-    " for ₦" +
-    selectedPlan.price.toLocaleString() +
-    ". Payment will be connected soon.";
+    " selected for " +
+    escapeHTML(phoneInput.value.trim()) +
+    ".<br><br>" +
+    "Real payment and automatic data delivery will be connected later.";
 
   message.style.color = "var(--green)";
+  message.style.display = "block";
+}
+
+
+/* =========================
+   COMING SOON
+========================== */
+
+function comingSoon() {
+
+  alert(
+    "This feature is coming soon to BackupData 🚀"
+  );
+
 }
 
 
@@ -1864,24 +1888,62 @@ function sendAI() {
 
   if (!text) return;
 
+  let reply =
+    "I can help with data plans, buying data, BackupData features, or customer support. 😊";
+
+  const lower = text.toLowerCase();
+
+  if (
+    lower.includes("hello") ||
+    lower.includes("hi") ||
+    lower.includes("hey")
+  ) {
+
+    reply =
+      "Hello 👋 How was your day? I'm Backup AI. What can I help you with?";
+
+  } else if (
+    lower.includes("price") ||
+    lower.includes("cost") ||
+    lower.includes("how much")
+  ) {
+
+    reply =
+      "Our current demo plans include different MTN, Airtel, Glo and 9mobile options. Open Buy Data to see the available plans and prices.";
+
+  } else if (
+    lower.includes("buy") ||
+    lower.includes("data")
+  ) {
+
+    reply =
+      "Sure 👍🏽. Tap 'Buy Data' below, choose your network and plan, then enter your phone number.";
+
+  } else if (
+    lower.includes("support") ||
+    lower.includes("help") ||
+    lower.includes("problem")
+  ) {
+
+    reply =
+      "You can contact BackupData Support on WhatsApp: 07084912007.";
+
+  }
+
   messages.innerHTML +=
-    `<div class="ai-user">${escapeHTML(text)}</div>`;
+    `<div class="ai-user">${escapeHTML(text)}</div>` +
+    `<div class="ai-bot">${escapeHTML(reply)}</div>`;
 
   input.value = "";
 
-  setTimeout(function() {
-
-    messages.innerHTML +=
-      `<div class="ai-bot">
-        Hi 👋 I'm Backup AI. How can I help you?
-      </div>`;
-
-    messages.scrollTop = messages.scrollHeight;
-
-  }, 400);
+  messages.scrollTop = messages.scrollHeight;
 
 }
 
+
+/* =========================
+   ESCAPE HTML
+========================== */
 
 function escapeHTML(text) {
 
@@ -1890,6 +1952,7 @@ function escapeHTML(text) {
   div.textContent = text;
 
   return div.innerHTML;
+
 }
 
 
@@ -1901,10 +1964,20 @@ window.addEventListener("load", function() {
 
   renderDataPlans();
 
+  setTimeout(function() {
+
+    const splash =
+      document.getElementById("splash");
+
+    if (splash) {
+      splash.style.display = "none";
+    }
+
+  }, 1800);
+
 });
 
-</script>
-    
+    </script>
  
     /* -------------------------
        QUICK BUY
