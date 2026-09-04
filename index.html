@@ -3591,3 +3591,402 @@ function openTasks(){
   navigateTo("tasks");
 }
 </script>
+<style>
+.payment-methods{
+  display:grid;
+  gap:9px;
+  margin-top:12px;
+}
+
+.payment-method{
+  width:100%;
+  border:1px solid var(--card-border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:15px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.payment-method.selected{
+  border-color:var(--green);
+  background:rgba(22,163,74,.06);
+}
+
+.payment-method-icon{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:rgba(22,163,74,.10);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.payment-method-text{
+  flex:1;
+}
+
+.payment-method-text strong{
+  display:block;
+  font-size:13px;
+}
+
+.payment-method-text span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.amount-input{
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  border:1px solid var(--card-border);
+  background:var(--bg2);
+  color:var(--text);
+  border-radius:13px;
+  outline:none;
+  font-size:16px;
+  font-weight:700;
+  margin-top:10px;
+}
+
+.payment-summary{
+  margin-top:12px;
+  padding:14px;
+  border-radius:14px;
+  background:var(--bg2);
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.summary-row:last-child{
+  margin-bottom:0;
+  font-weight:800;
+  padding-top:8px;
+  border-top:1px solid var(--card-border);
+}
+
+.payment-message{
+  display:none;
+  margin-top:10px;
+  padding:11px;
+  border-radius:11px;
+  background:rgba(22,163,74,.08);
+  color:var(--green);
+  font-size:11px;
+  line-height:1.5;
+}
+
+.promo-row{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.promo-input{
+  flex:1;
+  min-width:0;
+  border:1px solid var(--card-border);
+  background:var(--bg2);
+  color:var(--text);
+  border-radius:12px;
+  padding:12px;
+  outline:none;
+}
+
+.promo-button{
+  border:0;
+  background:var(--green);
+  color:#fff;
+  border-radius:12px;
+  padding:0 13px;
+  font-weight:800;
+}
+
+.receipt-card{
+  display:none;
+  margin-top:13px;
+  padding:15px;
+  border-radius:16px;
+  background:var(--card);
+  border:1px solid var(--card-border);
+}
+
+.receipt-card strong{
+  font-size:14px;
+}
+
+.receipt-card p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+</style>
+
+<section id="fund" class="screen">
+
+  <div class="page-title">
+    <h2>Fund Wallet</h2>
+    <p>Add money securely to your BackupData wallet.</p>
+  </div>
+
+  <div class="account-card">
+
+    <strong style="font-size:14px;">
+      Enter Amount
+    </strong>
+
+    <input
+      class="amount-input"
+      id="fundAmount"
+      type="number"
+      inputmode="decimal"
+      min="100"
+      placeholder="Minimum ₦100"
+    >
+
+  </div>
+
+  <div class="account-card">
+
+    <strong style="font-size:14px;">
+      Payment Method
+    </strong>
+
+    <div class="payment-methods">
+
+      <button
+        class="payment-method selected"
+        id="payCard"
+        onclick="selectPaymentMethod('card')"
+      >
+        <div class="payment-method-icon">▣</div>
+
+        <div class="payment-method-text">
+          <strong>Card</strong>
+          <span>Visa, Mastercard and supported cards</span>
+        </div>
+
+        <span>›</span>
+      </button>
+
+      <button
+        class="payment-method"
+        id="payTransfer"
+        onclick="selectPaymentMethod('transfer')"
+      >
+        <div class="payment-method-icon">₦</div>
+
+        <div class="payment-method-text">
+          <strong>Bank Transfer</strong>
+          <span>Pay using a secure bank transfer</span>
+        </div>
+
+        <span>›</span>
+      </button>
+
+      <button
+        class="payment-method"
+        id="payUSSD"
+        onclick="selectPaymentMethod('ussd')"
+      >
+        <div class="payment-method-icon">#</div>
+
+        <div class="payment-method-text">
+          <strong>USSD</strong>
+          <span>Use supported bank USSD payment</span>
+        </div>
+
+        <span>›</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="account-card">
+
+    <strong style="font-size:14px;">
+      Promo Code
+    </strong>
+
+    <div class="promo-row">
+
+      <input
+        class="promo-input"
+        id="promoCode"
+        type="text"
+        placeholder="Enter promo code"
+      >
+
+      <button
+        class="promo-button"
+        onclick="applyPromo()"
+      >
+        Apply
+      </button>
+
+    </div>
+
+    <div
+      id="promoMessage"
+      style="font-size:10px;color:var(--muted);margin-top:7px;"
+    ></div>
+
+  </div>
+
+  <div class="payment-summary">
+
+    <div class="summary-row">
+      <span>Amount</span>
+      <strong id="fundSummary">₦0.00</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Payment fee</span>
+      <strong>Calculated at checkout</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Total</span>
+      <strong id="fundTotal">₦0.00</strong>
+    </div>
+
+  </div>
+
+  <button
+    class="auth-submit"
+    style="margin-top:12px;"
+    onclick="startWalletFunding()"
+  >
+    Continue to Secure Payment
+  </button>
+
+  <div class="payment-message" id="paymentMessage"></div>
+
+  <div class="receipt-card" id="receiptCard">
+    <strong>Payment Receipt</strong>
+    <p id="receiptText"></p>
+  </div>
+
+  <button
+    class="back-button"
+    onclick="navigateTo('wallet')"
+  >
+    Back to Wallet
+  </button>
+
+</section>
+
+<script>
+let selectedPaymentMethod = "card";
+let appliedPromo = "";
+
+function selectPaymentMethod(method){
+
+  selectedPaymentMethod = method;
+
+  document.querySelectorAll(".payment-method")
+    .forEach(function(button){
+      button.classList.remove("selected");
+    });
+
+  const selected =
+    document.getElementById(
+      method === "card"
+      ? "payCard"
+      : method === "transfer"
+      ? "payTransfer"
+      : "payUSSD"
+    );
+
+  if(selected){
+    selected.classList.add("selected");
+  }
+}
+
+function updateFundSummary(){
+
+  const amount =
+    Number(document.getElementById("fundAmount").value || 0);
+
+  document.getElementById("fundSummary").textContent =
+    "₦" + amount.toFixed(2);
+
+  document.getElementById("fundTotal").textContent =
+    "₦" + amount.toFixed(2);
+}
+
+document.addEventListener("input",function(event){
+
+  if(event.target &&
+     event.target.id === "fundAmount"){
+
+    updateFundSummary();
+  }
+
+});
+
+function applyPromo(){
+
+  const code =
+    document.getElementById("promoCode").value
+      .trim()
+      .toUpperCase();
+
+  const message =
+    document.getElementById("promoMessage");
+
+  if(!code){
+    message.textContent = "Enter a promo code first.";
+    return;
+  }
+
+  message.textContent =
+    "Promo code will be verified securely when the promotion system is connected.";
+}
+
+function startWalletFunding(){
+
+  const amount =
+    Number(document.getElementById("fundAmount").value || 0);
+
+  const message =
+    document.getElementById("paymentMessage");
+
+  message.style.display = "block";
+
+  if(!amount || amount < 100){
+    message.textContent =
+      "Please enter at least ₦100.";
+    return;
+  }
+
+  message.textContent =
+    "Secure payment checkout will open here once the payment gateway is connected. No wallet balance has been added yet.";
+}
+
+function openFundWallet(){
+  navigateTo("fund");
+  updateFundSummary();
+}
+
+function showWalletFund(){
+  openFundWallet();
+}
+</script>
